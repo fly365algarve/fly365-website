@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Fly365 Algarve"
+version = "1.0.0"
+id = "artifacts/fly365-algarve"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25654
+
+[services.development]
+run = "pnpm --filter @workspace/fly365-algarve run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fly365-algarve", "run", "build" ]
+publicDir = "artifacts/fly365-algarve/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25654"
+BASE_PATH = "/"
