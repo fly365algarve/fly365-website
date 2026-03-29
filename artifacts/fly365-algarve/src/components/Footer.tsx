@@ -1,5 +1,7 @@
 import { Link } from "wouter";
-import { Plane, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+
+const LOGO = "https://fly365algarve.co.uk/gallery/favicons/favicon-192x192.png";
 
 export function Footer() {
   return (
@@ -9,9 +11,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-full sky-gradient flex items-center justify-center shadow-lg">
-                <Plane className="w-5 h-5 text-white -rotate-45" />
-              </div>
+              <img src={LOGO} alt="Fly365 Algarve" className="w-10 h-10 rounded-full object-cover shadow-lg" />
               <div>
                 <span className="text-lg font-bold tracking-tight" style={{color: 'hsl(195, 90%, 65%)'}}>FLY365</span>
                 <span className="text-lg font-light tracking-wide text-slate-300 ml-1">Algarve</span>

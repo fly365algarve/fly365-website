@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowRight, Wind, MapPin, Calendar, Shield, Plane } from "lucide-react";
 import { ContactForm } from "../components/ContactForm";
 
-const BANNER = "https://fly365algarve.co.uk/gallery/bannerheardalgarve-ts1664289439.jpg?ts=1762817991";
+const HERO = "https://fly365algarve.co.uk/gallery/report3-ts1664396193.jpg?ts=1762817991";
 const C42_1 = "https://fly365algarve.co.uk/gallery/report1-ts1664397036.jpg?ts=1762817991";
 const FLEXWING = "https://fly365algarve.co.uk/gallery/Picture4.png?ts=1762817991";
 
@@ -13,7 +13,7 @@ export function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${BANNER}')` }}
+          style={{ backgroundImage: `url('${HERO}')` }}
         />
         <div className="absolute inset-0 hero-gradient" />
 
