@@ -1,5 +1,15 @@
 import { ContactForm } from "../components/ContactForm";
 
+const BANNER = "https://fly365algarve.co.uk/gallery/bannerheardalgarve-ts1664289439.jpg?ts=1762817991";
+const REPORT_IMAGES = [
+  "https://fly365algarve.co.uk/gallery/report1-ts1664397036.jpg?ts=1762817991",
+  "https://fly365algarve.co.uk/gallery/report2-ts1664397002.jpg?ts=1762817991",
+  "https://fly365algarve.co.uk/gallery/report3-ts1664396193.jpg?ts=1762817991",
+  "https://fly365algarve.co.uk/gallery/report4-ts1664396219.jpg?ts=1762817991",
+  "https://fly365algarve.co.uk/gallery/report5-ts1664396153.jpg?ts=1762817991",
+  "https://fly365algarve.co.uk/gallery/report6-ts1664396092.jpg?ts=1762817991",
+];
+
 export function FixedWingPage() {
   return (
     <div className="pt-20">
@@ -7,22 +17,35 @@ export function FixedWingPage() {
       <section className="relative py-24 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1920&q=80')` }}
+          style={{ backgroundImage: `url('${BANNER}')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,15%,8%)]/85 to-[hsl(220,15%,8%)]" />
+        <div className="absolute inset-0 hero-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="accent-line mx-auto mb-6 block" />
-          <h1 className="text-5xl font-bold text-white mb-4">Fixed Wing</h1>
-          <p className="text-xl text-[hsl(35,20%,75%)]">C42 Ikarus 3-axis Microlight</p>
+          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">Fixed Wing</h1>
+          <p className="text-xl text-sky-200">C42 Ikarus 3-axis Microlight</p>
+        </div>
+      </section>
+
+      {/* Photo gallery grid */}
+      <section className="py-12 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 rounded-2xl overflow-hidden">
+            {REPORT_IMAGES.map((src, i) => (
+              <div key={i} className="aspect-[4/3] overflow-hidden">
+                <img src={src} alt={`C42 microlight photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Content */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="space-y-8 text-[hsl(35,10%,70%)] leading-relaxed text-base">
+        <div className="space-y-8 text-slate-600 leading-relaxed text-base">
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">C42 Ikarus 3-axis</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-6">C42 Ikarus 3-axis</h2>
             <p className="mb-4">
               Approaching the C42, it looks deceptively small. It sits fairly close to the ground on a tri-gear undercarriage and it's only when you open up the clamshell doors, hinged at the top, and slide inside, that you realise the cockpit is more spacious than many Group A aircraft. It's much bigger than a cosy Cessna 152, for instance, where most adults are rubbing shoulders, and much more modern. The seats look as though they're from a Caterham sports car, reclined and shaped, although the padding is a bit thin.
             </p>
@@ -34,8 +57,8 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Engine & Instruments</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Engine & Instruments</h2>
             <p className="mb-4">
               Other instruments include three engine-monitoring gauges: oil pressure, oil temperature and cylinder head temperature, and a fuel computer. A choke knob for cold starts and cockpit heater knob complete the controls. There's no magneto switch because the sparks are by modern dual electronic ignition, and no carb heat because the twin carbs are heated by the engine's liquid cooling system.
             </p>
@@ -44,15 +67,15 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Ground Handling & Taxi</h2>
-            <p className="mb-4">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Ground Handling & Taxi</h2>
+            <p>
               Taxying across the grass was straightforward enough. Visibility from the two-seat, side-by-side cockpit is excellent, the nosewheel steers directly from the rudder bars, and the hydraulic disc brakes on the main wheels are simply operated by a single hand-lever on the central stick. No differential braking, but it isn't necessary when the aircraft can turn on a sixpence just by steering it. The throttle took a little getting used to; it's a slim aluminium tube between your legs, hinged to fold out of the way for getting in and out, and for positioning. There's one for both seats so the aircraft can be flown from either side.
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Take-off & Flight Performance</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Take-off & Flight Performance</h2>
             <p className="mb-4">
               The take-off was anything but conventional, at least by the standards of a C152. Paul instructed me to pull the stick back, apply full power... and after just a few seconds and about eighty metres, we were airborne. It's not surprising that the performance is so sprightly, with 100 hp pulling a max of 450 kg. The climbout was at seventy knots, with 900 fpm showing initially, picking up to 1,050 fpm. The electric trim is operated by buttons on the stop of the stick, and with the stick forces trimmed out we could continue hands-off. Paul was very keen on showing the hands-off capability.
             </p>
@@ -64,8 +87,8 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Handling Qualities</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Handling Qualities</h2>
             <p className="mb-4">
               Thermal activity had us bumping around a fair bit but, once again, Paul persuaded me to leave the controls alone and let the aircraft return to straight-and-level by itself, which it did. It seems that once trimmed, the C42 runs on rails.
             </p>
@@ -77,8 +100,8 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Construction & Design</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Construction & Design</h2>
             <p className="mb-4">
               The C42 has one big advantage as a training aircraft over some other fixed-wing microlights, namely the nosewheel mounting. Unlike some, it's not mounted to the engine frame or firewall, but directly to the main fuselage frame, a large diameter aluminium alloy tube running the length of the aircraft with triangulated alloy tube substructures bolted on-the bodywork hangs off these. This means that if the aircraft has a nose-heavy landing, not an uncommon occurrence for training and group aircraft, it's just the nosewheel assembly that needs checking, not the whole engine mount.
             </p>
@@ -93,8 +116,8 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Cruise, Fuel & Stalls</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Cruise, Fuel & Stalls</h2>
             <p className="mb-4">
               Paul explained that the 83-knot cruise is where the C42 feels most comfortable, as well being fairly economical-it's burning around 13 litres an hour. Importer Du Boulay says that with the more efficient Warp Drive propeller that comes down to 11 lph.
             </p>
@@ -106,16 +129,15 @@ export function FixedWingPage() {
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8 border border-gold/20">
-            <h2 className="text-2xl font-bold text-white mb-4">Verdict & Costs</h2>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-200">
+            <h2 className="text-2xl font-bold text-navy mb-4">Verdict & Costs</h2>
             <p className="mb-4">
               So, what to make of the Ikarus C42? Would a Group A pilot feel it was a 'real' aircraft? It's much more Group A than any other fixed-wing microlight, with the possible exception of the Dyn'Aéro BanBi, but that's a high-performing hot ship. The C42's closest microlight rival is the Rans S-6, an alloy tube and fabric aircraft with an excellent reputation for flying qualities and ruggedness, but with less performance and more of a kitplane appearance.
             </p>
             <p className="mb-6">
               The clinching argument is the economic one. You can't buy a new Group A two-seater for the C42's built price of just over £55k, and you'd never match its operating costs with new or used. Add in the advantages of having an NPPL rather than a JAR PPL and it's no wonder that 100 C42s will have been sold in the UK by the end of 2014.
             </p>
-
-            <h3 className="text-xl font-bold text-gold mb-4">What'll it cost?</h3>
+            <h3 className="text-xl font-bold text-sky mb-4">What'll it cost?</h3>
             <p className="mb-4">
               The IKARUS C42 FB costs £55000.00 + VAT and delivery to anywhere on the UK mainland. That's ready to fly with a BMAA Permit to Fly. It will have been flight tested at the UK importers' HQ at Wolverhampton Airport.
             </p>
@@ -136,13 +158,14 @@ export function FixedWingPage() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="py-20 bg-[hsl(220,14%,10%)]">
+      <section className="py-20 section-alt">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white mb-3">Get in Touch</h2>
+            <h2 className="text-3xl font-bold text-navy mb-3">Get in Touch</h2>
           </div>
-          <ContactForm />
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <ContactForm />
+          </div>
         </div>
       </section>
     </div>

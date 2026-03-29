@@ -1,72 +1,75 @@
 import { ContactForm } from "../components/ContactForm";
 
+const BANNER = "https://fly365algarve.co.uk/gallery/bannerheardalgarve-ts1664289439.jpg?ts=1762817991";
+
 export function HistoryPage() {
   return (
     <div className="pt-20">
-      {/* Hero */}
       <section className="relative py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1920&q=80')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,15%,8%)]/85 to-[hsl(220,15%,8%)]" />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${BANNER}')` }} />
+        <div className="absolute inset-0 hero-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="accent-line mx-auto mb-6 block" />
-          <h1 className="text-5xl font-bold text-white mb-4">Our History</h1>
-          <p className="text-xl text-[hsl(35,20%,75%)]">The History of FLY365 Algarve</p>
+          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">Our History</h1>
+          <p className="text-xl text-sky-200">The story of Fly365 Algarve</p>
         </div>
       </section>
 
-      {/* Content */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="space-y-8 text-[hsl(35,10%,70%)] leading-relaxed text-base">
+        <div className="space-y-8 text-slate-600 leading-relaxed text-base">
 
-          <div className="glass-card rounded-2xl p-8">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">How it all began</h2>
             <p className="mb-4">
-              Born into a world of aviation, Malcolm Howland, the founder of Fly 365, spent his life with aircraft through his father's RAF postings in Cyprus, UK and Germany.
+              It all started in the early 1990s with a flight in a Cessna 172 over Lagos in the Algarve, an experience that was to change the future course of my life.
             </p>
             <p className="mb-4">
-              He himself joined the RAF at 17, taking on many adventurous opportunities, including involvement in the early days of hang-gliding and served in the Falklands before requesting to be discharged after 11 years as Corporal with an 'exemplary' assessment of his career.
+              I immediately became hooked on flying and enrolled on a "Group A" PPL course with Eastern Airways at Gloucestershire Airport. However, upon seeing a flexwing microlight for the first time, I soon diverted to Kemble Microlight Centre (now Cotswold Airport) to train for a microlight licence. Trained by the late Frank Evans, my instructor at that time, and a true Aviation Legend, I soloed within 2 weeks of starting lessons and obtained my Microlight Pilots Licence.
+            </p>
+            <p className="mb-4">
+              After qualifying I continued flying in Spain over the next few years, using all my holiday time to build up my experience as a pilot. By now I had many hundreds of flying hours and was flying with experienced Spanish microlight pilots, and was "Chief Pilot" for a Spanish holiday company based in Murcia where we took people for pleasure flights around the area. During this time I became familiar with various types of microlight and became very involved with organising Flying Rallys in Spain. There were some very memorable trips!
             </p>
             <p>
-              Following training with Graham Slater and progression to microlight flying instructor, he taught with GS Aviation before creating Fly365 at Wickenby Airfield.
+              One of the highlights during this period was assisting in a Round Europe trip in the Late 90s spanning some 6000 km, going through Spain, France, Switzerland, Germany, Austria and Italy. Although we experienced various problems on route, all the team members had a wonderful experience and returned home safely.
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">Founding the School</h2>
             <p className="mb-4">
-              With Gerry Breen retiring from the instructional side at Aerodromo de Lagos in Portugal around 2013, Malcolm saw the opportunity to extend the flyable year and started to offer courses in Portugal as well as the operation in Lincolnshire. He grew to love the Portuguese weather and lifestyle more and more and became a huge part of the continuing success and progress of Aeroclube de Lagos, offering guidance, engineering assistance and his wealth of experience to the club established in 1965.
+              In 2001, following our marriage and after much deliberation, my wife and I took the big leap and emigrated to the Algarve with the intention of setting up a microlight school. Having been awarded a British Microlight Instructors Rating (BMAA Class Rating Instructor and an UK CAA Microlight flying Instructor) in Gloucestershire and meeting my key partner and chief engineer Zeth, the Algarve Microlight School, as it was then called, was born in September 2001.
+            </p>
+            <p className="mb-4">
+              Since then we have trained and qualified many students, from complete beginners to experienced pilots. Students have come from all parts of the world including, Australia, Spain, Germany, America, France and of course Great Britain.
             </p>
             <p>
-              His vision was to permanently relocate to Lagos although with a little flame still flickering for Wickenby when it gets very hot and thermic in the middle part of day in July/August in Lagos, there remains an annual pilgrimage where students can experience international flights from the base in Lagos, back to Wickenby (or vice versa) and some training can still be done in the UK – if the weather is suitable.
+              The business has expanded since the early days to include more modern and better aircraft, and improved facilities at Lagos Aerodrome. We pride ourselves in offering a very personal service, which we believe is the key to running a successful microlight school. Our greatest satisfaction comes from seeing a student who arrived as a complete novice achieve their microlight pilots licence.
             </p>
           </div>
 
-          <div className="glass-card rounded-2xl p-8 border border-amber-500/20">
-            <p className="mb-4 text-[hsl(35,20%,80%)]">
-              Sadly, on September 30th 2025, with complications during what initially was considered minor heart surgery, he failed to recover.
-            </p>
-          </div>
-
-          <div className="glass-card rounded-2xl p-8">
-            <p>
-              Fly365's future success was always his goal and he nurtured (until recently) the youngest BMAA flying instructor to a full FI rating following his own demanding standards in the form of Zeth Devenish, who has now amassed more than 2000 hours. Zeth continues the Fly 365 training excellence on the fixed-wing side with Ikarus C42 aircraft and Colin Gordon is the principle flexwing instructor with Quantum, QuikR and Deltajet aircraft in the fleet, having cut his instructional teeth in Perth, Scotland back in 2003.
-            </p>
-            <p className="mt-4 text-[hsl(35,20%,80%)] italic">
-              A huge loss to both the UK and Portuguese microlighting communities but his legacy continues through the Fly 365 brand and the demanding standards he ensured were the foundation of Fly 365 training, in a location wonderfully suited to offer real progress through regular flying.
-            </p>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <h2 className="text-2xl font-bold text-navy mb-4">In Memory</h2>
+            <div className="border-l-4 border-sky-300 pl-6 py-2">
+              <p className="mb-4">
+                Our beloved Director, Malcolm Howland, sadly passed away after a long illness in November 2021. Malcolm was instrumental in the founding and continued success of Fly365 Algarve, and his passion for aviation and dedication to his students inspired everyone who flew with him.
+              </p>
+              <p>
+                The school continues in his memory, with the same values, the same passion for flying, and the same commitment to giving every student the very best chance to achieve their wings — just as Malcolm always intended.
+              </p>
+            </div>
           </div>
 
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="py-20 bg-[hsl(220,14%,10%)]">
+      <section className="py-20 section-alt">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white mb-3">Get in Touch</h2>
+            <h2 className="text-3xl font-bold text-navy mb-3">Get in Touch</h2>
           </div>
-          <ContactForm />
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
+            <ContactForm />
+          </div>
         </div>
       </section>
     </div>
