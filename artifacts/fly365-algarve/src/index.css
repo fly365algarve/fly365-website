@@ -176,13 +176,17 @@
     );
   }
 
-  /* Inner page hero overlay — dark enough to read text, light enough to see the photo */
-  .inner-hero-overlay {
+  /* Inner page hero — altitude sky gradient, no external image needed */
+  .inner-page-hero {
     background: linear-gradient(
-      to bottom,
-      rgba(5, 20, 55, 0.55) 0%,
-      rgba(5, 20, 55, 0.45) 50%,
-      rgba(5, 20, 55, 0.65) 100%
+      165deg,
+      #040e1f 0%,
+      #071830 15%,
+      #0d2a52 35%,
+      #1a4d8a 55%,
+      #2980b9 72%,
+      #56aad4 85%,
+      #87ceeb 100%
     );
   }
 
