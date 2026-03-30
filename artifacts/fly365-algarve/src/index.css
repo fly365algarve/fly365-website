@@ -176,6 +176,11 @@
     );
   }
 
+  /* Used on inner page banners to hide baked-in logo text */
+  .inner-hero-overlay {
+    background: rgba(5, 20, 55, 0.78);
+  }
+
   .glass-card {
     background: rgba(255, 255, 255, 0.85);
     border: 1px solid rgba(0, 120, 200, 0.12);
