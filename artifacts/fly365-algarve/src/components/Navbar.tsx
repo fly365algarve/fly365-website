@@ -72,7 +72,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/booking"
               className="ml-3 px-5 py-2 text-sm font-semibold rounded-full sky-gradient text-white hover:opacity-90 transition-opacity duration-200 shadow-md"
             >
               Book Now
@@ -109,7 +109,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/booking"
               className="mt-2 px-4 py-3 text-sm font-semibold rounded-full sky-gradient text-white text-center hover:opacity-90 transition-opacity shadow-md"
             >
               Book Now

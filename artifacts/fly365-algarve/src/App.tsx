@@ -13,6 +13,7 @@ import { PricesPage } from "./pages/PricesPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { TermsPage } from "./pages/TermsPage";
+import { BookingPage } from "./pages/BookingPage";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ function Router() {
           <Route path="/contact" component={ContactPage} />
           <Route path="/history" component={HistoryPage} />
           <Route path="/terms" component={TermsPage} />
+          <Route path="/booking" component={BookingPage} />
           <Route component={NotFound} />
         </Switch>
       </main>

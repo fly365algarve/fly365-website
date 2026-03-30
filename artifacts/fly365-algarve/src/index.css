@@ -176,9 +176,14 @@
     );
   }
 
-  /* Used on inner page banners to hide baked-in logo text */
+  /* Inner page hero overlay — dark enough to read text, light enough to see the photo */
   .inner-hero-overlay {
-    background: rgba(5, 20, 55, 0.78);
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 20, 55, 0.55) 0%,
+      rgba(5, 20, 55, 0.45) 50%,
+      rgba(5, 20, 55, 0.65) 100%
+    );
   }
 
   .glass-card {
