@@ -3,7 +3,7 @@ import { ArrowRight, Wind, MapPin, Calendar, Shield, Plane } from "lucide-react"
 import { ContactForm } from "../components/ContactForm";
 
 const HERO = "/sky-hero.webp";
-const C42_1 = "https://fly365algarve.co.uk/gallery/report6-ts1664396092.jpg?ts=1762817991";
+const C42_1 = "https://fly365algarve.co.uk/gallery_gen/492d19a6957027a0cc41d4a5986c4ce1_702x468_fit.jpg?ts=1762817991";
 const FLEXWING = "https://fly365algarve.co.uk/gallery/Picture4.png?ts=1762817991";
 
 export function HomePage() {
