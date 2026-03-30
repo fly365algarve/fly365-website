@@ -6,7 +6,7 @@ const LOGO = "https://fly365algarve.co.uk/gallery/favicons/favicon-192x192.png";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About & Team" },
   { href: "/fixed-wing", label: "Fixed Wing" },
   { href: "/flexwing", label: "Flexwing" },
   { href: "/training", label: "Training" },

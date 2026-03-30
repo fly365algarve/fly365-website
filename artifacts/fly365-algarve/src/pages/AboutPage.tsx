@@ -11,7 +11,7 @@ export function AboutPage() {
         <div className="absolute inset-0 sky-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="accent-line mx-auto mb-6 block" />
-          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">About FLY365 Algarve</h1>
+          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">About &amp; Team</h1>
           <p className="text-xl text-sky-200">FLY365 Full Time Operation on Portugal's Algarve</p>
         </div>
       </section>
@@ -128,6 +128,35 @@ export function AboutPage() {
             </p>
           </div>
 
+        </div>
+      </section>
+
+      {/* Meet the Team */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <span className="accent-line mx-auto mb-6 block" />
+            <h2 className="text-4xl font-bold text-navy mb-3">Meet the Team</h2>
+            <p className="text-slate-500">The people behind Fly365 Algarve</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {[
+              { name: "Zeth Devenish", role: "Instructor" },
+              { name: "Colin Gordon", role: "Instructor" },
+            ].map((member) => (
+              <div key={member.name} className="bg-white rounded-2xl border border-sky-100 shadow-sm overflow-hidden">
+                {/* Photo placeholder */}
+                <div className="aspect-[4/3] bg-slate-900 flex items-center justify-center">
+                  <span className="text-slate-600 text-sm">Photo coming soon</span>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-navy mb-1">{member.name}</h3>
+                  <p className="text-sm text-sky font-medium mb-4">{member.role}</p>
+                  <p className="text-slate-400 text-sm italic">Bio coming soon.</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
