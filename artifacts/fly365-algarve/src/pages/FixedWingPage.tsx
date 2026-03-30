@@ -1,5 +1,7 @@
 import { ContactForm } from "../components/ContactForm";
 
+const C42_FULL = "https://fly365algarve.co.uk/gallery_gen/492d19a6957027a0cc41d4a5986c4ce1_702x468_fit.jpg?ts=1762817991";
+
 const REPORT_IMAGES = [
   "https://fly365algarve.co.uk/gallery/report1-ts1664397036.jpg?ts=1762817991",
   "https://fly365algarve.co.uk/gallery/report2-ts1664397002.jpg?ts=1762817991",
@@ -19,6 +21,20 @@ export function FixedWingPage() {
           <span className="accent-line mx-auto mb-6 block" />
           <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">Fixed Wing</h1>
           <p className="text-xl text-sky-200">C42 Ikarus 3-axis Microlight</p>
+        </div>
+      </section>
+
+      {/* Full aircraft feature image */}
+      <section className="bg-white py-10">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl overflow-hidden shadow-xl border border-sky-100">
+            <img
+              src={C42_FULL}
+              alt="C42 Ikarus G-CISG fixed wing microlight in flight"
+              className="w-full object-cover"
+            />
+          </div>
+          <p className="text-center text-sm text-slate-400 mt-3">C42 Ikarus — 3-axis side-by-side microlight in flight</p>
         </div>
       </section>
 
