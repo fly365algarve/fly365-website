@@ -1,7 +1,5 @@
 import { ContactForm } from "../components/ContactForm";
 
-const BANNER = "https://fly365algarve.co.uk/gallery/bannerheardalgarve-ts1664289439.jpg?ts=1762817991";
-
 const terms = [
   "As microlights, light aircraft require good weather conditions, flights are subject to cancellation at short notice, Fly365 will not be held responsible for the costs of travel, accommodation or any associated costs should your flight be cancelled for any reason, including aircraft non-serviceability or poor weather.",
   "All Trial flights are weather dependent and non-refundable once booked.",
@@ -23,8 +21,7 @@ export function TermsPage() {
   return (
     <div className="pt-20">
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${BANNER}')` }} />
-        <div className="absolute inset-0 hero-gradient" />
+        <div className="absolute inset-0 sky-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="accent-line mx-auto mb-6 block" />
           <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">Terms &amp; Conditions</h1>

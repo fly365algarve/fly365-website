@@ -1,7 +1,6 @@
 import { ContactForm } from "../components/ContactForm";
 import { CheckCircle } from "lucide-react";
 
-const BANNER = "https://fly365algarve.co.uk/gallery/bannerheardalgarve-ts1664289439.jpg?ts=1762817991";
 const ABOUT_1 = "https://fly365algarve.co.uk/gallery_gen/9bc69dc33b079fd563607ed5a717dfbc_838x464_fit.png?ts=1762817991";
 const ABOUT_2 = "https://fly365algarve.co.uk/gallery_gen/492d19a6957027a0cc41d4a5986c4ce1_702x468_fit.jpg?ts=1762817991";
 
@@ -9,8 +8,7 @@ export function AboutPage() {
   return (
     <div className="pt-20">
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${BANNER}')` }} />
-        <div className="absolute inset-0 hero-gradient" />
+        <div className="absolute inset-0 sky-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="accent-line mx-auto mb-6 block" />
           <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">About FLY365 Algarve</h1>
