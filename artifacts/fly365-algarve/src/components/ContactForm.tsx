@@ -1,5 +1,8 @@
 import { useState, type FormEvent } from "react";
+import { Link } from "wouter";
 import { Check, Send } from "lucide-react";
+import { site } from "../config/site";
+import "./round5/round5.css";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -9,10 +12,14 @@ export function ContactForm() {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
     setError("");
+    if (import.meta.env.DEV) {
+      setError(`Preview only: the form sends from the live Netlify site. Please WhatsApp us or email ${site.contact.email} for now.`);
+      return;
+    }
     setIsSubmitting(true);
     try {
       const encoded = new URLSearchParams(Array.from(fields.entries()).map(([key, value]) => [key, String(value)]));
-      const response = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: encoded.toString() });
+      const response = await fetch(import.meta.env.BASE_URL, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: encoded.toString() });
       if (!response.ok) throw new Error("Form submission failed");
       setSent(true);
     } catch {
@@ -37,10 +44,11 @@ export function ContactForm() {
     </div>
     <div className="grid gap-5 sm:grid-cols-2">
       <label className="block text-sm font-semibold" htmlFor="contact-phone">Phone <span className="font-normal text-[var(--muted-foreground)]">(optional)</span><input className="form-field mt-2 font-normal" id="contact-phone" name="phone" type="tel" autoComplete="tel" /></label>
-      <label className="block text-sm font-semibold" htmlFor="contact-interest">Interested in <select className="form-field mt-2 font-normal" id="contact-interest" name="interested-in" required defaultValue=""><option value="" disabled>Select one</option><option>Trial flight</option><option>Training course</option><option>Conversion</option><option>Other</option></select></label>
-    </div>
+      </div>
+    <fieldset><legend className="text-sm font-semibold">Interested in <span aria-hidden="true">*</span></legend><div className="mt-2 flex flex-wrap gap-2">{["Trial flight", "Training course", "Conversion", "Other"].map((v, i) => <label key={v} className="r5-chip"><input type="radio" name="interested-in" value={v} required={i === 0} /><span>{v}</span></label>)}</div></fieldset>
     <label className="block text-sm font-semibold" htmlFor="contact-dates">Preferred dates <input className="form-field mt-2 font-normal" id="contact-dates" name="preferred-dates" placeholder="For example, early October" required /></label>
     <label className="block text-sm font-semibold" htmlFor="contact-message">Message <span aria-hidden="true">*</span><textarea className="form-field mt-2 min-h-32 resize-y font-normal" id="contact-message" name="message" required /></label>
     <button className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest disabled:cursor-wait disabled:opacity-70" type="submit" disabled={isSubmitting}><Send size={16} />{isSubmitting ? "Sending enquiry…" : "Send enquiry"}</button>
+    <p className="text-xs text-[var(--muted-foreground)]">We use your details to respond to enquiries and arrange bookings. <Link href="/privacy" className="underline underline-offset-4">Privacy notice</Link></p>
   </form>;
 }

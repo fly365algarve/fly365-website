@@ -14,6 +14,7 @@ import { ContactPage } from "./pages/ContactPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { TermsPage } from "./pages/TermsPage";
 import { BookingPage } from "./pages/BookingPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
 import { HelmetProvider } from "react-helmet-async";
 import { WhatsAppControl } from "./components/WhatsAppControl";
 import { Seo } from "./components/Seo";
@@ -67,6 +68,7 @@ function Router() {
           <Route path="/history" component={HistoryPage} />
           <Route path="/terms" component={TermsPage} />
           <Route path="/booking" component={BookingPage} />
+          <Route path="/privacy" component={PrivacyPage} />
           <Route component={NotFound} />
         </Switch>
       </main>

@@ -38,23 +38,6 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Fly365 Algarve",
-        "url": "https://fly365algarve.co.uk/",
-        "email": "fly365algarve@gmail.com",
-        "telephone": "+351 967 456 156",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Aeródromo de Lagos",
-          "postalCode": "8600",
-          "addressLocality": "Lagos",
-          "addressCountry": "PT"
-        }
-      }
-    </script>
   </head>
   <body>
     <form
@@ -67,12 +50,10 @@
       <input name="name" type="text" />
       <input name="email" type="email" />
       <input name="phone" type="tel" />
-      <select name="interested-in">
-        <option>Trial flight</option>
-        <option>Training course</option>
-        <option>Conversion</option>
-        <option>Other</option>
-      </select>
+      <input type="radio" name="interested-in" value="Trial flight" />
+      <input type="radio" name="interested-in" value="Training course" />
+      <input type="radio" name="interested-in" value="Conversion" />
+      <input type="radio" name="interested-in" value="Other" />
       <input name="preferred-dates" type="text" />
       <textarea name="message"></textarea>
     </form>

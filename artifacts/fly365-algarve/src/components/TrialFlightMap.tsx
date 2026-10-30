@@ -216,7 +216,9 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
                 link.target = "_blank";
                 link.rel = "noopener noreferrer";
                 const logo = document.createElement("img");
-                logo.src = "/images/logo.png";
+                logo.src = `${import.meta.env.BASE_URL}images/logo-192.webp`;
+                logo.width = 28;
+                logo.height = 28;
                 logo.alt = "";
                 logo.className = "mapbox-airport-logo circular-logo";
                 element.append(logo);

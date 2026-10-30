@@ -1,0 +1,7 @@
+[build]
+  command = "pnpm --filter @workspace/fly365-algarve run build"
+  publish = "artifacts/fly365-algarve/dist/public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { site } from "../config/site";
 import { Seo } from "../components/Seo";
 import { TrialFlightMap } from "../components/TrialFlightMap";
+import { PageHero } from "../components/round5/PageHero";
 
 const euro = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
 
@@ -14,7 +15,7 @@ export function PricesPage() {
   const bestRate = Math.min(...training.prepaidHours.map((tier) => tier.rate));
   return <div className="page-shell page-enter">
     <Seo title="Trial flight and training prices" description="Explore Fly365 Algarve’s trial flight routes and current prepaid microlight training prices in Lagos, Portugal." />
-    <section className="inner-hero px-5 py-16 text-center text-[var(--chalk)] md:py-24"><div className="mx-auto max-w-4xl"><span className="section-kicker !text-[var(--sandstone)]">Clear pricing</span><h1 className="mt-3 text-6xl md:text-8xl">Prices</h1><p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-[rgba(247,243,236,.75)]">Choose a short flight along the coast or set aside time for serious progress.</p></div></section>
+    <PageHero kicker="Clear pricing" title={["Prices"]} sub={<p>Choose a short flight along the coast or set aside time for serious progress.</p>} image="/images/fly365-algarve-lagos-operation.png" alt="Fly365 microlight flying from Lagos Aerodrome" position="center 60%" />
     <section id="trial" className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[1160px]">
       <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Price category">
         <button type="button" role="tab" aria-selected={view === "trial"} onClick={() => setView("trial")} className={`price-tab ${view === "trial" ? "active" : ""}`} data-testid="tab-trial-flights">Trial flights</button>

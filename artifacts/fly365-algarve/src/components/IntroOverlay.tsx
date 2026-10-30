@@ -1,5 +1,6 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import "./intro.css";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 const KEY = "fly365-intro-seen";
 let decided: boolean | null = null;
@@ -63,7 +64,7 @@ export function IntroOverlay() {
           <rect x="14" y="37" width="20" height="4" rx="1.2" />
         </g>
       </svg>
-      <img src="/images/logo.png" alt="" className="fx-intro__logo circular-logo" />
+      <ResponsiveImage src="/images/logo.png" priority sizes="144px" alt="" className="fx-intro__logo circular-logo" />
     </div>
   );
 }

@@ -2,19 +2,17 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
+import { PageHero } from "../components/round5/PageHero";
+import { SpecCards, Comparison } from "../components/round5/Aircraft";
 
 export function FlexwingPage() {
   return <div className="page-shell page-enter">
     <Seo title="Flexwing microlight aircraft" description="Explore Fly365 Algarve’s flexwing training aircraft: the Quantum 912, Deltajet 500 and Quik R." />
-    <section className="inner-hero px-5 py-16 text-[var(--chalk)] md:py-24">
-      <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-[.85fr_1.15fr] md:items-center">
-        <div><span className="section-kicker !text-[var(--sandstone)]">Weight-shift flying</span><h1 className="mt-3 text-6xl leading-[.85] md:text-8xl">Flexwing</h1><p className="mt-6 max-w-lg text-lg leading-7 text-[rgba(247,243,236,.75)]">Weight-shift controlled microlights — the three-dimensional motorcycles of the sky</p></div>
-        <img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing weight-shift microlight aircraft" className="aspect-[16/10] w-full object-contain" />
-      </div>
-    </section>
+    <PageHero variant="split" fit="contain" kicker="Weight-shift flying" title={["Flexwing"]} sub={<p>Weight-shift controlled microlights — the three-dimensional motorcycles of the sky</p>} image="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing weight-shift microlight aircraft" />
+    <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">At a glance</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">The flexwing fleet</h2><SpecCards names={["P&M Quantum 912", "Exodus Deltajet 500", "P&M Quik R"]} /></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">
-      <div className="mx-auto max-w-[1160px] space-y-14 text-sm leading-7 text-[var(--ink)]">
+      <div className="mx-auto max-w-[1160px] space-y-14 text-sm leading-7 text-[var(--ink)] [&_article>div:last-child]:max-w-[68ch]">
         <article className="grid gap-6 border-b border-[rgba(11,42,60,.2)] pb-10 md:grid-cols-[.45fr_1fr]">
           <div><span className="section-kicker">01 · Aircraft</span><h2 className="mt-3 text-3xl text-[var(--navy)]">Pegasus Quantum 912</h2></div>
           <div><p className="mb-4">The Pegasus Quantum is a tandem seat, flexible wing, weightshift controlled microlight. This aircraft has proved itself to be one of the most popular weightshift aircraft in the world today, being used by the majority of schools in the UK.</p>
@@ -44,6 +42,7 @@ export function FlexwingPage() {
         <div className="flex flex-wrap gap-4"><Link href="/training" className="button-ochre inline-flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wider">Explore training <ArrowRight size={15} /></Link><Link href="/prices" className="inline-flex items-center gap-2 border border-[var(--navy)] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[var(--navy)]">Training prices <ArrowRight size={15} /></Link></div>
       </div>
     </section>
-    <section className="surface-sand section-pad"><div className="mx-auto max-w-2xl"><span className="section-kicker">Interested in flexwing?</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">Let’s talk flying.</h2><ContactForm /></div></section>
+    <Comparison />
+    <section className="bg-[var(--chalk)] section-pad"><div className="mx-auto max-w-2xl"><span className="section-kicker">Interested in flexwing?</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">Let’s talk flying.</h2><ContactForm /></div></section>
   </div>;
 }

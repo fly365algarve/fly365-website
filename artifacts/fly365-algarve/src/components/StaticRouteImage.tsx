@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { site } from "../config/site";
 import { trialRoutes } from "../config/routes";
 import { aerodromeMapsUrl, staticRouteMap } from "../lib/staticRouteMap";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 const preloaded = new Set<string>();
 const token = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -25,11 +26,11 @@ export function StaticRouteImage({ selected, onSelect, interactive }: {
     });
   };
   return <div className="static-route-image" aria-hidden={!interactive}>
-    <img className="static-route-backdrop" src="/images/fly365-algarve-lagos-operation.png" width={1000} height={600} alt="" />
+    <ResponsiveImage className="static-route-backdrop" src="/images/fly365-algarve-lagos-operation.png" sizes="(max-width: 640px) 100vw, 1100px" alt="" />
     {desktop && mobile && !failed ? <>
       <picture>
         <source media="(max-width: 639px)" srcSet={mobile.url} width={480} height={420} />
-        <img key={selected} src={desktop.url} width={1000} height={600}
+        <img key={selected} src={desktop.url} width={1000} height={600} loading="lazy" decoding="async"
           alt={`Satellite view of the approximate ${trialRoutes[selected].minutes}-minute trial flight route, with pins for Lagos Aerodrome, Ponta da Piedade, Salema, Sagres and Cabo de São Vicente`}
           onLoad={preload} onError={() => setFailed(true)} />
       </picture>

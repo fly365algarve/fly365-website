@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { site } from "../config/site";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 export function Footer() {
   return (
@@ -8,7 +9,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-[1.2fr_.8fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-16 w-16 object-cover circular-logo" />
+            <ResponsiveImage src="/images/logo.png" sizes="64px" alt="Fly365 Algarve logo" className="h-16 w-16 object-cover circular-logo" />
             <span className="display-heading text-2xl">Fly365 Algarve</span>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,243,236,.72)]">Microlight trial flights and intensive training from Lagos Aerodrome.</p>
@@ -28,7 +29,7 @@ export function Footer() {
       </div>
       <div className="mx-auto mt-12 flex max-w-[1160px] flex-col gap-4 border-t border-[rgba(247,243,236,.2)] pt-6 text-xs text-[rgba(247,243,236,.65)] sm:flex-row sm:items-center sm:justify-between">
         <p>© 2026 Fly365 Algarve.</p>
-        <Link href="/terms">T&amp;Cs</Link>
+        <div className="flex gap-5"><Link href="/privacy">Privacy notice</Link><Link href="/terms">T&amp;Cs</Link></div>
       </div>
     </footer>
   );

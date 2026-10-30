@@ -53,9 +53,11 @@ export const site = {
     maxStudentsPerWeek: 2,
   },
   team: [
-    { name: "Zeth Devenish", role: "Fixed-wing instructor" },
-    { name: "Colin Gordon", role: "Principal flexwing instructor" },
+    { name: "Zeth Devenish", role: "Fixed-wing instructor", experience: "More than 2,000 hours", initials: "ZD", photo: "/images/zeth.jpg" },
+    { name: "Colin Gordon", role: "Principal flexwing instructor", experience: "Instructing since 2003", initials: "CG", photo: "/images/colin.jpg" },
   ],
+  reviews: [] as Array<{ quote: string; author: string; source?: string; url?: string }>,
+  reviewLinks: {} as Record<string, string>,
   fixedWing: {
     name: "Ikarus C42",
     aircraftCount: 3,

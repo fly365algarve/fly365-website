@@ -3,35 +3,42 @@ import { ArrowRight, Check } from "lucide-react";
 import { site } from "../config/site";
 import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { PageHero } from "../components/round5/PageHero";
+import { TeamCard } from "../components/round5/Extras";
 
 const card = "border-t border-[rgba(11,42,60,.2)] py-8";
 
 export function AboutPage() {
   return <div className="page-shell page-enter">
     <Seo title="About and team" description="Learn about the Fly365 Algarve operation, aircraft, instructors and training at Lagos Aerodrome." />
-    <section className="inner-hero px-5 py-16 text-[var(--chalk)] md:py-24">
-      <div className="mx-auto max-w-[1160px]">
-        <span className="section-kicker !text-[var(--sandstone)]">Fly365 Algarve</span>
-        <h1 className="mt-3 text-6xl leading-[.85] md:text-8xl">About &amp; Team</h1>
-        <p className="mt-6 max-w-xl text-lg text-[rgba(247,243,236,.78)]">FLY365 Full Time Operation on Portugal&apos;s Algarve</p>
-      </div>
-    </section>
+    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/fly365-algarve-lagos-operation.png" alt="Fly365 Algarve operation at Lagos Aerodrome" position="center 35%" />
+    <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">Meet the team</span><h2 className="mt-3 text-5xl text-[var(--navy)]">Your instructors</h2><div className="mt-8 grid gap-6 md:grid-cols-2">{site.team.map((member) => <TeamCard key={member.name} member={member} />)}</div></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">
-      <div className="mx-auto grid max-w-[1160px] gap-10 lg:grid-cols-[1fr_.72fr]">
-        <div className="space-y-1 text-sm leading-7 text-[var(--ink)]">
-          <article className={card}>
+      <div className="mx-auto max-w-[1160px] space-y-14 text-sm leading-7 text-[var(--ink)] md:space-y-20">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+          <ResponsiveImage src="/images/ikarus-c42-fly365.jpg" alt="Fly365 Algarve Ikarus C42 at Lagos Aerodrome" sizes="(max-width: 768px) 100vw, 50vw" className="aspect-[4/3] w-full object-cover" />
+          <div className="max-w-[68ch]">
             <h2 className="mb-4 text-3xl text-[var(--navy)]">The Operation</h2>
             <p className="mb-4">Lagos Aerodrome is {site.facts.townDistanceKm}km from the centre of Lagos in Portugal, has a {site.facts.runway.toLowerCase()} and {site.facts.flyingDays} flying days per year. We offer intensive training packages of up to {site.courses[1].hours} hours in {site.courses[1].title.toLowerCase()} blocks throughout the year.</p>
             <p className="mb-4">Training is available on either a Quantum 912, Deltajet BMW, Quik R (all weightshift) or the C42 3-axis.</p>
             <p>The C42 is a high wing side-by-side seat, Single Side Stick controlled monoplane. This popular aircraft has been designed with the beginner in mind, being very forgiving yet giving lively performance especially when it comes to operating from short unprepared fields. Experience has shown that students who learn on this aircraft find conversion to other more sophisticated aircraft much easier. This is due firstly to the requirement to use the rudder pedals in order to fly the aircraft more precisely, and secondly, the extremely light control forces normally only found in very advanced more aerobatic type of aircraft. This makes for a more relaxed and less strenuous flight even in very turbulent conditions. Whilst some schools use faster and more sophisticated aircraft in the training role, experience has shown that this generally slows down a student&apos;s progress and increases the training time required to reach that seemingly elusive goal of first solo or the licence!</p>
-          </article>
-
-          <article className={card}>
+          </div>
+        </div>
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+          <ResponsiveImage src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing aircraft at the airfield" sizes="(max-width: 768px) 100vw, 50vw" className="aspect-[4/3] w-full bg-[#eee4d4] object-contain p-3 md:order-2" />
+          <div className="md:order-1">          <div className="max-w-[68ch]">
             <h2 className="mb-4 text-3xl text-[var(--navy)]">Our Fleet</h2>
             <p className="mb-4">For our flexwing training, we have a choice of P&amp;M Quantum 912, P&amp;M Quik R 912S and an Exodus Deltajet 500 BMW. For the 3 axis microlight training we have {site.fixedWing.aircraftCount} {site.fixedWing.name} aircraft and offer intensive training packages of up to {site.courses[1].hours} hours in {site.courses[1].title.toLowerCase()} blocks throughout the year, in both control types.</p>
             <p>The flexwing, weight-shift controlled microlights are like three dimensional motorcycles and all have slightly different characteristics - The Quantum 912 design from the 1980s is a highly proven machine and is extremely forgiving, with mild stall characteristics and produces good cruise speeds, combined with pleasant handling and very fast climb rates. The brand new Deltajet is a very recent introduction and has a topless wing, similar characteristics to the Quantum but is very comfortable and handles more testing weather conditions than the Quantum. The Quik R is the sportsbike of the flexwing world with the highest speeds, lightest control and best resilience to turbulent conditions due to the smaller wing and therefore higher wing loading.</p>
-          </article>
+          </div></div>
+        </div>
+      </div>
+    </section>
+    <section className="section-pad bg-[var(--chalk)] !pt-0">
+      <div className="mx-auto grid max-w-[1160px] gap-10 lg:grid-cols-[1fr_.72fr]">
+        <div className="r5-measure space-y-1 text-sm leading-7 text-[var(--ink)]">
 
           <article className={card}>
             <h2 className="mb-4 text-3xl text-[var(--navy)]">Personal Service</h2>
@@ -69,15 +76,8 @@ export function AboutPage() {
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            <img src="/images/ikarus-c42-fly365.jpg" alt="Fly365 Algarve Ikarus C42 at Lagos Aerodrome" className="aspect-[4/3] w-full object-cover" />
-            <img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing aircraft at the airfield" className="aspect-[4/3] w-full object-contain bg-[#eee4d4] p-3" />
-          </div>
-          <div className="mt-8">
-            <span className="section-kicker">Meet the team</span>
-            <div className="mt-4 grid gap-4">
-              {site.team.map((member) => <article key={member.name} className="border-t border-[rgba(11,42,60,.2)] pt-4"><div className="grid aspect-[4/2] place-items-center bg-[var(--navy)] text-sm text-[rgba(247,243,236,.7)]">Photo coming soon</div><h2 className="mt-4 text-3xl text-[var(--navy)]">{member.name}</h2><p className="mt-1 text-sm text-[var(--ocean)]">{member.role}</p><p className="mt-3 text-sm italic text-[var(--muted-foreground)]">Bio coming soon.</p></article>)}
-            </div>
+          <div>
+            <p className="r5-pull">Strictly limited to {site.facts.maxStudentsPerWeek} students per week.</p>
             <Link href="/history" className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Our history <ArrowRight size={15} /></Link>
           </div>
         </aside>
