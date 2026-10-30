@@ -30,12 +30,14 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
   const progressRef = useRef(0);
   const startTimeRef = useRef(0);
   const selectedRef = useRef(selected);
+  const initialOverviewShownRef = useRef(false);
   const playbackRef = useRef<PlaybackState>("idle");
   const [status, setStatus] = useState<MapStatus>("waiting");
   const [shouldLoad, setShouldLoad] = useState(false);
   const [playback, setPlayback] = useState<PlaybackState>("idle");
   const [reducedMotion, setReducedMotion] = useState(false);
   const [showFallback, setShowFallback] = useState(!token);
+  const [fallbackReason, setFallbackReason] = useState(!token ? "missing-token" : "");
   const flight = site.trialFlights[selected];
   const route = trialRoutes[selected];
 
@@ -66,7 +68,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         setShouldLoad(true);
         observer.disconnect();
       }
-    }, { rootMargin: "240px", threshold: 0.01 });
+    }, { rootMargin: "0px", threshold: 0.01 });
 
     observer.observe(target);
     return () => observer.disconnect();
@@ -89,6 +91,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         if (!mapbox.supported()) {
           setStatus("fallback");
           setShowFallback(true);
+          setFallbackReason("webgl-unavailable");
           return;
         }
 
@@ -115,6 +118,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           if (map && !map.isStyleLoaded()) {
             setStatus("fallback");
             setShowFallback(true);
+            setFallbackReason("load-timeout");
           }
         }, 12000);
 
@@ -123,6 +127,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           if (/token|unauthorized|forbidden|access token/i.test(message)) {
             setStatus("fallback");
             setShowFallback(true);
+            setFallbackReason("map-service-unavailable");
           }
         });
 
@@ -229,12 +234,14 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           } catch {
             setStatus("fallback");
             setShowFallback(true);
+            setFallbackReason("map-load-error");
           }
         });
       } catch {
         if (!cancelled) {
           setStatus("fallback");
           setShowFallback(true);
+          setFallbackReason("map-load-error");
         }
       }
     }
@@ -275,9 +282,15 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       map.setPaintProperty(lineId, "line-opacity", selectedRoute ? 1 : 0.38);
     });
 
+    if (!initialOverviewShownRef.current) {
+      initialOverviewShownRef.current = true;
+      return;
+    }
     map.fitBounds(routeBounds(route.coordinates), {
       padding: { top: 85, right: 120, bottom: 90, left: 120 },
       maxZoom: 11,
+      pitch: 55,
+      bearing: -12,
       duration: reducedMotion ? 0 : 900,
     });
   }, [flight.minutes, route.coordinates, reducedMotion, status]);
@@ -291,7 +304,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     const map = mapRef.current;
     if (!map || status !== "ready") return;
     if (reducedMotion) {
-      map.fitBounds(routeBounds(route.coordinates), { padding: 80, maxZoom: 11, duration: 0 });
+      map.fitBounds(routeBounds(route.coordinates), { padding: 80, maxZoom: 11, pitch: 55, bearing: -12, duration: 0 });
       return;
     }
 
@@ -366,13 +379,14 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     updatePlayback("paused");
   };
 
-  return <div className="trial-map-shell" data-testid="map-trial-routes">
-    <div ref={mapElement} className="trial-map mapbox-map" aria-label="Interactive 3D satellite map of approximate trial flight routes">
+  return <div className="trial-map-shell" data-testid="map-trial-routes" data-map-status={status} data-map-fallback-reason={showFallback ? fallbackReason : undefined}>
+    <div className="trial-map mapbox-map" aria-label="Interactive 3D satellite map of approximate trial flight routes">
+      <div ref={mapElement} className="mapbox-canvas-host" />
       {status === "waiting" && <div className="map-loading-panel"><span className="map-loading-mark">FLY365</span><span>Loading route map…</span></div>}
       {status === "loading" && <div className="map-loading-panel"><span className="map-loading-mark">FLY365</span><span>Loading satellite map…</span></div>}
       {showFallback && <div className="map-fallback">
         <div className="map-fallback-photo" role="img" aria-label="View of the Algarve coast from a Fly365 microlight">
-          <span className="map-fallback-caption">Approximate routes along the Algarve coast</span>
+          <span className="map-fallback-caption">3D view unavailable · Explore the flight options below<br />Approximate routes along the Algarve coast</span>
         </div>
         <div className="map-fallback-routes">
           {site.trialFlights.map((item, index) => <button key={item.minutes} type="button" className={`map-fallback-route ${selected === index ? "selected" : ""}`} onClick={() => onSelect(index)} aria-pressed={selected === index} data-testid={`fallback-route-${item.minutes}`}>

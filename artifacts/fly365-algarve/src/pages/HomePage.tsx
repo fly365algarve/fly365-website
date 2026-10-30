@@ -72,6 +72,7 @@ export function HomePage() {
       </div>
     </section>
 
+    <svg className="flight-divider" viewBox="0 0 420 34" aria-hidden="true"><path d="M3 25 C68 3 120 8 173 22 S274 32 321 13 S375 7 417 18" /></svg>
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[1160px]">
         <div className="mb-8">
@@ -95,12 +96,13 @@ export function HomePage() {
     <section className="surface-ocean section-pad">
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-10 md:grid-cols-[.8fr_1.2fr]">
-          <div><span className="section-kicker !text-[var(--sandstone)]">People who teach</span><h2 className="mt-3 text-5xl leading-[.9]">Good hands.<br />Clear standards.</h2><Link href="/history" className="mt-7 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[var(--sandstone)]">The story behind Fly365 <ArrowRight size={16} /></Link></div>
+          <div><span className="section-kicker !text-[var(--sandstone)]">People who teach</span><h2 className="mt-3 text-5xl leading-[.9]">Good hands.<br />Clear standards.</h2><Link href="/history" className="motion-link mt-7 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[var(--sandstone)]">The story behind Fly365 <ArrowRight size={16} /></Link></div>
            <div className="grid gap-5 sm:grid-cols-2">{site.team.map((member) => <div key={member.name} className="team-card border-t border-[rgba(247,243,236,.25)] pt-5"><h3 className="text-3xl">{member.name}</h3><p className="mt-2 text-sm text-[rgba(247,243,236,.7)]">{member.role}</p></div>)}</div>
         </div>
       </div>
     </section>
 
+    <svg className="flight-divider" viewBox="0 0 420 34" aria-hidden="true"><path d="M3 25 C68 3 120 8 173 22 S274 32 321 13 S375 7 417 18" /></svg>
     <section className="section-pad surface-sand">
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-12 md:grid-cols-[.75fr_1.25fr]">
