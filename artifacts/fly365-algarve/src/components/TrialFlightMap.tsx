@@ -6,8 +6,10 @@ import { site } from "../config/site";
 import { routePlaces, trialRoutes, type MapCoordinate } from "../config/routes";
 import { StaticRouteImage } from "./StaticRouteImage";
 import { aerodromeMapsUrl } from "../lib/staticRouteMap";
+import { useCockpitFlight, type MapboxSdk } from "../hooks/useCockpitFlight";
+import { CockpitHud } from "./CockpitHud";
+import { RouteFlightVideo } from "./RouteFlightVideo";
 
-type PlaybackState = "idle" | "playing" | "paused" | "finished";
 type MapStatus = "static" | "loading" | "ready" | "unavailable";
 
 const formatPrice = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
@@ -22,31 +24,41 @@ function routeBounds(coordinates: MapCoordinate[]) {
   ] as [[number, number], [number, number]];
 }
 
+function coastOverview(map: MapboxMap, animate = false) {
+  map.stop();
+  const inset = map.getCanvas().clientWidth < 600 ? 35 : 55;
+  map.fitBounds(routeBounds(routePlaces.map(place => place.position)), {
+    padding: { top: inset, right: inset, bottom: inset + 15, left: inset },
+    pitch: 60,
+    bearing: -50,
+    maxZoom: 11.5,
+    duration: animate ? 900 : 0,
+  });
+}
+
 export function TrialFlightMap({ selected, onSelect }: { selected: number; onSelect: (index: number) => void }) {
   const mapElement = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapboxMap | null>(null);
   const markersRef = useRef<MapboxMarker[]>([]);
-  const aircraftMarkerRef = useRef<MapboxMarker | null>(null);
-  const frameRef = useRef<number | null>(null);
-  const overviewTimeoutRef = useRef<number | null>(null);
-  const progressRef = useRef(0);
-  const startTimeRef = useRef(0);
+  const sdkRef = useRef<MapboxSdk | null>(null);
   const selectedRef = useRef(selected);
-  const initialOverviewShownRef = useRef(false);
-  const playbackRef = useRef<PlaybackState>("idle");
   const [status, setStatus] = useState<MapStatus>("static");
   const [failureReason, setFailureReason] = useState("");
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [playback, setPlayback] = useState<PlaybackState>("idle");
   const [reducedMotion, setReducedMotion] = useState(false);
   const flight = site.trialFlights[selected];
   const route = trialRoutes[selected];
 
   selectedRef.current = selected;
-  const updatePlayback = (next: PlaybackState) => {
-    playbackRef.current = next;
-    setPlayback(next);
-  };
+  const cockpit = useCockpitFlight({
+    mapRef, sdkRef, coordinates: route.coordinates, reducedMotion,
+    overview: () => { if (mapRef.current) coastOverview(mapRef.current, !reducedMotion); },
+    onError: () => {
+      setFailureReason("cockpit-error");
+      setStatus("unavailable");
+      setShouldLoad(false);
+    },
+  });
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -67,7 +79,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       setFailureReason(reason);
       setStatus("unavailable");
       setShouldLoad(false);
-      updatePlayback("idle");
+      cockpit.reset();
     };
     // Includes module download time. Never leave a pending 3D request indefinitely.
     const loadTimeout = window.setTimeout(() => fail("timeout"), 8000);
@@ -80,6 +92,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         ]);
         if (cancelled || !mapElement.current) return;
         const mapbox = mapboxModule.default;
+        sdkRef.current = mapbox;
         if (!mapbox.supported()) {
           fail("webgl-unavailable");
           return;
@@ -88,12 +101,22 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         mapbox.accessToken = token;
         map = new mapbox.Map({
           container: mapElement.current,
-          style: "mapbox://styles/mapbox/satellite-streets-v12",
+          style: "mapbox://styles/mapbox/standard-satellite",
+          config: {
+            basemap: {
+              lightPreset: "day",
+              showRoadLabels: false,
+              showPointOfInterestLabels: false,
+              showTransitLabels: false,
+              showPlaceLabels: false,
+            },
+          },
           projection: "mercator",
           center: [-8.81, 37.065],
           zoom: 9,
-          pitch: 55,
-          bearing: -12,
+          pitch: 60,
+          bearing: -50,
+          maxPitch: 85,
           dragPan: true,
           dragRotate: true,
           touchPitch: true,
@@ -126,14 +149,21 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               tileSize: 512,
               maxzoom: 14,
             });
-            map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+            map.setTerrain({ source: "mapbox-dem", exaggeration: 1.3 });
+            map.setFog({
+              color: "#d9e8f0",
+              "high-color": "#9bc9ed",
+              "horizon-blend": 0.12,
+              "space-color": "#dceefa",
+              "star-intensity": 0,
+            });
             map.addLayer({
               id: "fly365-atmosphere",
               type: "sky",
               paint: {
                 "sky-type": "atmosphere",
-                "sky-atmosphere-sun": [0, 0],
-                "sky-atmosphere-sun-intensity": 15,
+                "sky-atmosphere-sun": [230, 45],
+                "sky-atmosphere-sun-intensity": 5,
               },
             });
 
@@ -150,6 +180,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               map!.addLayer({
                 id: `${sourceId}-glow`,
                 type: "line",
+                slot: "middle",
                 source: sourceId,
                 layout: { "line-cap": "round", "line-join": "round" },
                 paint: {
@@ -162,6 +193,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               map!.addLayer({
                 id: `${sourceId}-line`,
                 type: "line",
+                slot: "middle",
                 source: sourceId,
                 layout: { "line-cap": "round", "line-join": "round" },
                 paint: {
@@ -173,10 +205,10 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               });
             });
 
-            routePlaces.forEach((place) => {
+            routePlaces.forEach((place, index) => {
               const isAirport = "kind" in place && place.kind === "aerodrome";
               const element = document.createElement(isAirport ? "a" : "div");
-              element.className = `mapbox-place-pin${isAirport ? " mapbox-place-pin-airport" : ""}`;
+              element.className = `mapbox-place-pin${isAirport ? " mapbox-place-pin-airport" : ""}${index === 3 ? " mapbox-pin-sagres" : index === 4 ? " mapbox-pin-cabo" : ""}`;
               element.setAttribute("aria-label", isAirport ? "Open Lagos Aerodrome in Google Maps" : place.name);
               if (isAirport) {
                 const link = element as HTMLAnchorElement;
@@ -195,26 +227,15 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               }
               const label = document.createElement("span");
               label.className = "mapbox-place-label";
-              label.textContent = place.name;
+              label.textContent = place.name.replace(" / the grottos", "");
               element.append(label);
-              const marker = new mapbox.Marker({ element, anchor: "bottom" })
+              const marker = new mapbox.Marker({ element, anchor: "center" })
                 .setLngLat([...place.position])
                 .addTo(map!);
               markersRef.current.push(marker);
             });
 
-            const bounds = routeBounds(trialRoutes.flatMap((item) => item.coordinates));
-            map.fitBounds(bounds, { padding: { top: 80, right: 120, bottom: 90, left: 120 }, maxZoom: 9.5, duration: 0 });
-            map.setPitch(55);
-
-            const aircraft = document.createElement("div");
-            aircraft.className = "mapbox-aircraft-marker";
-            aircraft.setAttribute("aria-label", "Aircraft following the selected route");
-            aircraft.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16Z" fill="currentColor"/></svg>';
-            aircraftMarkerRef.current = new mapbox.Marker({ element: aircraft, anchor: "center", rotationAlignment: "map" })
-              .setLngLat([...trialRoutes[selectedRef.current].coordinates[0]])
-              .addTo(map);
-            aircraftMarkerRef.current.getElement().style.display = "none";
+            coastOverview(map);
 
             if (cancelled) return;
             mapRef.current = map;
@@ -235,26 +256,16 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       cancelled = true;
       if (loadTimeout) window.clearTimeout(loadTimeout);
       resizeObserver?.disconnect();
-      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
-      aircraftMarkerRef.current?.remove();
-      aircraftMarkerRef.current = null;
       map?.remove();
       mapRef.current = null;
-      initialOverviewShownRef.current = false;
     };
     }, [shouldLoad]);
 
   useEffect(() => {
     if (status !== "ready" || !mapRef.current) return;
     const map = mapRef.current;
-    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
-    if (overviewTimeoutRef.current !== null) window.clearTimeout(overviewTimeoutRef.current);
-    frameRef.current = null;
-    updatePlayback("idle");
-    progressRef.current = 0;
-    aircraftMarkerRef.current?.getElement().style.setProperty("display", "none");
 
     trialRoutes.forEach((item) => {
       const selectedRoute = item.minutes === flight.minutes;
@@ -268,121 +279,18 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       map.setPaintProperty(lineId, "line-opacity", selectedRoute ? 1 : 0.38);
     });
 
-    if (!initialOverviewShownRef.current) {
-      initialOverviewShownRef.current = true;
-      return;
-    }
-    map.fitBounds(routeBounds(route.coordinates), {
-      padding: { top: 85, right: 120, bottom: 90, left: 120 },
-      maxZoom: 11,
-      pitch: 55,
-      bearing: -12,
-      duration: reducedMotion ? 0 : 900,
-    });
+    coastOverview(map);
   }, [flight.minutes, route.coordinates, reducedMotion, status]);
 
-  useEffect(() => () => {
-    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
-    if (overviewTimeoutRef.current !== null) window.clearTimeout(overviewTimeoutRef.current);
-  }, []);
-
-  const play = async (restart = false) => {
-    const map = mapRef.current;
-    if (!map || status !== "ready") return;
-    if (reducedMotion) {
-      map.fitBounds(routeBounds(route.coordinates), { padding: 80, maxZoom: 11, pitch: 55, bearing: -12, duration: 0 });
-      return;
-    }
-
-    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
-    frameRef.current = null;
-    if (overviewTimeoutRef.current !== null) window.clearTimeout(overviewTimeoutRef.current);
-    if (restart || playbackRef.current === "idle" || playbackRef.current === "finished") progressRef.current = 0;
-    if (playbackRef.current === "paused" && !restart) {
-      startTimeRef.current = performance.now() - progressRef.current * 25000;
-    } else {
-      progressRef.current = 0;
-      startTimeRef.current = performance.now();
-    }
-
-    const aircraft = aircraftMarkerRef.current;
-    aircraft?.getElement().style.setProperty("display", "grid");
-    updatePlayback("playing");
-
-    let turf: typeof import("@turf/turf");
-    try {
-      turf = await import("@turf/turf");
-    } catch {
-      updatePlayback("idle");
-      setFailureReason("flyover-module-error");
-      setShouldLoad(false);
-      setStatus("unavailable");
-      return;
-    }
-    if (playbackRef.current !== "playing") return;
-    startTimeRef.current = performance.now() - progressRef.current * 25000;
-    const line = turf.lineString(route.coordinates);
-    const length = turf.length(line, { units: "kilometers" });
-    const duration = 25000;
-    const step = (now: number) => {
-      if (!mapRef.current || playbackRef.current !== "playing") return;
-      const progress = Math.min(1, (now - startTimeRef.current) / duration);
-      progressRef.current = progress;
-      const distance = Math.max(0.001, length * progress);
-      const point = turf.along(line, distance, { units: "kilometers" });
-      const next = turf.along(line, Math.min(length, distance + 0.03), { units: "kilometers" });
-      const [longitude, latitude] = point.geometry.coordinates;
-      const bearing = turf.bearing(point, next);
-
-      mapRef.current.easeTo({
-        center: [longitude, latitude],
-        zoom: 12.2,
-        pitch: 67,
-        bearing,
-        offset: [0, 115],
-        duration: 0,
-      });
-      aircraftMarkerRef.current?.setLngLat([longitude, latitude]).setRotation(bearing);
-
-      if (progress < 1) {
-        frameRef.current = requestAnimationFrame(step);
-      } else {
-        frameRef.current = null;
-        updatePlayback("finished");
-        overviewTimeoutRef.current = window.setTimeout(() => {
-          overviewTimeoutRef.current = null;
-          if (mapRef.current) {
-            mapRef.current.easeTo({
-              center: [-8.81, 37.065],
-              zoom: 9,
-              pitch: 55,
-              bearing: -12,
-              offset: [0, 0],
-              duration: 1600,
-            });
-          }
-          aircraftMarkerRef.current?.getElement().style.setProperty("display", "none");
-        }, 450);
-      }
-    };
-
-    frameRef.current = requestAnimationFrame(step);
-  };
-
-  const pause = () => {
-    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
-    frameRef.current = null;
-    updatePlayback("paused");
-  };
-
   useEffect(() => {
-    if (status === "ready") void play(true);
+    if (status === "ready") void cockpit.play(true);
   }, [status]);
 
   return <div className="trial-map-shell" data-testid="map-trial-routes" data-map-status={status} data-map-failure={status === "unavailable" ? failureReason : undefined}>
     <div className="trial-map mapbox-map" aria-label="Interactive 3D satellite map of approximate trial flight routes">
       <StaticRouteImage selected={selected} onSelect={onSelect} interactive={status !== "ready"} />
       <div ref={mapElement} className={`mapbox-canvas-host ${status === "ready" ? "mapbox-visible" : ""}`} aria-hidden={status !== "ready"} inert={status !== "ready"} />
+      {status === "ready" && cockpit.active && <CockpitHud routeName={`${flight.minutes} min · ${flight.route}`} progress={cockpit.progress} place={cockpit.place} />}
     </div>
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <div className="flex flex-wrap gap-2" role="group" aria-label="Select trial flight duration">
@@ -393,11 +301,14 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         {status === "loading" ? <span className="map-button-progress" aria-hidden="true" /> : <Play size={15} />} Fly this route in 3D
       </button>}
       {status === "ready" && <div className="flex flex-wrap gap-2">
-        {playback === "playing"
-          ? <button type="button" className="route-select" onClick={pause} data-testid="button-pause-flyover"><Pause size={15} /> Pause</button>
-          : <button type="button" className="route-select route-play" onClick={() => void play()} data-testid="button-play-flyover"><Play size={15} /> {playback === "finished" ? "Fly this route again" : playback === "paused" ? "Resume route" : "Fly this route"}</button>}
-        {playback !== "idle" && <button type="button" className="route-select" onClick={() => void play(true)} aria-label="Replay route from the beginning" data-testid="button-replay-flyover"><RotateCcw size={15} /> Replay</button>}
-        <button type="button" className="route-select" onClick={() => { updatePlayback("idle"); setShouldLoad(false); setStatus("static"); }}>Static view</button>
+        {cockpit.playback === "playing"
+          ? <button type="button" className="route-select" onClick={cockpit.pause} data-testid="button-pause-flyover"><Pause size={15} /> Pause</button>
+          : <button type="button" className="route-select route-play" onClick={() => void cockpit.play()} data-testid="button-play-flyover"><Play size={15} /> {cockpit.playback === "finished" ? "Fly this route again" : cockpit.playback === "paused" ? "Resume" : "Fly this route"}</button>}
+        {cockpit.active && <>
+          <button type="button" className="route-select" onClick={() => void cockpit.play(true)} aria-label="Restart flight from the beginning" data-testid="button-restart-flyover"><RotateCcw size={15} /> Restart</button>
+          <button type="button" className="route-select" onClick={cockpit.exit} data-testid="button-exit-flyover">Exit</button>
+        </>}
+        <button type="button" className="route-select" onClick={() => { cockpit.reset(); setShouldLoad(false); setStatus("static"); }}>Static view</button>
       </div>}
     </div>
     {status === "unavailable" && <p role="status" className="mt-2 text-xs text-[var(--muted-foreground)]">3D view unavailable right now</p>}
@@ -407,5 +318,6 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     </div>
     <p className="mt-3 text-[11px] text-[var(--muted-foreground)]">Routes are approximate and depend on weather</p>
     <Link href="/prices#trial" className="motion-link mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">View full price list <ArrowRight size={14} /></Link>
+    {route.video?.src && <RouteFlightVideo key={route.video.src} video={route.video} />}
   </div>;
 }

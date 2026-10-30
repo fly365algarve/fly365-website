@@ -51,6 +51,9 @@ function returnAlong(outbound: MapCoordinate[]) {
   return [...outbound, ...outbound.slice(0, -1).reverse()];
 }
 
+// Add a real video file URL here when available; empty entries render no slot.
+export const routeVideos: Partial<Record<number, { src: string; poster?: string }>> = {};
+
 export const trialRoutes = site.trialFlights.map((flight, index) => {
   const outbound = [
     coastToGrottos,
@@ -62,5 +65,6 @@ export const trialRoutes = site.trialFlights.map((flight, index) => {
   return {
     ...flight,
     coordinates: returnAlong(outbound),
+    video: routeVideos[flight.minutes],
   };
 });
