@@ -173,12 +173,12 @@
 .price-tab:hover { transform: translateY(-2px); }
 .price-tab.active { background: var(--navy); color: var(--chalk); }
 .trial-map-shell { color: var(--ink); }
-.trial-map { position: relative; aspect-ratio: 5 / 3; overflow: hidden; border: 1px solid rgba(11,42,60,.18); background: #d9d1c1; }
+.trial-map { position: relative; aspect-ratio: 5 / 3; overflow: hidden; border: 1px solid rgba(11,42,60,.18); background: var(--navy); }
 .trial-map .mapbox-canvas-host { position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none; }
 .trial-map .mapbox-canvas-host.mapbox-visible { opacity: 1; pointer-events: auto; }
-.static-route-image, .static-route-image picture, .static-route-image picture img, .static-route-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; }
+.static-route-image, .static-route-image picture, .static-route-image picture img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.static-route-image picture { transition: opacity 200ms ease; pointer-events: none; }
 .static-route-image picture img { object-fit: fill; }
-.static-route-backdrop { object-fit: cover; }
 .static-airport-hotspot { position: absolute; width: 44px; height: 48px; transform: translate(-50%, -100%); z-index: 2; border-radius: 50%; }
 .static-airport-hotspot:focus-visible { outline: 3px solid var(--chalk); background: rgba(200,105,47,.2); }
 .static-airport-mobile { display: none; }

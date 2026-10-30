@@ -54,9 +54,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     mapRef, sdkRef, coordinates: route.coordinates, reducedMotion,
     overview: () => { if (mapRef.current) coastOverview(mapRef.current, !reducedMotion); },
     onError: () => {
-      setFailureReason("cockpit-error");
-      setStatus("unavailable");
-      setShouldLoad(false);
+      if (import.meta.env.DEV) console.warn("Trial-flight map: cockpit-error");
     },
   });
 
@@ -71,10 +69,11 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
   useEffect(() => {
     if (!shouldLoad || !mapElement.current || !token) return;
     let cancelled = false;
+    let styleReady = false;
     let map: MapboxMap | null = null;
     let resizeObserver: ResizeObserver | undefined;
     const fail = (reason: string) => {
-      if (cancelled) return;
+      if (cancelled || styleReady) return;
       cancelled = true;
       setFailureReason(reason);
       setStatus("unavailable");
@@ -82,7 +81,13 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       cockpit.reset();
     };
     // Includes module download time. Never leave a pending 3D request indefinitely.
-    const loadTimeout = window.setTimeout(() => fail("timeout"), 8000);
+    const loadTimeout = window.setTimeout(() => fail("timeout"), 12000);
+    const optional = (step: string, setup: () => void) => {
+      try { setup(); }
+      catch {
+        if (import.meta.env.DEV) console.warn(`Trial-flight map: ${step}-setup-error`);
+      }
+    };
 
     async function initialize() {
       try {
@@ -126,48 +131,40 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           antialias: true,
         });
         mapRef.current = map;
-        map.addControl(new mapbox.NavigationControl({ visualizePitch: true }), "top-right");
+        optional("controls", () => map!.addControl(new mapbox.NavigationControl({ visualizePitch: true }), "top-right"));
         resizeObserver = new ResizeObserver(() => map?.resize());
         resizeObserver.observe(mapElement.current);
         map.resize();
         map.on("error", (event) => {
-          const error = event.error as Error & { status?: number };
+          const error = event.error as (Error & { status?: number }) | undefined;
           // Store only a category/status, never token-bearing service error text.
-          const category = error.status ? `http-${error.status}`
-            : /sky|projection/i.test(error.message) ? "projection"
-            : /fetch|network/i.test(error.message) ? "network"
-            : /source|layer|style/i.test(error.message) ? "style"
+          const category = error?.status ? `http-${error.status}`
+            : /sky|projection/i.test(error?.message ?? "") ? "projection"
+            : /fetch|network/i.test(error?.message ?? "") ? "network"
+            : /source|layer|style/i.test(error?.message ?? "") ? "style"
             : "unknown";
+          if (styleReady) {
+            if (import.meta.env.DEV) console.warn(`Trial-flight map: map-service-${category}`);
+            return;
+          }
           fail(`map-service-${category}`);
         });
         map.once("style.load", () => {
           if (!map || cancelled) return;
-          try {
-            map.addSource("mapbox-dem", {
+          styleReady = true;
+          window.clearTimeout(loadTimeout);
+          optional("terrain", () => {
+            map!.addSource("mapbox-dem", {
               type: "raster-dem",
               url: "mapbox://mapbox.mapbox-terrain-dem-v1",
               tileSize: 512,
               maxzoom: 14,
             });
-            map.setTerrain({ source: "mapbox-dem", exaggeration: 1.3 });
-            map.setFog({
-              color: "#d9e8f0",
-              "high-color": "#9bc9ed",
-              "horizon-blend": 0.12,
-              "space-color": "#dceefa",
-              "star-intensity": 0,
-            });
-            map.addLayer({
-              id: "fly365-atmosphere",
-              type: "sky",
-              paint: {
-                "sky-type": "atmosphere",
-                "sky-atmosphere-sun": [230, 45],
-                "sky-atmosphere-sun-intensity": 5,
-              },
-            });
+            map!.setTerrain({ source: "mapbox-dem", exaggeration: 1.3 });
+          });
 
             trialRoutes.forEach((flightRoute) => {
+              optional(`route-${flightRoute.minutes}`, () => {
               const sourceId = `route-${flightRoute.minutes}`;
               map!.addSource(sourceId, {
                 type: "geojson",
@@ -203,9 +200,11 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
                   "line-dasharray": [1.4, 1.2],
                 },
               });
+              });
             });
 
             routePlaces.forEach((place, index) => {
+              optional(`marker-${index}`, () => {
               const isAirport = "kind" in place && place.kind === "aerodrome";
               const element = document.createElement(isAirport ? "a" : "div");
               element.className = `mapbox-place-pin${isAirport ? " mapbox-place-pin-airport" : ""}${index === 3 ? " mapbox-pin-sagres" : index === 4 ? " mapbox-pin-cabo" : ""}`;
@@ -235,18 +234,15 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
                 .setLngLat([...place.position])
                 .addTo(map!);
               markersRef.current.push(marker);
+              });
             });
 
-            coastOverview(map);
+            optional("overview", () => coastOverview(map!));
 
             if (cancelled) return;
             mapRef.current = map;
-            window.clearTimeout(loadTimeout);
             setStatus("ready");
             requestAnimationFrame(() => { if (!cancelled) map?.resize(); });
-          } catch {
-            fail("style-setup-error");
-          }
         });
       } catch {
         fail("module-or-initialization-error");
@@ -313,7 +309,10 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         <button type="button" className="route-select" onClick={() => { cockpit.reset(); setShouldLoad(false); setStatus("static"); }}>Static view</button>
       </div>}
     </div>
-    {status === "unavailable" && <p role="status" className="mt-2 text-xs text-[var(--muted-foreground)]">3D view unavailable right now</p>}
+    {status === "unavailable" && <div role="status" className="mt-2 text-xs text-[var(--muted-foreground)]">
+      <p>3D view unavailable right now</p>
+      {import.meta.env.DEV && <p className="mt-1 text-[10px]">{failureReason}</p>}
+    </div>}
     <div className="mt-5 flex flex-col gap-4 border-t border-[rgba(11,42,60,.16)] pt-4 sm:flex-row sm:items-center sm:justify-between">
       <div><p className="text-xs uppercase tracking-[.18em] text-[var(--ocean)]">{flight.minutes} minute route</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">{flight.route}</p></div>
       <div className="flex items-center gap-4"><strong className="display-heading text-3xl text-[var(--navy)]">{formatPrice(flight.price)}</strong><Link href="/contact" className="button-ochre px-4 py-3 text-xs font-bold uppercase tracking-wider" data-testid="link-book-selected-flight">Book this flight <ArrowRight className="ml-1 inline" size={14} /></Link></div>
