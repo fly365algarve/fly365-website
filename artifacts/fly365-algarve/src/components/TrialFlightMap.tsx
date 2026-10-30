@@ -122,6 +122,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           pitch: 60,
           bearing: -50,
           maxPitch: 85,
+          maxTileCacheSize: 500,
           dragPan: true,
           dragRotate: true,
           touchPitch: true,

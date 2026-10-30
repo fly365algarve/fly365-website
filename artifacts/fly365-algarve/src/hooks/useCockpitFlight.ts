@@ -87,24 +87,23 @@ export function useCockpitFlight({
           const distance = length * ratio;
           const current = turf.along(line, distance, { units: "kilometers" });
           const position = current.geometry.coordinates as MapCoordinate;
-          let ahead = turf.along(line, Math.min(length, distance + 1.5), { units: "kilometers" });
+          let ahead = turf.along(line, Math.min(length, distance + 2.5), { units: "kilometers" });
           // Keep a horizon at the final point instead of looking straight down.
           if (turf.distance(current, ahead, { units: "kilometers" }) < 0.05) {
-            ahead = turf.destination(current, 1.5, bearing ?? map.getBearing(), { units: "kilometers" });
+            ahead = turf.destination(current, 2.5, bearing ?? map.getBearing(), { units: "kilometers" });
           }
           const targetBearing = turf.bearing(current, ahead);
           const seconds = Math.min(0.1, Math.max(0, (now - lastFrame) / 1000));
           bearing = bearing === undefined ? targetBearing : smoothFlightBearing(bearing, targetBearing, seconds);
           lastFrame = now;
           const terrain = map.queryTerrainElevation(position, { exaggerated: true }) ?? 0;
-          const targetAltitude = terrain + 300;
+          const targetAltitude = terrain + 600;
           cameraAltitude = cameraAltitude === undefined ? targetAltitude
             : cameraAltitude + (targetAltitude - cameraAltitude) * (1 - Math.exp(-seconds / 0.4));
           cameraAltitude = Math.max(terrain + 100, cameraAltitude);
           const aheadPosition = ahead.geometry.coordinates as MapCoordinate;
           const aheadTerrain = map.queryTerrainElevation(aheadPosition, { exaggerated: true }) ?? 0;
-          const lookDistance = turf.distance(current, ahead, { units: "kilometers" }) * 1000;
-          const pitch = Math.max(75, Math.min(80, Math.atan2(lookDistance, cameraAltitude - aheadTerrain) * 180 / Math.PI));
+          const pitch = 65;
           const camera = map.getFreeCameraOptions();
           camera.position = sdk.MercatorCoordinate.fromLngLat(position, cameraAltitude);
           camera.lookAtPoint(aheadPosition, undefined, aheadTerrain);
