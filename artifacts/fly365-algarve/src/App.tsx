@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +21,7 @@ import { IntroOverlay } from "./components/IntroOverlay";
 import { useEffect } from "react";
 
 function MotionObserver() {
+  const [location] = useLocation();
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const sections = Array.from(document.querySelectorAll("main section"));
@@ -30,7 +31,7 @@ function MotionObserver() {
     }), { threshold: 0.06 });
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [location]);
   return null;
 }
 

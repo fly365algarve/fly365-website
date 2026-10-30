@@ -66,7 +66,7 @@ export function HomePage() {
       <div className="mx-auto max-w-[1160px]">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><span className="section-kicker">Make a week of it</span><h2 className="mt-3 text-5xl text-[var(--navy)] md:text-6xl">Courses with focus</h2></div><p className="max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Small weekly groups, big blocks of time in the air. A maximum of {site.facts.maxStudentsPerWeek} students each week.</p></div>
         <div className="mt-9 grid gap-7 lg:grid-cols-[.82fr_1.18fr] lg:items-stretch">
-          <img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 flexwing microlight above the Algarve" className="h-full min-h-[300px] w-full object-cover" />
+          <div className="aircraft-image-frame min-h-[300px]"><img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 flexwing microlight above the Algarve" className="h-full min-h-[300px] w-full object-cover" /></div>
           <div className="grid gap-3 sm:grid-cols-2">{site.courses.map((course, index) => <div key={course.title} className="price-card bg-[var(--chalk)] p-6 md:p-8"><span className="section-kicker">0{index + 1}</span><h3 className="mt-5 text-3xl text-[var(--navy)]">{course.title}</h3><p className="display-heading mt-1 text-2xl text-[var(--ocean)]">{course.hours === 20 ? <CountUp value={20} label="hours" /> : course.hours} hours</p><Link href="/training" className="motion-link mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Course details <ArrowRight size={15} /></Link></div>)}</div>
         </div>
       </div>
@@ -80,12 +80,12 @@ export function HomePage() {
           <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--muted-foreground)]">Choose from fixed-wing 3-axis microlights or weightshift flexwings — all expertly maintained and ready to fly.</p>
         </div>
         <div className="grid gap-8 md:grid-cols-2">
-          <Link href="/fixed-wing" className="group grid min-h-[420px] grid-rows-[1fr_auto] bg-[var(--navy)] text-[var(--chalk)]">
-            <img src="/images/ikarus-c42-fly365.jpg" alt="Ikarus C42 fixed-wing microlight operated by Fly365 Algarve" className="h-full max-h-[310px] w-full object-cover" />
+          <Link href="/fixed-wing" className="aircraft-card group grid min-h-[420px] grid-rows-[1fr_auto] bg-[var(--navy)] text-[var(--chalk)]">
+            <div className="aircraft-image-frame h-full max-h-[310px]"><img src="/images/ikarus-c42-fly365.jpg" alt="Ikarus C42 fixed-wing microlight operated by Fly365 Algarve" className="h-full w-full object-cover" /></div>
             <div className="flex items-end justify-between p-6"><div><span className="section-kicker !text-[var(--sandstone)]">Three-axis</span><h3 className="mt-2 text-3xl">Fixed wing · C42</h3><p className="mt-2 max-w-sm text-sm leading-6 text-[rgba(247,243,236,.72)]">{site.fixedWing.description}</p></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" /></div>
           </Link>
-          <Link href="/flexwing" className="group grid min-h-[420px] grid-rows-[1fr_auto] bg-[#e9dfd0] text-[var(--navy)]">
-            <div className="flex h-full max-h-[310px] items-center justify-center overflow-hidden"><img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve weight-shift flexwing microlight aircraft" className="h-full w-full object-contain p-5" /></div>
+          <Link href="/flexwing" className="aircraft-card group grid min-h-[420px] grid-rows-[1fr_auto] bg-[#e9dfd0] text-[var(--navy)]">
+            <div className="aircraft-image-frame flex h-full max-h-[310px] items-center justify-center"><img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve weight-shift flexwing microlight aircraft" className="h-full w-full object-contain p-5" /></div>
             <div className="flex items-end justify-between p-6"><div><span className="section-kicker">Weight-shift</span><h3 className="mt-2 text-3xl">Flexwing</h3><p className="mt-2 max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Three-dimensional motorcycles of the sky. Quantum 912, Deltajet 500 BMW, and Quik R in our flexwing fleet.</p></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" /></div>
           </Link>
         </div>
@@ -96,7 +96,7 @@ export function HomePage() {
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-10 md:grid-cols-[.8fr_1.2fr]">
           <div><span className="section-kicker !text-[var(--sandstone)]">People who teach</span><h2 className="mt-3 text-5xl leading-[.9]">Good hands.<br />Clear standards.</h2><Link href="/history" className="mt-7 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[var(--sandstone)]">The story behind Fly365 <ArrowRight size={16} /></Link></div>
-          <div className="grid gap-5 sm:grid-cols-2">{site.team.map((member) => <div key={member.name} className="border-t border-[rgba(247,243,236,.25)] pt-5"><h3 className="text-3xl">{member.name}</h3><p className="mt-2 text-sm text-[rgba(247,243,236,.7)]">{member.role}</p></div>)}</div>
+           <div className="grid gap-5 sm:grid-cols-2">{site.team.map((member) => <div key={member.name} className="team-card border-t border-[rgba(247,243,236,.25)] pt-5"><h3 className="text-3xl">{member.name}</h3><p className="mt-2 text-sm text-[rgba(247,243,236,.7)]">{member.role}</p></div>)}</div>
         </div>
       </div>
     </section>
