@@ -30,7 +30,7 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 bg-[var(--chalk)] border-b border-[rgba(11,42,60,.16)]">
       <nav aria-label="Main navigation" className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-5">
         <Link href="/" className="flex items-center gap-3" aria-label="Fly365 Algarve home">
-          <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-11 w-11 object-contain" />
+          <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-14 w-14 object-cover circular-logo" />
           <span className="display-heading text-[1.45rem] leading-none text-[var(--navy)]">Fly365 <span className="text-[var(--ocean)]">Algarve</span></span>
         </Link>
         <div className="hidden items-center gap-1 lg:flex">

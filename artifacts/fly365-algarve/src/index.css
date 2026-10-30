@@ -144,8 +144,8 @@
 .button-ochre:hover { background: #a85127; border-color: #a85127; }
 .button-outline-light { border: 1px solid rgba(247,243,236,.65); color: var(--chalk); }
 .button-outline-light:hover { background: rgba(247,243,236,.12); }
-.hero-photo { position: relative; isolation: isolate; background-image: url("/sky-hero.webp"); background-size: cover; background-position: center; }
-.hero-photo::before { content: ""; position: absolute; z-index: -1; inset: 0; background: rgba(11, 42, 60, .64); }
+.hero-photo { position: relative; isolation: isolate; background-image: url("/images/fly365-algarve-lagos-operation.png"); background-size: cover; background-position: center; }
+.hero-photo::before { content: ""; position: absolute; z-index: -1; inset: 0; background: rgba(11, 42, 60, .69); }
 .inner-hero { background: var(--navy); }
 .surface { background: var(--chalk); }
 .surface-ocean { background: var(--navy); color: var(--chalk); }
@@ -155,8 +155,51 @@
 .lift:hover { transform: translateY(-3px); }
 .page-enter { animation: page-in .45s ease-out both; }
 @keyframes page-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-.whatsapp-control { position: fixed; z-index: 60; right: 18px; bottom: 18px; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; color: var(--chalk); background: var(--ocean); border: 2px solid var(--chalk); box-shadow: 0 6px 20px rgba(11,42,60,.22); transition: transform .2s, opacity .2s; }
-.whatsapp-control:hover { transform: translateY(-3px); }
+.whatsapp-control { position: fixed; z-index: 60; right: 18px; bottom: 18px; min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 19px; border-radius: 999px; color: #fff; background: #25D366; box-shadow: 0 5px 16px rgba(11,42,60,.2); transition: transform .2s, background .2s; animation: whatsapp-pulse 1s ease-out .9s 1; }
+.whatsapp-control:hover { transform: translateY(-3px); background: #20bd5b; }
+.whatsapp-label { font-size: .86rem; font-weight: 700; }
+.circular-logo { border-radius: 50%; clip-path: circle(50% at 50% 50%); }
+.hero-logo { width: 68px; height: 68px; object-fit: cover; }
+.aircraft-band { height: clamp(190px, 32vw, 390px); background-image: linear-gradient(rgba(11,42,60,.12),rgba(11,42,60,.12)), url("/images/fly365-algarve-lagos-operation.png"); background-size: cover; background-position: center 48%; }
+.price-card { position: relative; display: block; min-height: 180px; padding: 1.5rem; background: #eee4d4; border: 1px solid rgba(11,42,60,.15); color: var(--navy); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.price-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(11,42,60,.12); border-color: var(--ochre); }
+.price-card-selected { border-color: var(--ochre); box-shadow: inset 0 0 0 1px var(--ochre); }
+.best-value { border-color: var(--ochre); padding-top: 2.7rem; }
+.best-value-label { position: absolute; top: 0; left: 0; right: 0; padding: .45rem .7rem; background: var(--ochre); color: var(--chalk); font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.price-tab { border: 1px solid rgba(11,42,60,.28); padding: .8rem 1.25rem; font-size: .75rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; color: var(--navy); transition: background .2s, color .2s, transform .2s; }
+.price-tab:hover { transform: translateY(-2px); }
+.price-tab.active { background: var(--navy); color: var(--chalk); }
+.trial-map-shell { color: var(--ink); }
+.trial-map { height: clamp(340px, 48vw, 530px); overflow: hidden; border: 1px solid rgba(11,42,60,.18); }
+.trial-map .leaflet-container { width: 100%; height: 100%; font-family: var(--app-font-sans); }
+.fly365-map-marker { border: 0; background: transparent; }
+.map-pin-dot { display: block; width: 16px; height: 16px; background: var(--ochre); border: 3px solid var(--chalk); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 1px 5px rgba(11,42,60,.45); }
+.trial-map .leaflet-tooltip { padding: 4px 7px; border: 0; border-radius: 2px; background: var(--navy); color: var(--chalk); font-size: 11px; font-weight: 700; box-shadow: none; }
+.trial-map .leaflet-tooltip:before { display: none; }
+.route-select { border: 1px solid rgba(11,42,60,.25); padding: .55rem .8rem; color: var(--navy); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: transform .2s, background .2s, color .2s; }
+.route-select:hover { transform: translateY(-2px); }
+.route-select.selected { border-color: var(--navy); background: var(--navy); color: var(--chalk); }
+.motion-link { transition: color .2s ease, transform .2s ease; text-underline-offset: 5px; }
+.motion-link:hover { color: var(--ochre); transform: translateX(2px); text-decoration: underline; }
+.nav-link { position: relative; }
+.nav-link::after { content: ""; position: absolute; right: .72rem; bottom: .35rem; left: .72rem; height: 1px; background: var(--ochre); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+.nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+.button-ochre, .button-outline-light { transition: transform .2s ease, background .2s ease, color .2s ease; }
+.button-ochre:hover, .button-outline-light:hover { transform: translateY(-2px); }
+.section-reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+.section-reveal.is-visible { opacity: 1; transform: translateY(0); }
+.intro-overlay { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; background: var(--navy); color: var(--chalk); cursor: pointer; }
+.intro-logo { width: clamp(84px, 12vw, 138px); height: clamp(84px, 12vw, 138px); object-fit: cover; animation: intro-mark .5s ease-out both; }
+.intro-track { width: min(420px, 70vw); height: 70px; overflow: visible; }
+.intro-track path { fill: none; stroke: var(--sandstone); stroke-width: 1.5; stroke-dasharray: 620; stroke-dashoffset: 620; animation: draw-track 1s ease-out .25s forwards; }
+.intro-title { font-family: var(--app-font-display); font-size: clamp(1.8rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: .1em; animation: intro-mark .55s ease-out .45s both; }
+.intro-skip { position: absolute; bottom: 24px; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,243,236,.62); }
+.intro-exit { animation: intro-slide .48s cubic-bezier(.7,0,.2,1) forwards; pointer-events: none; }
+@keyframes draw-track { to { stroke-dashoffset: 0; } }
+@keyframes intro-mark { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes intro-slide { to { transform: translateY(-100%); } }
+@keyframes whatsapp-pulse { 0% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 0 rgba(37,211,102,.42); } 75% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 10px rgba(37,211,102,0); } 100% { box-shadow: 0 5px 16px rgba(11,42,60,.2); } }
+@media (max-width: 640px) { .whatsapp-control { width: 54px; height: 54px; padding: 0; } .whatsapp-label { display: none; } }
 .coast-svg { width: 100%; height: auto; display: block; }
 .coast-route { fill: none; stroke: var(--ocean); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 9 8; opacity: .45; transition: opacity .2s, stroke-width .2s; }
 .coast-route.active { opacity: 1; stroke: var(--ochre); stroke-width: 4; }
@@ -165,3 +208,4 @@
 .form-field { width: 100%; border: 1px solid rgba(11,42,60,.22); background: var(--chalk); color: var(--ink); border-radius: 4px; padding: .8rem .9rem; }
 .form-field:focus { outline: 2px solid var(--ocean); outline-offset: 1px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (prefers-reduced-motion: reduce) { .section-reveal { opacity: 1; transform: none; } }

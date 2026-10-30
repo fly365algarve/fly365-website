@@ -4,13 +4,9 @@ import { ArrowDownRight, ArrowRight, ChevronDown, MapPin, Plane, Sun, Wind } fro
 import { site } from "../config/site";
 import { Seo } from "../components/Seo";
 import { ContactForm } from "../components/ContactForm";
+import { TrialFlightMap } from "../components/TrialFlightMap";
+import { CountUp } from "../components/Reveal";
 
-const routeLines = [
-  "M 90 216 C 175 172, 200 132, 285 143 C 365 153, 395 91, 492 94",
-  "M 90 216 C 175 172, 200 132, 285 143 C 365 153, 395 91, 492 94 C 563 92, 596 144, 673 150",
-  "M 90 216 C 175 172, 200 132, 285 143 C 365 153, 395 91, 492 94 C 563 92, 596 144, 673 150 C 738 158, 785 103, 855 86",
-  "M 90 216 C 175 172, 200 132, 285 143 C 365 153, 395 91, 492 94 C 563 92, 596 144, 673 150 C 738 158, 785 103, 855 86 C 908 73, 945 92, 1000 44",
-];
 const faqs = [
   ["Do I need a medical to take a trial flight?", "Before flying solo, you must be in possession of a current EASA medical certificate, Class 1, 2 or LAPL. However, a medical is not required to fly when under dual instruction. The new UK self-declaration medical certificate (without any medical professional involvement) acceptable in UK airspace is NOT valid in Portuguese Airspace."],
   ["How old do I need to be?", "You can start training from age 14. Solo flight requires a minimum age of 16 and a licence requires you to be at least 17."],
@@ -27,7 +23,7 @@ export function HomePage() {
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." />
     <section className="hero-photo relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20">
       <div className="relative mx-auto w-full max-w-[1160px]">
-        <p className="mb-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p>
+        <div className="mb-7 flex items-center gap-4"><img src="/images/logo.png" alt="Fly365 Algarve" className="hero-logo circular-logo" /><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
         <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]">Learn to fly<br /><span className="text-[var(--sandstone)]">over the Algarve</span></h1>
         <p className="mt-7 max-w-[580px] text-base leading-7 text-[rgba(247,243,236,.9)] md:text-lg">Microlight trial flights and intensive training from Lagos Aerodrome, with UK CAA-approved instructors.</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -42,24 +38,7 @@ export function HomePage() {
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-9 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
           <div><span className="section-kicker">Choose your coast</span><h2 className="mt-3 text-5xl leading-[.95] text-[var(--navy)] md:text-6xl">From grottos<br />to the west</h2><p className="mt-5 max-w-md text-sm leading-6 text-[var(--muted-foreground)]">Experience the thrill of microlight flying with a one-off trial lesson over the stunning Algarve coastline. Trace the route from Lagos Aerodrome past Ponta da Piedade, onward to Salema and Sagres.</p></div>
-          <div className="thin-border bg-[#f1e8db] p-4 md:p-7">
-            <svg className="coast-svg" viewBox="0 0 1050 270" role="img" aria-label="Illustrative route map from Lagos Aerodrome along the Algarve coast to Sagres">
-              <path d="M20 238 C 160 198, 190 220, 287 176 S 430 119, 499 132 S 632 105, 686 167 S 810 126, 870 110 S 981 66, 1035 31" fill="none" stroke="#d5bea0" strokeWidth="34" strokeLinecap="round" />
-              {routeLines.map((d, i) => <path key={d} d={d} className={`coast-route ${selected === i ? "active" : ""}`} />)}
-              <circle className="coast-node" cx="90" cy="216" r="8" /><circle className="coast-node" cx="285" cy="143" r="7" /><circle className="coast-node" cx="673" cy="150" r="7" /><circle className="coast-node" cx="855" cy="86" r="7" />
-              <text className="coast-label" x="36" y="255">Lagos Aerodrome</text><text className="coast-label" x="235" y="118">Ponta da Piedade</text><text className="coast-label" x="647" y="183">Salema</text><text className="coast-label" x="835" y="62">Sagres</text>
-              <text className="coast-label" x="256" y="159" fontSize="11">the grottos</text>
-            </svg>
-            <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Select trial flight duration">
-              {site.trialFlights.map((item, index) => <button key={item.minutes} type="button" onClick={() => setSelected(index)} aria-pressed={selected === index} className={`border px-3 py-2 text-xs font-bold uppercase tracking-wider ${selected === index ? "border-[var(--navy)] bg-[var(--navy)] text-[var(--chalk)]" : "border-[rgba(11,42,60,.25)] text-[var(--navy)] hover:bg-[rgba(11,42,60,.06)]"}`} data-testid={`button-flight-${item.minutes}`}>{item.minutes} min</button>)}
-            </div>
-            <div className="mt-5 flex flex-col gap-4 border-t border-[rgba(11,42,60,.16)] pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <div><p className="text-xs uppercase tracking-[.18em] text-[var(--ocean)]">{flight.minutes} minute route</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">{flight.route}</p></div>
-              <div className="flex items-center gap-4"><strong className="display-heading text-3xl text-[var(--navy)]">€{flight.price}</strong><Link href="/contact" className="button-ochre px-4 py-3 text-xs font-bold uppercase tracking-wider">Book this flight</Link></div>
-            </div>
-            <p className="mt-3 text-[11px] text-[var(--muted-foreground)]">Map is illustrative.</p>
-            <Link href="/prices" className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">View full price list <ArrowRight size={14} /></Link>
-          </div>
+          <div className="thin-border bg-[#f1e8db] p-4 md:p-7"><TrialFlightMap selected={selected} onSelect={setSelected} /></div>
         </div>
       </div>
     </section>
@@ -69,10 +48,10 @@ export function HomePage() {
         <div className="max-w-xl"><span className="section-kicker !text-[var(--sandstone)]">Why Lagos</span><h2 className="mt-3 text-5xl leading-[.9] md:text-6xl">More sky.<br />More days.</h2></div>
         <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-9 md:grid-cols-4">
           {[
-            { icon: Sun, value: site.facts.flyingDays, label: "flying days each year" },
+            { icon: Sun, value: <CountUp value={site.facts.flyingDays} label="flying days each year" />, label: "flying days each year" },
             { icon: Plane, value: site.facts.runway, label: "at Lagos Aerodrome" },
-            { icon: MapPin, value: `${site.facts.townDistanceKm} km`, label: "from Lagos town" },
-            { icon: Wind, value: site.facts.winterWeather, label: "for year-round flying" },
+            { icon: MapPin, value: <><CountUp value={site.facts.townDistanceKm} label="km from Lagos town" /> km</>, label: "from Lagos town" },
+            { icon: Wind, value: site.facts.winterWeather, label: "in the Azores high-pressure region" },
           ].map((fact) => <div key={fact.label} className="border-t border-[rgba(247,243,236,.25)] pt-5"><fact.icon size={20} className="text-[var(--sandstone)]" /><strong className="display-heading mt-5 block text-3xl leading-none md:text-4xl">{fact.value}</strong><span className="mt-2 block text-xs text-[rgba(247,243,236,.7)]">{fact.label}</span></div>)}
         </div>
         <div className="mt-10 grid gap-4 border-t border-[rgba(247,243,236,.25)] pt-6 text-sm leading-6 text-[rgba(247,243,236,.78)] md:grid-cols-2">
@@ -86,8 +65,9 @@ export function HomePage() {
     <section className="section-pad surface-sand">
       <div className="mx-auto max-w-[1160px]">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><span className="section-kicker">Make a week of it</span><h2 className="mt-3 text-5xl text-[var(--navy)] md:text-6xl">Courses with focus</h2></div><p className="max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Small weekly groups, big blocks of time in the air. A maximum of {site.facts.maxStudentsPerWeek} students each week.</p></div>
-        <div className="mt-9 grid gap-px border border-[rgba(11,42,60,.18)] bg-[rgba(11,42,60,.18)] md:grid-cols-3">
-          {site.courses.map((course, index) => <div key={course.title} className="bg-[var(--chalk)] p-6 md:p-8"><span className="section-kicker">0{index + 1}</span><h3 className="mt-5 text-3xl text-[var(--navy)]">{course.title}</h3><p className="display-heading mt-1 text-2xl text-[var(--ocean)]">{course.hours} hours</p><Link href="/training" className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Course details <ArrowRight size={15} /></Link></div>)}
+        <div className="mt-9 grid gap-7 lg:grid-cols-[.82fr_1.18fr] lg:items-stretch">
+          <img src="/images/fly365-flexwing-aircraft.png" alt="Fly365 flexwing microlight above the Algarve" className="h-full min-h-[300px] w-full object-cover" />
+          <div className="grid gap-3 sm:grid-cols-2">{site.courses.map((course, index) => <div key={course.title} className="price-card bg-[var(--chalk)] p-6 md:p-8"><span className="section-kicker">0{index + 1}</span><h3 className="mt-5 text-3xl text-[var(--navy)]">{course.title}</h3><p className="display-heading mt-1 text-2xl text-[var(--ocean)]">{course.hours === 20 ? <CountUp value={20} label="hours" /> : course.hours} hours</p><Link href="/training" className="motion-link mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Course details <ArrowRight size={15} /></Link></div>)}</div>
         </div>
       </div>
     </section>
@@ -129,6 +109,7 @@ export function HomePage() {
         </div>
       </div>
     </section>
+    <div className="aircraft-band" role="img" aria-label="View from a Fly365 microlight above the Algarve coast" />
 
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[880px]">

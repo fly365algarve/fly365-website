@@ -17,6 +17,22 @@ import { BookingPage } from "./pages/BookingPage";
 import { HelmetProvider } from "react-helmet-async";
 import { WhatsAppControl } from "./components/WhatsAppControl";
 import { Seo } from "./components/Seo";
+import { IntroOverlay } from "./components/IntroOverlay";
+import { useEffect } from "react";
+
+function MotionObserver() {
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const sections = Array.from(document.querySelectorAll("main section"));
+    sections.forEach((section) => section.classList.add("section-reveal"));
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); }
+    }), { threshold: 0.06 });
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+  return null;
+}
 
 const queryClient = new QueryClient();
 
@@ -36,6 +52,8 @@ function Router() {
   return (
     <div className="min-h-[100dvh] bg-background">
       <Navbar />
+      <IntroOverlay />
+      <MotionObserver />
       <main>
         <Switch>
           <Route path="/" component={HomePage} />

@@ -8,7 +8,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-[1.2fr_.8fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-12 w-12 object-contain" />
+            <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-16 w-16 object-cover circular-logo" />
             <span className="display-heading text-2xl">Fly365 Algarve</span>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,243,236,.72)]">Microlight trial flights and intensive training from Lagos Aerodrome.</p>
