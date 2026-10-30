@@ -14,3 +14,9 @@ Wait for actual rendered-page markers and the intro overlay's disappearance befo
 **Why:** A cold preview navigation returned before React rendered, producing an empty capture and a false input failure; subsequent warm navigations rendered correctly.
 
 **How to apply:** Poll for the expected DOM elements and completed intro with a bounded timeout, rather than assuming navigation completion or a one-to-two-second sleep means the app is ready.
+
+Static Images API success does not establish that live satellite raster tiles are available, even with the same token and satellite-v9 style.
+
+**Why:** A fresh-tab, single-route check received HTTP 429 for live satellite tiles while the static satellite image remained visible. Switching away from Standard did not eliminate that service failure.
+
+**How to apply:** Distinguish static-image responses from live raster-tile responses when diagnosing blank imagery; report observed status codes without token-bearing URLs, and do not claim imagery works merely because the style or playback loads.

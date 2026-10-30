@@ -70,10 +70,13 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     if (!shouldLoad || !mapElement.current || !token) return;
     let cancelled = false;
     let styleReady = false;
+    let satelliteTileLoaded = false;
+    let satelliteRendered = false;
+    const satelliteSources = new Set<string>();
     let map: MapboxMap | null = null;
     let resizeObserver: ResizeObserver | undefined;
-    const fail = (reason: string) => {
-      if (cancelled || styleReady) return;
+    const fail = (reason: string, imageryFailure = false) => {
+      if (cancelled || (styleReady && !imageryFailure)) return;
       cancelled = true;
       setFailureReason(reason);
       setStatus("unavailable");
@@ -82,6 +85,9 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     };
     // Includes module download time. Never leave a pending 3D request indefinitely.
     const loadTimeout = window.setTimeout(() => fail("timeout"), 12000);
+    const imageryTimeout = window.setTimeout(() => {
+      if (!satelliteRendered) fail("satellite-imagery-timeout", true);
+    }, 6000);
     const optional = (step: string, setup: () => void) => {
       try { setup(); }
       catch {
@@ -106,16 +112,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         mapbox.accessToken = token;
         map = new mapbox.Map({
           container: mapElement.current,
-          style: "mapbox://styles/mapbox/standard-satellite",
-          config: {
-            basemap: {
-              lightPreset: "day",
-              showRoadLabels: false,
-              showPointOfInterestLabels: false,
-              showTransitLabels: false,
-              showPlaceLabels: false,
-            },
-          },
+          style: "mapbox://styles/mapbox/satellite-v9",
           projection: "mercator",
           center: [-8.81, 37.065],
           zoom: 9,
@@ -136,8 +133,23 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         resizeObserver = new ResizeObserver(() => map?.resize());
         resizeObserver.observe(mapElement.current);
         map.resize();
+        map.on("sourcedata", (event) => {
+          if (cancelled || !satelliteSources.has(event.sourceId ?? "")) return;
+          if (event.sourceDataType === "content" && event.tile?.state === "loaded") {
+            satelliteTileLoaded = true;
+          }
+        });
+        map.on("render", () => {
+          if (cancelled || satelliteRendered || !satelliteTileLoaded) return;
+          satelliteRendered = true;
+          window.clearTimeout(imageryTimeout);
+        });
         map.on("error", (event) => {
           const error = event.error as (Error & { status?: number }) | undefined;
+          if (error?.status && [401, 403, 429].includes(error.status)) {
+            fail(`map-service-http-${error.status}`, true);
+            return;
+          }
           // Store only a category/status, never token-bearing service error text.
           const category = error?.status ? `http-${error.status}`
             : /sky|projection/i.test(error?.message ?? "") ? "projection"
@@ -154,6 +166,11 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
           if (!map || cancelled) return;
           styleReady = true;
           window.clearTimeout(loadTimeout);
+          Object.entries(map.getStyle().sources).forEach(([id, source]) => {
+            if (source.type === "raster" && source.url?.includes("mapbox.satellite")) {
+              satelliteSources.add(id);
+            }
+          });
           optional("terrain", () => {
             map!.addSource("mapbox-dem", {
               type: "raster-dem",
@@ -162,6 +179,13 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               maxzoom: 14,
             });
             map!.setTerrain({ source: "mapbox-dem", exaggeration: 1.3 });
+          });
+          optional("sky", () => {
+            map!.addLayer({
+              id: "fly365-atmosphere",
+              type: "sky",
+              paint: { "sky-type": "atmosphere" },
+            });
           });
 
             trialRoutes.forEach((flightRoute) => {
@@ -178,7 +202,6 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               map!.addLayer({
                 id: `${sourceId}-glow`,
                 type: "line",
-                slot: "middle",
                 source: sourceId,
                 layout: { "line-cap": "round", "line-join": "round" },
                 paint: {
@@ -191,7 +214,6 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               map!.addLayer({
                 id: `${sourceId}-line`,
                 type: "line",
-                slot: "middle",
                 source: sourceId,
                 layout: { "line-cap": "round", "line-join": "round" },
                 paint: {
@@ -254,6 +276,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     return () => {
       cancelled = true;
       if (loadTimeout) window.clearTimeout(loadTimeout);
+      window.clearTimeout(imageryTimeout);
       resizeObserver?.disconnect();
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
