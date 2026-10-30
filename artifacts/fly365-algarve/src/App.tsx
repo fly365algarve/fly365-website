@@ -14,15 +14,19 @@ import { ContactPage } from "./pages/ContactPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { TermsPage } from "./pages/TermsPage";
 import { BookingPage } from "./pages/BookingPage";
+import { HelmetProvider } from "react-helmet-async";
+import { WhatsAppControl } from "./components/WhatsAppControl";
+import { Seo } from "./components/Seo";
 
 const queryClient = new QueryClient();
 
 function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="page-shell min-h-[70vh] flex items-center justify-center">
+      <Seo title="Page not found" description="The page you were looking for could not be found. Explore Fly365 Algarve microlight flights and training." />
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-gold mb-4">404</h1>
-        <p className="text-[hsl(35,10%,55%)]">Page not found.</p>
+        <h1 className="display-heading mb-4 text-7xl text-[var(--navy)]">404</h1>
+        <p className="text-[var(--muted-foreground)]">Page not found.</p>
       </div>
     </div>
   );
@@ -30,7 +34,7 @@ function NotFound() {
 
 function Router() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-[100dvh] bg-background">
       <Navbar />
       <main>
         <Switch>
@@ -48,20 +52,23 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <WhatsAppControl />
     </div>
   );
 }
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 

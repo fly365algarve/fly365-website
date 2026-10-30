@@ -4,12 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Fly365 Algarve</title>
+    <meta
+      name="description"
+      content="Microlight trial flights and intensive training from Lagos Aerodrome, with UK CAA-approved instructors."
+    />
+    <meta property="og:title" content="Fly365 Algarve | Learn to Fly in Lagos" />
+    <meta
+      property="og:description"
+      content="Microlight trial flights and intensive training from Lagos Aerodrome, Algarve."
+    />
+    <meta property="og:image" content="https://fly365algarve.co.uk/opengraph.jpg" />
+    <meta property="og:url" content="https://fly365algarve.co.uk/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Fly365 Algarve | Learn to Fly in Lagos"
+    />
+    <meta
+      name="twitter:description"
+      content="Microlight trial flights and intensive training from Lagos Aerodrome, Algarve."
+    />
+    <meta
+      name="twitter:image"
+      content="https://fly365algarve.co.uk/opengraph.jpg"
+    />
+    <link rel="canonical" href="https://fly365algarve.co.uk/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Fly365 Algarve",
+        "url": "https://fly365algarve.co.uk/",
+        "email": "fly365algarve@gmail.com",
+        "telephone": "+351 967 456 156",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Aeródromo de Lagos",
+          "postalCode": "8600",
+          "addressLocality": "Lagos",
+          "addressCountry": "PT"
+        }
+      }
+    </script>
   </head>
   <body>
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <select name="interested-in">
+        <option>Trial flight</option>
+        <option>Training course</option>
+        <option>Conversion</option>
+        <option>Other</option>
+      </select>
+      <input name="preferred-dates" type="text" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

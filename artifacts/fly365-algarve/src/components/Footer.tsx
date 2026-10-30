@@ -1,91 +1,34 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin } from "lucide-react";
-
-const LOGO = "https://fly365algarve.co.uk/gallery/favicons/favicon-192x192.png";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { site } from "../config/site";
 
 export function Footer() {
   return (
-    <footer className="bg-slate-800 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <img src={LOGO} alt="Fly365 Algarve" className="w-10 h-10 rounded-full object-cover shadow-lg" />
-              <div>
-                <span className="text-lg font-bold tracking-tight" style={{color: 'hsl(195, 90%, 65%)'}}>FLY365</span>
-                <span className="text-lg font-light tracking-wide text-slate-300 ml-1">Algarve</span>
-              </div>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Premium microlight flight training on Portugal's stunning Algarve coast. 320 flying days a year at Lagos Aerodrome.
-            </p>
+    <footer className="bg-[var(--navy)] px-5 py-14 text-[var(--chalk)]">
+      <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-[1.2fr_.8fr_1fr]">
+        <div>
+          <div className="flex items-center gap-3">
+            <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-12 w-12 object-contain" />
+            <span className="display-heading text-2xl">Fly365 Algarve</span>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{color: 'hsl(195, 90%, 65%)'}}>Navigation</h4>
-            <ul className="space-y-2">
-              {[
-                { href: "/about", label: "About Fly365" },
-                { href: "/fixed-wing", label: "Fixed Wing (C42)" },
-                { href: "/flexwing", label: "Flexwing Aircraft" },
-                { href: "/training", label: "Training Packages" },
-                { href: "/prices", label: "Prices" },
-                { href: "/history", label: "Our History" },
-                { href: "/contact", label: "Contact Us" },
-                { href: "/terms", label: "Terms & Conditions" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-slate-400 hover:text-white transition-colors duration-200">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{color: 'hsl(195, 90%, 65%)'}}>Contact</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{color: 'hsl(195, 90%, 65%)'}} />
-                <span className="text-sm text-slate-400">Aeródromo de Lagos, 8600 Lagos, Portugal</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 shrink-0 mt-0.5" style={{color: 'hsl(195, 90%, 65%)'}} />
-                <div>
-                  <a href="tel:+351967456156" className="text-sm text-slate-400 hover:text-white transition-colors block">+351 967 456 156</a>
-                  <a href="tel:+351936445501" className="text-sm text-slate-400 hover:text-white transition-colors block">+351 936 445 501</a>
-                  <span className="text-xs text-slate-500">WhatsApp available</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 shrink-0 mt-0.5 text-slate-500" />
-                <div>
-                  <a href="tel:+447984368253" className="text-sm text-slate-400 hover:text-white transition-colors block">+44 7984 368 253</a>
-                  <span className="text-xs text-slate-500">UK Mobile — Calls only</span>
-                </div>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 shrink-0" style={{color: 'hsl(195, 90%, 65%)'}} />
-                <a href="mailto:info@fly365algarve.co.uk" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  info@fly365algarve.co.uk
-                </a>
-              </li>
-            </ul>
+          <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,243,236,.72)]">Microlight trial flights and intensive training from Lagos Aerodrome.</p>
+        </div>
+        <div>
+          <h2 className="section-kicker !text-[var(--sandstone)]">Explore</h2>
+          <div className="mt-4 grid gap-3 text-sm text-[rgba(247,243,236,.82)]">
+            <Link href="/fixed-wing">Fixed wing</Link><Link href="/flexwing">Flexwing</Link><Link href="/training">Learn to fly</Link><Link href="/prices">Prices</Link><Link href="/about">About &amp; team</Link><Link href="/history">Our history</Link><Link href="/contact">Contact</Link>
           </div>
         </div>
-
-        <div className="mt-12 pt-8 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-500">
-            © 2025 Fly365 Algarve. All rights reserved.
-          </p>
-          <Link href="/terms" className="text-xs text-slate-500 hover:text-white transition-colors">
-            Terms & Conditions
-          </Link>
+        <div>
+          <h2 className="section-kicker !text-[var(--sandstone)]">Find us</h2>
+          <p className="mt-4 flex gap-3 text-sm leading-6 text-[rgba(247,243,236,.82)]"><MapPin size={17} className="mt-1 shrink-0" />{site.contact.address}</p>
+          <a href={`mailto:${site.contact.email}`} className="mt-3 flex items-center gap-3 text-sm text-[rgba(247,243,236,.82)]"><Mail size={17} />{site.contact.email}</a>
+          <div className="mt-3 grid gap-2">{site.contact.portugalPhones.map((phone) => <div key={phone.tel} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[rgba(247,243,236,.82)]"><a href={`tel:${phone.tel}`} className="flex items-center gap-3 hover:text-[var(--sandstone)]"><Phone size={16} />{phone.label}</a><a href={phone.whatsappUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[var(--sandstone)]">WhatsApp</a></div>)}</div>
         </div>
+      </div>
+      <div className="mx-auto mt-12 flex max-w-[1160px] flex-col gap-4 border-t border-[rgba(247,243,236,.2)] pt-6 text-xs text-[rgba(247,243,236,.65)] sm:flex-row sm:items-center sm:justify-between">
+        <p>© 2026 Fly365 Algarve.</p>
+        <Link href="/terms">T&amp;Cs</Link>
       </div>
     </footer>
   );

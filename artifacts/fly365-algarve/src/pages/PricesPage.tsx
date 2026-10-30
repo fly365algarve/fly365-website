@@ -1,117 +1,29 @@
-import { ContactForm } from "../components/ContactForm";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+import { site } from "../config/site";
+import { Seo } from "../components/Seo";
+
+const euro = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
 
 export function PricesPage() {
-  return (
-    <div className="pt-20">
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 inner-page-hero" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="accent-line mx-auto mb-6 block" />
-          <h1 className="text-5xl font-bold text-white mb-4 drop-shadow-lg">Prices</h1>
-          <p className="text-xl text-sky-200">Fly365 Algarve Training Fees</p>
-        </div>
-      </section>
-
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="space-y-10">
-
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-6 flex items-center gap-4">
-              <span className="accent-line" />
-              Trial Lessons — Euros (No Vat)
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { duration: "20 Mins", price: "€60", desc: "Flight to Grottos and return" },
-                { duration: "30 Mins", price: "€85", desc: "Grottos & coastal flight to Salema Area" },
-                { duration: "45 Mins", price: "€140", desc: "Grottos, west coast & Sagres Area" },
-                { duration: "60 Mins", price: "€185", desc: "Grottos, west coast & Sagres Area+" },
-              ].map((item) => (
-                <div key={item.duration} className="bg-white rounded-xl p-5 text-center shadow-sm border border-sky-100 hover:border-sky-300 hover:shadow-md transition-all">
-                  <div className="text-xs uppercase tracking-widest text-slate-400 mb-2">{item.duration}</div>
-                  <div className="text-3xl font-bold text-sky mb-3">{item.price}</div>
-                  <div className="text-xs text-slate-500 leading-relaxed">{item.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-6 flex items-center gap-4">
-              <span className="accent-line" />
-              Training Packages — Euros (No Vat)
-            </h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-sky-100 overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="sky-gradient">
-                    <th className="px-6 py-4 text-left font-semibold text-white">Package</th>
-                    <th className="px-6 py-4 text-right font-semibold text-white">Flexwing</th>
-                    <th className="px-6 py-4 text-right font-semibold text-white">Fixed Wing</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { label: "One Week — 10 Hours Training", flex: "€1,500", fixed: "€1,700" },
-                    { label: "Two Weeks — 20 Hours Training", flex: "€2,500", fixed: "€2,900" },
-                    { label: "Single Lesson (1 hour)", flex: "€155", fixed: "€175" },
-                    { label: "Hour Building (Pre-Solo, Solo Tasks or PPL Conversion)", flex: "€155/hr", fixed: "€175/hr" },
-                    { label: "Theory Ground School (per hour)", flex: "€30", fixed: "€30" },
-                    { label: "Conversion (1 control type to another) — 5 hrs", flex: "€775", fixed: "€875" },
-                    { label: "Conversion (1 control type to another) — 10 hrs", flex: "€1,500", fixed: "€1,700" },
-                  ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-sky-50/60"}>
-                      <td className="px-6 py-4 text-slate-700">{row.label}</td>
-                      <td className="px-6 py-4 text-right font-semibold text-sky">{row.flex}</td>
-                      <td className="px-6 py-4 text-right font-semibold text-sky">{row.fixed}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-6 flex items-center gap-4">
-              <span className="accent-line" />
-              Additional Training Fees — Euros (No Vat)
-            </h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-sky-100 overflow-hidden">
-              <table className="w-full text-sm">
-                <tbody>
-                  {[
-                    { label: "CAA Multiple choice examinations (per subject x5)", value: "€30 per subject" },
-                    { label: "CAA General Skills Test", value: "€200" },
-                    { label: "Licence Issue", value: "€75" },
-                  ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-sky-50/60"}>
-                      <td className="px-6 py-4 text-slate-700">{row.label}</td>
-                      <td className="px-6 py-4 text-right font-semibold text-sky">{row.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="bg-sky-50 rounded-2xl p-6 border border-sky-200 text-sm text-slate-600 space-y-2">
-            <p>All prices are in Euros. No VAT is applicable.</p>
-            <p>Prices include: Instruction fees, pre &amp; post flight briefings, landing fees, use of aircraft and all equipment (flying suits, helmets, etc.).</p>
-          </div>
-
-        </div>
-      </section>
-
-      <section className="py-20 section-alt">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-navy mb-3">Book Your Training</h2>
-          </div>
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-sky-100">
-            <ContactForm />
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  const training = site.training;
+  return <div className="page-shell page-enter">
+    <Seo title="Trial flight and training prices" description="Explore Fly365 Algarve’s trial flight routes and current prepaid microlight training prices in Lagos, Portugal." />
+    <section className="inner-hero px-5 py-16 text-center text-[var(--chalk)] md:py-24"><div className="mx-auto max-w-4xl"><span className="section-kicker !text-[var(--sandstone)]">Clear pricing</span><h1 className="mt-3 text-6xl md:text-8xl">Prices</h1><p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-[rgba(247,243,236,.75)]">Choose a short flight along the coast or set aside time for serious progress.</p></div></section>
+    <section id="trial" className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[1160px]">
+      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><span className="section-kicker">See the Algarve from above</span><h2 className="mt-3 text-5xl text-[var(--navy)] md:text-6xl">Trial flights</h2></div><Link href="/contact" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[var(--ocean)]">Book a flight <ArrowRight size={15} /></Link></div>
+      <div className="mt-8 grid gap-px border border-[rgba(11,42,60,.18)] bg-[rgba(11,42,60,.18)] sm:grid-cols-2 lg:grid-cols-4">{site.trialFlights.map((flight) => <div key={flight.minutes} className="bg-[#eee4d4] p-6"><span className="section-kicker">{flight.minutes} minutes</span><p className="display-heading mt-4 text-4xl text-[var(--navy)]">{euro(flight.price)}</p><p className="mt-3 min-h-10 text-sm leading-5 text-[var(--muted-foreground)]">{flight.route}</p><Link href="/contact" className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Book this flight <ArrowRight size={14} /></Link></div>)}</div>
+    </div></section>
+    <section className="surface-ocean section-pad"><div className="mx-auto max-w-[1160px]">
+      <span className="section-kicker !text-[var(--sandstone)]">Training</span><h2 className="mt-3 text-5xl md:text-6xl">Prepaid hours</h2>
+      <div className="mt-8 overflow-x-auto border border-[rgba(247,243,236,.25)]"><table className="w-full min-w-[520px] text-left text-sm"><thead><tr className="border-b border-[rgba(247,243,236,.25)] text-[var(--sandstone)]"><th className="px-5 py-4 font-semibold">Prepaid flight time</th><th className="px-5 py-4 font-semibold">Rate per hour</th><th className="px-5 py-4 text-right font-semibold">Package total</th></tr></thead><tbody>{training.prepaidHours.map((tier) => <tr key={tier.hours} className="border-b border-[rgba(247,243,236,.16)] last:border-0"><td className="px-5 py-4">{tier.hours} {tier.hours === 1 ? "hour" : "hours"}</td><td className="px-5 py-4">{euro(tier.rate)} / hour</td><td className="px-5 py-4 text-right font-bold">{euro(tier.total)}</td></tr>)}</tbody></table></div>
+      <div className="mt-14 grid gap-10 md:grid-cols-[.65fr_1.35fr]"><div><span className="section-kicker !text-[var(--sandstone)]">As needed</span><h3 className="mt-3 text-4xl">Additional fees</h3></div><div className="border-t border-[rgba(247,243,236,.25)]">{[
+        ["Extra flight hours", `${euro(training.extraHourRate)} per hour`],
+        ["General Skills Test + aircraft", euro(training.generalSkillsTest)],
+        ["Ground examinations", `${euro(training.groundExam)} each`],
+        ["Ground school", `${euro(training.groundSchoolHour)} per hour`],
+      ].map(([label, amount]) => <div key={label} className="flex justify-between gap-4 border-b border-[rgba(247,243,236,.2)] py-4 text-sm"><span>{label}</span><strong>{amount}</strong></div>)}</div></div>
+    </div></section>
+    <section className="surface-sand px-5 py-12"><div className="mx-auto flex max-w-[1160px] flex-col gap-5 md:flex-row md:items-center md:justify-between"><div><h2 className="text-4xl text-[var(--navy)]">Let’s find your flight.</h2><p className="mt-2 text-sm text-[var(--muted-foreground)]">Tell us what you’re hoping to do and when.</p></div><Link href="/contact" className="button-ochre inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-wider">Enquire now <ArrowRight size={16} /></Link></div></section>
+  </div>;
 }

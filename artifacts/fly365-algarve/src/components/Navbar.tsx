@@ -1,105 +1,70 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-const LOGO = "https://fly365algarve.co.uk/gallery/favicons/favicon-192x192.png";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About & Team" },
-  { href: "/fixed-wing", label: "Fixed Wing" },
+const aircraftLinks = [
+  { href: "/fixed-wing", label: "Fixed wing" },
   { href: "/flexwing", label: "Flexwing" },
-  { href: "/training", label: "Training" },
-  { href: "/prices", label: "Prices" },
-  { href: "/history", label: "Our History" },
-  { href: "/contact", label: "Contact" },
-  { href: "/terms", label: "T&Cs" },
+];
+const aboutLinks = [
+  { href: "/about", label: "About & team" },
+  { href: "/history", label: "Our history" },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
-
+  useEffect(() => { setIsOpen(false); }, [location]);
   useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setIsOpen(false); };
+    document.addEventListener("keydown", closeOnEscape);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/95 border-b border-sky-200/60 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <img
-              src={LOGO}
-              alt="Fly365 Algarve"
-              className="w-10 h-10 rounded-full shadow-md group-hover:scale-105 transition-transform duration-200 object-cover"
-            />
-            <div>
-              <span className="text-lg font-bold tracking-tight text-sky">FLY365</span>
-              <span className="text-lg font-light tracking-wide ml-1 text-sky-dark">Algarve</span>
-            </div>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  location === link.href
-                    ? "text-sky bg-sky-100 font-semibold"
-                    : "text-slate-600 hover:text-sky hover:bg-sky-50"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/booking"
-              className="ml-3 px-5 py-2 text-sm font-semibold rounded-full sky-gradient text-white hover:opacity-90 transition-opacity duration-200 shadow-md"
-            >
-              Book Now
-            </Link>
+    <header className="fixed inset-x-0 top-0 z-50 bg-[var(--chalk)] border-b border-[rgba(11,42,60,.16)]">
+      <nav aria-label="Main navigation" className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-5">
+        <Link href="/" className="flex items-center gap-3" aria-label="Fly365 Algarve home">
+          <img src="/images/logo.png" alt="Fly365 Algarve logo" className="h-11 w-11 object-contain" />
+          <span className="display-heading text-[1.45rem] leading-none text-[var(--navy)]">Fly365 <span className="text-[var(--ocean)]">Algarve</span></span>
+        </Link>
+        <div className="hidden items-center gap-1 lg:flex">
+          <Link href="/prices#trial" className="nav-link">Trial flights</Link>
+          <Link href="/training" className="nav-link">Learn to fly</Link>
+          <div className="nav-group">
+            <button type="button" className="nav-link inline-flex items-center gap-1" aria-haspopup="true">Aircraft <ChevronDown size={14} /></button>
+            <div className="nav-dropdown">{aircraftLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md transition-colors text-slate-600 hover:text-sky hover:bg-sky-50"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="lg:hidden nav-blur bg-white/98 border-b border-sky-200/60 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 pb-4 pt-2 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  location === link.href
-                    ? "text-sky bg-sky-50 font-semibold"
-                    : "text-slate-600 hover:text-sky hover:bg-sky-50"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/booking"
-              className="mt-2 px-4 py-3 text-sm font-semibold rounded-full sky-gradient text-white text-center hover:opacity-90 transition-opacity shadow-md"
-            >
-              Book Now
-            </Link>
+          <Link href="/prices" className="nav-link">Prices</Link>
+          <div className="nav-group">
+            <button type="button" className="nav-link inline-flex items-center gap-1" aria-haspopup="true">About <ChevronDown size={14} /></button>
+            <div className="nav-dropdown">{aboutLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
           </div>
+          <Link href="/contact" className="button-ochre ml-3 px-5 py-3 text-xs font-bold uppercase tracking-[.14em]">Book</Link>
         </div>
-      )}
-    </nav>
+        <button className="grid h-11 w-11 place-items-center text-[var(--navy)] lg:hidden" aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(!isOpen)} data-testid="button-menu">
+          {isOpen ? <X size={25} /> : <Menu size={25} />}
+        </button>
+      </nav>
+      {isOpen && <div id="mobile-navigation" className="fixed inset-0 top-[76px] z-50 flex min-h-[calc(100dvh-76px)] flex-col bg-[var(--navy)] px-7 py-8 text-[var(--chalk)] lg:hidden">
+        <p className="section-kicker !text-[var(--sandstone)]">Fly365 Algarve</p>
+        <div className="mt-6 flex flex-col">
+          <Link href="/prices#trial" className="mobile-nav-link">Trial flights</Link>
+          <Link href="/training" className="mobile-nav-link">Learn to fly</Link>
+          <p className="mt-5 text-xs font-bold uppercase tracking-[.2em] text-[var(--sandstone)]">Aircraft</p>
+          {aircraftLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}
+          <Link href="/prices" className="mobile-nav-link">Prices</Link>
+          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[var(--sandstone)]">About</p>
+          {aboutLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}
+        </div>
+        <Link href="/contact" className="button-ochre mt-auto px-6 py-4 text-center font-bold uppercase tracking-widest">Book a flight</Link>
+      </div>}
+      <style>{`.nav-link{display:inline-flex;align-items:center;padding:.7rem .72rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);transition:color .2s}.nav-link:hover{color:var(--ochre)}.nav-group{position:relative}.nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:180px;background:var(--chalk);border:1px solid rgba(11,42,60,.18);padding:.35rem;box-shadow:0 8px 18px rgba(11,42,60,.1)}.nav-group:focus-within .nav-dropdown,.nav-group:hover .nav-dropdown{display:grid}.nav-dropdown a{padding:.7rem;color:var(--navy);font-size:.78rem}.nav-dropdown a:hover{background:#eee4d4}.mobile-nav-link{border-bottom:1px solid rgba(247,243,236,.18);padding:1rem 0;font-family:var(--app-font-display);font-size:1.7rem;font-weight:700;letter-spacing:.025em;text-transform:uppercase}`}</style>
+    </header>
   );
 }
