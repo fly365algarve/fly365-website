@@ -6,6 +6,7 @@ import { Seo } from "../components/Seo";
 import { ContactForm } from "../components/ContactForm";
 import { TrialFlightMap } from "../components/TrialFlightMap";
 import { CountUp } from "../components/Reveal";
+import { useHeroReady } from "../components/IntroOverlay";
 
 const faqs = [
   ["Do I need a medical to take a trial flight?", "Before flying solo, you must be in possession of a current EASA medical certificate, Class 1, 2 or LAPL. However, a medical is not required to fly when under dual instruction. The new UK self-declaration medical certificate (without any medical professional involvement) acceptable in UK airspace is NOT valid in Portuguese Airspace."],
@@ -19,12 +20,14 @@ const faqs = [
 export function HomePage() {
   const [selected, setSelected] = useState(0);
   const flight = site.trialFlights[selected];
+  const heroReady = useHeroReady();
   return <div className="page-enter">
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." />
-    <section className="hero-photo relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20">
+    <section className={`fx-hero ${heroReady ? "fx-hero--go" : "fx-hero--hold"} relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20`}>
+      <div className="fx-hero__photo" aria-hidden="true" /><div className="fx-hero__shade" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1160px]">
         <div className="mb-7 flex items-center gap-4"><img src="/images/logo.png" alt="Fly365 Algarve" className="hero-logo circular-logo" /><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
-        <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]">Learn to fly<br /><span className="text-[var(--sandstone)]">over the Algarve</span></h1>
+        <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]"><span className="fx-hero__line" style={{ ["--i" as string]: 0 }}>Learn to fly</span><span className="fx-hero__line text-[var(--sandstone)]" style={{ ["--i" as string]: 1 }}>over the Algarve</span></h1>
         <p className="mt-7 max-w-[580px] text-base leading-7 text-[rgba(247,243,236,.9)] md:text-lg">Microlight trial flights and intensive training from Lagos Aerodrome, with UK CAA-approved instructors.</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Book a trial flight <ArrowRight size={16} /></Link>

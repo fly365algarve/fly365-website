@@ -1,0 +1,26 @@
+.fx-intro { position: fixed; inset: 0; z-index: 100; background: #0B2A3C; cursor: pointer; overflow: hidden; clip-path: inset(0 0 0 0); }
+.fx-intro--wipe { animation: fx-wipe .6s cubic-bezier(.76,0,.24,1) forwards; pointer-events: none; }
+.fx-intro__sky { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fx-intro__trail { fill: none; stroke: #C8692F; stroke-width: 2; stroke-dasharray: 7 9; vector-effect: non-scaling-stroke; clip-path: inset(0 100% 0 0); animation: fx-trail .7s linear forwards; }
+.fx-intro__plane { position: absolute; left: 0; top: 0; width: clamp(34px, 4.4vw, 52px); height: auto; color: #F7F3EC; offset-path: none; transform: translate(-12vw, 62vh) rotate(-7deg); animation: fx-fly .7s linear forwards; }
+.fx-intro__logo { position: absolute; left: 50%; top: 50%; width: clamp(96px, 13vw, 148px); height: clamp(96px, 13vw, 148px); margin: calc(clamp(96px, 13vw, 148px) / -2) 0 0 calc(clamp(96px, 13vw, 148px) / -2); border-radius: 50%; object-fit: cover; opacity: 0; transform: scale(.92); animation: fx-snap .5s cubic-bezier(.2,.9,.3,1) .4s forwards; }
+@keyframes fx-fly { to { transform: translate(108vw, 38vh) rotate(-7deg); } }
+@keyframes fx-trail { to { clip-path: inset(0 0 0 0); } }
+@keyframes fx-snap { to { opacity: 1; transform: scale(1); } }
+@keyframes fx-wipe { to { clip-path: inset(0 0 0 100%); } }
+
+.fx-hero { position: relative; isolation: isolate; }
+.fx-hero__photo { position: absolute; inset: 0; z-index: -2; background: url("/images/fly365-algarve-lagos-operation.png") center / cover; }
+.fx-hero__shade { position: absolute; inset: 0; z-index: -1; background: rgba(11, 42, 60, .69); }
+.fx-hero__line { display: block; }
+.fx-hero--hold .fx-hero__photo { transform: scale(1.05); }
+.fx-hero--hold .fx-hero__line { opacity: 0; transform: translateY(16px); }
+.fx-hero--go .fx-hero__photo { animation: fx-settle 1.2s cubic-bezier(.22,.7,.2,1) both; }
+.fx-hero--go .fx-hero__line { animation: fx-line .7s cubic-bezier(.22,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 80ms); }
+@keyframes fx-settle { from { transform: scale(1.05); } to { transform: scale(1); } }
+@keyframes fx-line { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .fx-intro { display: none; }
+  .fx-hero--hold .fx-hero__photo, .fx-hero--hold .fx-hero__line { opacity: 1; transform: none; }
+  .fx-hero--go .fx-hero__photo, .fx-hero--go .fx-hero__line { animation: none; }
+}

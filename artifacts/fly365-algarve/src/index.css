@@ -144,8 +144,6 @@
 .button-ochre:hover { background: #a85127; border-color: #a85127; }
 .button-outline-light { border: 1px solid rgba(247,243,236,.65); color: var(--chalk); }
 .button-outline-light:hover { background: rgba(247,243,236,.12); }
-.hero-photo { position: relative; isolation: isolate; background-image: url("/images/fly365-algarve-lagos-operation.png"); background-size: cover; background-position: center; }
-.hero-photo::before { content: ""; position: absolute; z-index: -1; inset: 0; background: rgba(11, 42, 60, .69); }
 .inner-hero { background: var(--navy); }
 .surface { background: var(--chalk); }
 .surface-ocean { background: var(--navy); color: var(--chalk); }
@@ -175,11 +173,25 @@
 .price-tab:hover { transform: translateY(-2px); }
 .price-tab.active { background: var(--navy); color: var(--chalk); }
 .trial-map-shell { color: var(--ink); }
-.trial-map { position: relative; height: clamp(360px, 52vw, 600px); overflow: hidden; border: 1px solid rgba(11,42,60,.18); background: #d9d1c1; }
-.mapbox-canvas-host { position: absolute; inset: 0; }
+.trial-map { position: relative; aspect-ratio: 5 / 3; overflow: hidden; border: 1px solid rgba(11,42,60,.18); background: #d9d1c1; }
+.trial-map .mapbox-canvas-host { position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none; }
+.trial-map .mapbox-canvas-host.mapbox-visible { opacity: 1; pointer-events: auto; }
+.static-route-image, .static-route-image picture, .static-route-image picture img, .static-route-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; }
+.static-route-image picture img { object-fit: fill; }
+.static-route-backdrop { object-fit: cover; }
+.static-airport-hotspot { position: absolute; width: 44px; height: 48px; transform: translate(-50%, -100%); z-index: 2; border-radius: 50%; }
+.static-airport-hotspot:focus-visible { outline: 3px solid var(--chalk); background: rgba(200,105,47,.2); }
+.static-airport-mobile { display: none; }
+.static-map-key { position: absolute; left: 8px; right: 8px; top: 8px; width: fit-content; max-width: calc(100% - 16px); padding: 5px 7px; background: var(--navy); color: var(--chalk); font-size: 10px; line-height: 1.6; }
+.map-button-progress { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: map-button-spin .7s linear infinite; }
+@keyframes map-button-spin { to { transform: rotate(360deg); } }
+@media (max-width: 639px) {
+  .trial-map { aspect-ratio: 8 / 7; }
+  .static-airport-desktop { display: none; }
+  .static-airport-mobile { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .map-button-progress { animation: none; } }
 .trial-map .mapboxgl-map { width: 100%; height: 100%; font-family: var(--app-font-sans); }
-.map-loading-panel { position: absolute; z-index: 2; inset: 0; display: grid; place-content: center; justify-items: center; gap: .65rem; background: #e9dfd0; color: var(--navy); font-size: .85rem; }
-.map-loading-mark { font: 800 1.6rem var(--app-font-display); letter-spacing: .12em; }
 .map-fallback { position: absolute; z-index: 4; inset: 0; display: grid; grid-template-rows: minmax(160px, 1fr) auto; background: var(--chalk); }
 .map-fallback-photo { position: relative; min-height: 155px; background-image: linear-gradient(rgba(11,42,60,.24),rgba(11,42,60,.24)), url("/images/fly365-algarve-lagos-operation.png"); background-size: cover; background-position: center; }
 .map-fallback-caption { position: absolute; bottom: 14px; left: 16px; color: white; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-shadow: 0 1px 5px rgba(0,0,0,.5); text-transform: uppercase; }
@@ -192,7 +204,7 @@
 .mapbox-place-pin { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
 .mapbox-place-dot { width: 13px; height: 13px; border: 3px solid var(--chalk); border-radius: 50%; background: var(--ochre); box-shadow: 0 1px 7px rgba(11,42,60,.55); }
 .mapbox-place-label { max-width: 190px; padding: 4px 7px; border: 1px solid rgba(247,243,236,.4); background: var(--navy); color: var(--chalk); font-size: 10px; font-weight: 700; line-height: 1.2; text-align: center; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,.28); }
-.mapbox-place-pin-airport { gap: 3px; }
+.mapbox-place-pin-airport { gap: 3px; pointer-events: auto; cursor: pointer; }
 .mapbox-airport-logo { width: 34px; height: 34px; border: 2px solid var(--chalk); object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,.38); }
 .mapbox-aircraft-marker { display: grid; width: 36px; height: 36px; place-items: center; border: 2px solid var(--chalk); border-radius: 50%; background: var(--ochre); color: white; box-shadow: 0 2px 12px rgba(0,0,0,.45); }
 .mapbox-aircraft-marker svg { width: 22px; height: 22px; }
@@ -217,16 +229,6 @@
 .button-ochre:hover, .button-outline-light:hover { transform: translateY(-2px); }
 .section-reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
 .section-reveal.is-visible { opacity: 1; transform: translateY(0); }
-.intro-overlay { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; background: var(--navy); color: var(--chalk); cursor: pointer; }
-.intro-logo { width: clamp(84px, 12vw, 138px); height: clamp(84px, 12vw, 138px); object-fit: cover; animation: intro-mark .5s ease-out both; }
-.intro-track { width: min(420px, 70vw); height: 70px; overflow: visible; clip-path: inset(0 100% 0 0); animation: draw-track 1s ease-out .25s forwards; }
-.intro-track path { fill: none; stroke: var(--sandstone); stroke-width: 1.5; stroke-dasharray: 5 7; }
-.intro-title { font-family: var(--app-font-display); font-size: clamp(1.8rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: .1em; animation: intro-mark .55s ease-out .45s both; }
-.intro-skip { position: absolute; bottom: 24px; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,243,236,.62); }
-.intro-exit { animation: intro-slide .48s cubic-bezier(.7,0,.2,1) forwards; pointer-events: none; }
-@keyframes draw-track { to { clip-path: inset(0 0 0 0); } }
-@keyframes intro-mark { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes intro-slide { to { transform: translateY(-100%); } }
 @keyframes whatsapp-pulse { 0% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 0 rgba(37,211,102,.42); } 75% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 10px rgba(37,211,102,0); } 100% { box-shadow: 0 5px 16px rgba(11,42,60,.2); } }
 @media (max-width: 640px) { .whatsapp-control { width: 54px; height: 54px; padding: 0; } .whatsapp-label { display: none; } }
 @media (max-width: 640px) { .map-fallback-routes { grid-template-columns: repeat(2,minmax(0,1fr)); } .map-fallback-route { padding: .55rem; } .mapbox-place-label { max-width: 140px; white-space: normal; } }

@@ -4,9 +4,11 @@ import { Link } from "wouter";
 import { ArrowRight, Pause, Play, RotateCcw } from "lucide-react";
 import { site } from "../config/site";
 import { routePlaces, trialRoutes, type MapCoordinate } from "../config/routes";
+import { StaticRouteImage } from "./StaticRouteImage";
+import { aerodromeMapsUrl } from "../lib/staticRouteMap";
 
 type PlaybackState = "idle" | "playing" | "paused" | "finished";
-type MapStatus = "waiting" | "loading" | "ready" | "fallback";
+type MapStatus = "static" | "loading" | "ready" | "unavailable";
 
 const formatPrice = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
 const token = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -32,12 +34,11 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
   const selectedRef = useRef(selected);
   const initialOverviewShownRef = useRef(false);
   const playbackRef = useRef<PlaybackState>("idle");
-  const [status, setStatus] = useState<MapStatus>("waiting");
+  const [status, setStatus] = useState<MapStatus>("static");
+  const [failureReason, setFailureReason] = useState("");
   const [shouldLoad, setShouldLoad] = useState(false);
   const [playback, setPlayback] = useState<PlaybackState>("idle");
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [showFallback, setShowFallback] = useState(!token);
-  const [fallbackReason, setFallbackReason] = useState(!token ? "missing-token" : "");
   const flight = site.trialFlights[selected];
   const route = trialRoutes[selected];
 
@@ -56,29 +57,20 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
   }, []);
 
   useEffect(() => {
-    const target = mapElement.current;
-    if (!target || !token) {
-      setStatus("fallback");
-      return;
-    }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setStatus("loading");
-        setShouldLoad(true);
-        observer.disconnect();
-      }
-    }, { rootMargin: "0px", threshold: 0.01 });
-
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     if (!shouldLoad || !mapElement.current || !token) return;
     let cancelled = false;
     let map: MapboxMap | null = null;
-    let loadTimeout: number | undefined;
+    let resizeObserver: ResizeObserver | undefined;
+    const fail = (reason: string) => {
+      if (cancelled) return;
+      cancelled = true;
+      setFailureReason(reason);
+      setStatus("unavailable");
+      setShouldLoad(false);
+      updatePlayback("idle");
+    };
+    // Includes module download time. Never leave a pending 3D request indefinitely.
+    const loadTimeout = window.setTimeout(() => fail("timeout"), 8000);
 
     async function initialize() {
       try {
@@ -89,9 +81,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         if (cancelled || !mapElement.current) return;
         const mapbox = mapboxModule.default;
         if (!mapbox.supported()) {
-          setStatus("fallback");
-          setShowFallback(true);
-          setFallbackReason("webgl-unavailable");
+          fail("webgl-unavailable");
           return;
         }
 
@@ -99,6 +89,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         map = new mapbox.Map({
           container: mapElement.current,
           style: "mapbox://styles/mapbox/satellite-streets-v12",
+          projection: "mercator",
           center: [-8.81, 37.065],
           zoom: 9,
           pitch: 55,
@@ -113,27 +104,21 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
         });
         mapRef.current = map;
         map.addControl(new mapbox.NavigationControl({ visualizePitch: true }), "top-right");
-
-        loadTimeout = window.setTimeout(() => {
-          if (map && !map.isStyleLoaded()) {
-            setStatus("fallback");
-            setShowFallback(true);
-            setFallbackReason("load-timeout");
-          }
-        }, 12000);
-
+        resizeObserver = new ResizeObserver(() => map?.resize());
+        resizeObserver.observe(mapElement.current);
+        map.resize();
         map.on("error", (event) => {
-          const message = event.error?.message ?? "";
-          if (/token|unauthorized|forbidden|access token/i.test(message)) {
-            setStatus("fallback");
-            setShowFallback(true);
-            setFallbackReason("map-service-unavailable");
-          }
+          const error = event.error as Error & { status?: number };
+          // Store only a category/status, never token-bearing service error text.
+          const category = error.status ? `http-${error.status}`
+            : /sky|projection/i.test(error.message) ? "projection"
+            : /fetch|network/i.test(error.message) ? "network"
+            : /source|layer|style/i.test(error.message) ? "style"
+            : "unknown";
+          fail(`map-service-${category}`);
         });
-
-        map.once("load", () => {
+        map.once("style.load", () => {
           if (!map || cancelled) return;
-          if (loadTimeout) window.clearTimeout(loadTimeout);
           try {
             map.addSource("mapbox-dem", {
               type: "raster-dem",
@@ -190,11 +175,14 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
 
             routePlaces.forEach((place) => {
               const isAirport = "kind" in place && place.kind === "aerodrome";
-              const element = document.createElement("div");
+              const element = document.createElement(isAirport ? "a" : "div");
               element.className = `mapbox-place-pin${isAirport ? " mapbox-place-pin-airport" : ""}`;
-              element.setAttribute("role", "img");
-              element.setAttribute("aria-label", place.name);
+              element.setAttribute("aria-label", isAirport ? "Open Lagos Aerodrome in Google Maps" : place.name);
               if (isAirport) {
+                const link = element as HTMLAnchorElement;
+                link.href = aerodromeMapsUrl;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
                 const logo = document.createElement("img");
                 logo.src = "/images/logo.png";
                 logo.alt = "";
@@ -228,21 +216,17 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
               .addTo(map);
             aircraftMarkerRef.current.getElement().style.display = "none";
 
+            if (cancelled) return;
             mapRef.current = map;
+            window.clearTimeout(loadTimeout);
             setStatus("ready");
-            setShowFallback(false);
+            requestAnimationFrame(() => { if (!cancelled) map?.resize(); });
           } catch {
-            setStatus("fallback");
-            setShowFallback(true);
-            setFallbackReason("map-load-error");
+            fail("style-setup-error");
           }
         });
       } catch {
-        if (!cancelled) {
-          setStatus("fallback");
-          setShowFallback(true);
-          setFallbackReason("map-load-error");
-        }
+        fail("module-or-initialization-error");
       }
     }
 
@@ -250,6 +234,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     return () => {
       cancelled = true;
       if (loadTimeout) window.clearTimeout(loadTimeout);
+      resizeObserver?.disconnect();
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
@@ -257,6 +242,7 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
       aircraftMarkerRef.current = null;
       map?.remove();
       mapRef.current = null;
+      initialOverviewShownRef.current = false;
     };
     }, [shouldLoad]);
 
@@ -323,13 +309,23 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     aircraft?.getElement().style.setProperty("display", "grid");
     updatePlayback("playing");
 
-    const turf = await import("@turf/turf");
+    let turf: typeof import("@turf/turf");
+    try {
+      turf = await import("@turf/turf");
+    } catch {
+      updatePlayback("idle");
+      setFailureReason("flyover-module-error");
+      setShouldLoad(false);
+      setStatus("unavailable");
+      return;
+    }
     if (playbackRef.current !== "playing") return;
+    startTimeRef.current = performance.now() - progressRef.current * 25000;
     const line = turf.lineString(route.coordinates);
     const length = turf.length(line, { units: "kilometers" });
     const duration = 25000;
     const step = (now: number) => {
-      if (!mapRef.current) return;
+      if (!mapRef.current || playbackRef.current !== "playing") return;
       const progress = Math.min(1, (now - startTimeRef.current) / duration);
       progressRef.current = progress;
       const distance = Math.max(0.001, length * progress);
@@ -379,33 +375,32 @@ export function TrialFlightMap({ selected, onSelect }: { selected: number; onSel
     updatePlayback("paused");
   };
 
-  return <div className="trial-map-shell" data-testid="map-trial-routes" data-map-status={status} data-map-fallback-reason={showFallback ? fallbackReason : undefined}>
+  useEffect(() => {
+    if (status === "ready") void play(true);
+  }, [status]);
+
+  return <div className="trial-map-shell" data-testid="map-trial-routes" data-map-status={status} data-map-failure={status === "unavailable" ? failureReason : undefined}>
     <div className="trial-map mapbox-map" aria-label="Interactive 3D satellite map of approximate trial flight routes">
-      <div ref={mapElement} className="mapbox-canvas-host" />
-      {status === "waiting" && <div className="map-loading-panel"><span className="map-loading-mark">FLY365</span><span>Loading route map…</span></div>}
-      {status === "loading" && <div className="map-loading-panel"><span className="map-loading-mark">FLY365</span><span>Loading satellite map…</span></div>}
-      {showFallback && <div className="map-fallback">
-        <div className="map-fallback-photo" role="img" aria-label="View of the Algarve coast from a Fly365 microlight">
-          <span className="map-fallback-caption">3D view unavailable · Explore the flight options below<br />Approximate routes along the Algarve coast</span>
-        </div>
-        <div className="map-fallback-routes">
-          {site.trialFlights.map((item, index) => <button key={item.minutes} type="button" className={`map-fallback-route ${selected === index ? "selected" : ""}`} onClick={() => onSelect(index)} aria-pressed={selected === index} data-testid={`fallback-route-${item.minutes}`}>
-            <span>{item.minutes} min</span><strong>{formatPrice(item.price)}</strong><small>{item.route}</small>
-          </button>)}
-        </div>
-      </div>}
+      <StaticRouteImage selected={selected} onSelect={onSelect} interactive={status !== "ready"} />
+      <div ref={mapElement} className={`mapbox-canvas-host ${status === "ready" ? "mapbox-visible" : ""}`} aria-hidden={status !== "ready"} inert={status !== "ready"} />
     </div>
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <div className="flex flex-wrap gap-2" role="group" aria-label="Select trial flight duration">
         {site.trialFlights.map((item, index) => <button key={item.minutes} type="button" onClick={() => onSelect(index)} aria-pressed={selected === index} className={`route-select ${selected === index ? "selected" : ""}`} data-testid={`button-flight-${item.minutes}`}>{item.minutes} min</button>)}
       </div>
-      {status === "ready" && <div className="flex gap-2">
+      {token && status !== "ready" && <button type="button" className="route-select route-play" disabled={status === "loading"} aria-busy={status === "loading"}
+        onClick={() => { setStatus("loading"); setShouldLoad(true); }} data-testid="button-open-3d">
+        {status === "loading" ? <span className="map-button-progress" aria-hidden="true" /> : <Play size={15} />} Fly this route in 3D
+      </button>}
+      {status === "ready" && <div className="flex flex-wrap gap-2">
         {playback === "playing"
           ? <button type="button" className="route-select" onClick={pause} data-testid="button-pause-flyover"><Pause size={15} /> Pause</button>
           : <button type="button" className="route-select route-play" onClick={() => void play()} data-testid="button-play-flyover"><Play size={15} /> {playback === "finished" ? "Fly this route again" : playback === "paused" ? "Resume route" : "Fly this route"}</button>}
         {playback !== "idle" && <button type="button" className="route-select" onClick={() => void play(true)} aria-label="Replay route from the beginning" data-testid="button-replay-flyover"><RotateCcw size={15} /> Replay</button>}
+        <button type="button" className="route-select" onClick={() => { updatePlayback("idle"); setShouldLoad(false); setStatus("static"); }}>Static view</button>
       </div>}
     </div>
+    {status === "unavailable" && <p role="status" className="mt-2 text-xs text-[var(--muted-foreground)]">3D view unavailable right now</p>}
     <div className="mt-5 flex flex-col gap-4 border-t border-[rgba(11,42,60,.16)] pt-4 sm:flex-row sm:items-center sm:justify-between">
       <div><p className="text-xs uppercase tracking-[.18em] text-[var(--ocean)]">{flight.minutes} minute route</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">{flight.route}</p></div>
       <div className="flex items-center gap-4"><strong className="display-heading text-3xl text-[var(--navy)]">{formatPrice(flight.price)}</strong><Link href="/contact" className="button-ochre px-4 py-3 text-xs font-bold uppercase tracking-wider" data-testid="link-book-selected-flight">Book this flight <ArrowRight className="ml-1 inline" size={14} /></Link></div>

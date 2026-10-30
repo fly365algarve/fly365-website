@@ -1,24 +1,69 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import "./intro.css";
+
+const KEY = "fly365-intro-seen";
+let decided: boolean | null = null;
+let handedOff = false;
+const listeners = new Set<() => void>();
+
+function shouldPlay(): boolean {
+  if (decided !== null) return decided;
+  if (typeof window === "undefined") return (decided = false);
+  try {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return (decided = false);
+    if (sessionStorage.getItem(KEY)) return (decided = false);
+    sessionStorage.setItem(KEY, "1");
+    return (decided = true);
+  } catch {
+    return (decided = false);
+  }
+}
+
+function handoff() {
+  if (handedOff) return;
+  handedOff = true;
+  listeners.forEach((l) => l());
+}
+
+/** Hero hook: true once the hero may run its entrance (immediately when no intro plays). */
+export function useHeroReady(): boolean {
+  return useSyncExternalStore(
+    (cb) => { listeners.add(cb); return () => listeners.delete(cb); },
+    () => !shouldPlay() || handedOff,
+    () => true,
+  );
+}
 
 export function IntroOverlay() {
-  const [visible, setVisible] = useState(false);
-  const [exiting, setExiting] = useState(false);
+  const [play] = useState(shouldPlay);
+  const [wiping, setWiping] = useState(false);
+  const [gone, setGone] = useState(!play);
+
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    try {
-      if (sessionStorage.getItem("fly365-intro-seen")) return;
-      sessionStorage.setItem("fly365-intro-seen", "1");
-    } catch { return; }
-    setVisible(true);
-    const timer = window.setTimeout(() => setExiting(true), 1450);
-    const remove = window.setTimeout(() => setVisible(false), 1950);
-    return () => { window.clearTimeout(timer); window.clearTimeout(remove); };
-  }, []);
-  if (!visible) return null;
-  const skip = () => { setExiting(true); window.setTimeout(() => setVisible(false), 420); };
-  return <div className={`intro-overlay ${exiting ? "intro-exit" : ""}`} onClick={skip} role="button" tabIndex={0} aria-label="Skip Fly365 Algarve intro" data-testid="intro-overlay" onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") skip(); }}>
-    <img src="/images/logo.png" alt="" className="intro-logo circular-logo" />
-    <svg className="intro-track" viewBox="0 0 420 70" aria-hidden="true"><path d="M8 42 C96 8 156 65 230 33 S342 8 412 34" /></svg>
-    <p className="intro-title">FLY365 ALGARVE</p><span className="intro-skip">Click to skip</span>
-  </div>;
+    if (!play || gone) return;
+    const skip = () => { setWiping(true); handoff(); };
+    const t1 = window.setTimeout(skip, 1000);
+    const t2 = window.setTimeout(() => setGone(true), 1600);
+    window.addEventListener("keydown", skip);
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2); window.removeEventListener("keydown", skip); };
+  }, [play, gone]);
+
+  if (gone) return null;
+  const skipNow = () => { setWiping(true); handoff(); window.setTimeout(() => setGone(true), 600); };
+
+  return (
+    <div className={`fx-intro${wiping ? " fx-intro--wipe" : ""}`} onPointerDown={skipNow} onAnimationEnd={(e) => { if (e.target === e.currentTarget) setGone(true); }} role="presentation" aria-hidden="true" data-testid="intro-overlay">
+      <svg className="fx-intro__sky" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path className="fx-intro__trail" d="M-12 64 L108 40" />
+      </svg>
+      <svg className="fx-intro__plane" viewBox="0 0 48 48" fill="currentColor">
+        <g transform="rotate(90 24 24)">
+          <rect x="21.5" y="4" width="5" height="38" rx="2.5" />
+          <rect x="3" y="15" width="42" height="6" rx="1.5" />
+          <rect x="14" y="37" width="20" height="4" rx="1.2" />
+        </g>
+      </svg>
+      <img src="/images/logo.png" alt="" className="fx-intro__logo circular-logo" />
+    </div>
+  );
 }
