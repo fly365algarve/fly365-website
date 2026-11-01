@@ -12,8 +12,8 @@ export function Seo({ title, description, faq }: SeoProps) {
   const business = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
     name: site.name, url: site.domain, email: site.contact.email,
-    telephone: [...site.contact.portugalPhones.map((phone) => phone.tel), site.contact.ukPhone.tel],
-    address: { "@type": "PostalAddress", streetAddress: "Aeródromo de Lagos", postalCode: "8600", addressLocality: "Lagos", addressCountry: "PT" },
+    telephone: site.contact.portugalPhones.map((phone) => phone.tel),
+    address: { "@type": "PostalAddress", streetAddress: "Aeródromo Municipal de Lagos", postalCode: "8600-327", addressLocality: "Lagos", addressCountry: "PT" },
     geo: { "@type": "GeoCoordinates", latitude: site.aerodrome.lat, longitude: site.aerodrome.lng },
     image: new URL("/images/fly365-algarve-lagos-operation-837.webp", site.domain).toString(),
   };

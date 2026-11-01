@@ -6,20 +6,19 @@ export const site = {
   contact: {
     portugalPhones: [
       {
-        label: "+351 967 456 156",
+        label: "Colin – +351 967 456 156",
         tel: "+351967456156",
         whatsappUrl: "https://wa.me/351967456156",
       },
       {
-        label: "+351 936 445 501",
+        label: "Zeth – +351 936 445 501",
         tel: "+351936445501",
         whatsappUrl: "https://wa.me/351936445501",
       },
     ],
-    ukPhone: { label: "+44 7984 368 253", tel: "+447984368253" },
     whatsappUrl: "https://wa.me/351967456156",
     email: "fly365algarve@gmail.com",
-    address: "Aeródromo de Lagos, 8600 Lagos, Portugal",
+    address: "Aeródromo Municipal de Lagos, 8600-327 Lagos, Portugal",
   },
   trialFlights: [
     { minutes: 20, price: 60, route: "Grottos & Lagos – Meia Praia, grottos, Lagos old town and marina" },

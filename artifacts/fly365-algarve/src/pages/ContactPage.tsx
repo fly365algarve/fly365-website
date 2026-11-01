@@ -32,7 +32,6 @@ export function ContactPage() {
         </div>
         <div>
           <div className="flex items-start gap-4 border-t border-[rgba(11,42,60,.2)] py-5"><Phone className="mt-1 shrink-0 text-[var(--ocean)]" size={20} /><div><div className="section-kicker mb-1">Portugal Mobile · Calls and WhatsApp</div><div className="grid gap-2">{site.contact.portugalPhones.map((phone) => <a key={phone.tel} href={`tel:${phone.tel}`} className="text-sm text-[var(--ink)] hover:text-[var(--ocean)]">{phone.label}</a>)}</div></div></div>
-          <div className="flex items-start gap-4 border-t border-[rgba(11,42,60,.2)] py-5"><Phone className="mt-1 shrink-0 text-[var(--ocean)]" size={20} /><div><div className="section-kicker mb-1">UK Mobile — Calls Only</div><a href={`tel:${site.contact.ukPhone.tel}`} className="text-sm text-[var(--ink)] hover:text-[var(--ocean)]">{site.contact.ukPhone.label}</a></div></div>
           <div className="flex items-start gap-4 border-y border-[rgba(11,42,60,.2)] py-5"><Mail className="mt-1 shrink-0 text-[var(--ocean)]" size={20} /><div><div className="section-kicker mb-1">Email</div><a href={`mailto:${site.contact.email}`} className="text-sm text-[var(--ink)] hover:text-[var(--ocean)]">{site.contact.email}</a></div></div>
         </div>
         <figure className="overflow-hidden border border-[rgba(11,42,60,.2)] bg-[#eee4d4]">
