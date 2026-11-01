@@ -5,8 +5,9 @@ import { site } from "../config/site";
 import { Seo } from "../components/Seo";
 import { TrialFlightMap } from "../components/TrialFlightMap";
 import { PageHero } from "../components/round5/PageHero";
+import { Price } from "../components/Price";
 
-const euro = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
+const euro = (amount: number) => <Price amount={amount} />;
 
 export function TrialFlightsPage() {
   const [selected, setSelected] = useState(0);

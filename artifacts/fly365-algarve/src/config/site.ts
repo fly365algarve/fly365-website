@@ -2,6 +2,7 @@
 export const site = {
   name: "Fly365 Algarve",
   domain: "https://fly365algarve.co.uk",
+  exchangeRate: 1.2,
   aerodrome: { lat: 37.122110, lng: -8.679058 },
   contact: {
     portugalPhones: [

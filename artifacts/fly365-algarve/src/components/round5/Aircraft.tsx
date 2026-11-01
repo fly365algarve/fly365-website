@@ -6,13 +6,12 @@ import "./round5.css";
 export const aircraftSpecs = [
   { name: "Ikarus C42", control: "3-axis", wing: "High wing", seats: "Two seats, side-by-side", engine: "Rotax 912S", hp: 100 },
   { name: "P&M Quantum 912", control: "Weight-shift (flexwing)", seats: "Two seats, tandem", engine: "Rotax 912", hp: 80 },
-  { name: "Exodus Deltajet 500", control: "Weight-shift", seats: "Two seats, tandem", engine: "BMW boxer engine", hp: 115 },
   { name: "P&M Quik R", control: "Weight-shift", seats: "Two seats, tandem", engine: "Rotax 912ULS", hp: 100 },
 ] as const;
 
 export function SpecCards({ names }: { names: string[] }) {
   const list = aircraftSpecs.filter((a) => names.includes(a.name));
-  return <div className={`grid gap-4 ${list.length > 1 ? "md:grid-cols-3" : ""}`}>{list.map((a) => <article key={a.name} className="r5-spec p-6">
+  return <div className={`grid gap-4 ${list.length === 2 ? "md:grid-cols-2" : list.length > 2 ? "md:grid-cols-3" : ""}`}>{list.map((a) => <article key={a.name} className="r5-spec p-6">
     <h3 className="text-3xl text-[var(--navy)]">{a.name}</h3>
     <div className="mt-5 flex items-end gap-2"><strong className="display-heading text-6xl leading-none text-[var(--ochre)]">{a.hp}</strong><span className="pb-1 text-sm font-bold uppercase tracking-widest text-[var(--ocean)]">hp</span></div>
     <dl className={`mt-6 grid ${list.length === 1 ? "sm:grid-cols-2 sm:gap-x-8" : ""}`}>

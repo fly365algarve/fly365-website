@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowDownRight, ArrowRight, ChevronDown, MapPin, Plane, Sun, Wind } from "lucide-react";
 import { site } from "../config/site";
+import { Price, PriceNote } from "../components/Price";
 import { Seo } from "../components/Seo";
 import { ContactForm } from "../components/ContactForm";
 import { TrialFlightMap } from "../components/TrialFlightMap";
@@ -63,7 +64,7 @@ export function HomePage() {
         </div>
         <div className="mt-10 grid gap-4 border-t border-[rgba(247,243,236,.25)] pt-6 text-sm leading-6 text-[rgba(247,243,236,.78)] md:grid-cols-2">
           <p>Lagos Aerodrome is {site.facts.townDistanceKm}km from the centre of Lagos in Portugal, with a {site.facts.runway.toLowerCase()} and {site.facts.flyingDays} flying days per year. We offer intensive training packages of up to {site.courses[1].hours} hours in {site.courses[1].title.toLowerCase()} blocks throughout the year.</p>
-          <p>Training is available on either a Quantum 912, Deltajet BMW, Quik R (all weightshift) or the {site.fixedWing.name} 3-axis. Fly365 operates in Lagos Portugal from October through to end April.</p>
+          <p>Training is available on either a P&amp;M Quantum 912 or P&amp;M Quik R (both weightshift) or the {site.fixedWing.name} 3-axis. We fly in the Algarve all year round.</p>
         </div>
         <WeatherWidget />
       </div>
@@ -74,7 +75,9 @@ export function HomePage() {
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><span className="section-kicker">Make a week of it</span><h2 className="mt-3 text-5xl text-[var(--navy)] md:text-6xl">Courses with focus</h2></div><p className="max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Small weekly groups, big blocks of time in the air. A maximum of {site.facts.maxStudentsPerWeek} students each week.</p></div>
         <div className="mt-9 grid gap-3 sm:grid-cols-3">{site.courses.map((course, index) => <div key={course.title} className="price-card bg-[var(--chalk)] p-6 md:p-8"><span className="section-kicker">0{index + 1}</span><h3 className="mt-5 text-3xl text-[var(--navy)]">{course.title}</h3><p className="display-heading mt-1 text-2xl text-[var(--ocean)]">{course.hours === 20 ? <CountUp value={20} label="hours" /> : course.hours} hours</p><Link href="/training" className="motion-link mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Course details <ArrowRight size={15} /></Link></div>)}</div>
         <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]"><Link href="/fixed-wing" className="motion-link">Fixed wing · C42</Link><Link href="/flexwing" className="motion-link">Flexwing</Link></p>
-        <p className="mt-6 text-sm leading-6 text-[var(--muted-foreground)]">Courses from €{courseHourlyRate} an hour (around £135) – less than you&apos;d pay at UK flying schools.</p>
+        <p className="mt-6 text-sm leading-6 text-[var(--muted-foreground)]">Courses from <Price amount={courseHourlyRate} /> an hour.</p>
+        <PriceNote />
+        <p className="mt-4 text-sm leading-6 text-[var(--muted-foreground)]">Concentrated, intensive flying – most students progress faster and need fewer hours overall than with occasional weekly lessons.</p>
       </div>
     </section>
 
@@ -82,7 +85,8 @@ export function HomePage() {
       <div className="mx-auto grid max-w-[1160px] items-center gap-9 lg:grid-cols-2 lg:gap-14">
         <div>
           <h2 id="more-than-a-course" className="text-5xl leading-[.95] text-[var(--navy)] md:text-6xl">More than a flying course</h2>
-          <p className="mt-6 text-base leading-8 text-[var(--muted-foreground)]">Fly in the morning, then enjoy Lagos – surf, beaches, great food and a lively old town, or just slow down and relax. Come on your own and we&apos;ll make you feel welcome – we often head out for dinner together – or bring friends or family along. We&apos;ll help sort your accommodation at no extra charge.</p>
+          <p className="mt-6 text-base leading-8 text-[var(--muted-foreground)]">Fly in the morning, then enjoy Lagos – surf, beaches including Meia Praia right next to the airfield, great food and a lively old town, or just slow down and relax. Come on your own and we&apos;ll make you feel welcome – we often head out for dinner together – or bring friends or family along. We&apos;ll help sort your accommodation at no extra charge.</p>
+          <p className="mt-4 text-base leading-8 text-[var(--muted-foreground)]">Serious flying by day, good fun in the evenings. Winter is a great time to come: accommodation and car hire in the Algarve are good value out of season.</p>
           <Link href="/contact" className="button-ochre mt-7 inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Plan your trip <ArrowRight size={16} /></Link>
         </div>
         <ResponsiveImage src="/images/lagos-old-town-unsplash.webp" width={1200} height={1879} sizes="(max-width: 1023px) 100vw, 560px" alt="A flowering jacaranda above a street in Lagos old town, Portugal" className="aspect-[5/4] w-full object-cover object-[center_65%]" />
@@ -101,7 +105,7 @@ export function HomePage() {
             <div className="flex items-end justify-between p-6"><div><span className="section-kicker !text-[var(--sandstone)]">Three-axis</span><h3 className="mt-2 text-3xl">Fixed wing · C42</h3><p className="mt-2 max-w-sm text-sm leading-6 text-[rgba(247,243,236,.72)]">{site.fixedWing.description}</p></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" /></div>
           </Link>
           <Link href="/flexwing" className="aircraft-card group bg-[#e9dfd0] text-[var(--navy)]">
-            <div className="flex items-end justify-between p-6"><div><span className="section-kicker">Weight-shift</span><h3 className="mt-2 text-3xl">Flexwing</h3><p className="mt-2 max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Three-dimensional motorcycles of the sky. Quantum 912, Deltajet 500 BMW, and Quik R in our flexwing fleet.</p></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" /></div>
+            <div className="flex items-end justify-between p-6"><div><span className="section-kicker">Weight-shift</span><h3 className="mt-2 text-3xl">Flexwing</h3><p className="mt-2 max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Three-dimensional motorcycles of the sky. P&amp;M Quantum 912 and P&amp;M Quik R in our flexwing fleet.</p></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" /></div>
           </Link>
         </div>
       </div>

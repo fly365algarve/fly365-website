@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { site } from "../config/site";
+import { Price } from "./Price";
 import { trialRoutes } from "../config/routes";
 import { aerodromeMapsUrl, staticRouteMap } from "../lib/staticRouteMap";
 const token = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -45,7 +46,7 @@ export function StaticRouteImage({ selected, onSelect, interactive }: {
       <div className="map-fallback-routes">{site.trialFlights.map((flight, index) =>
         <button key={flight.minutes} type="button" className={`map-fallback-route ${selected === index ? "selected" : ""}`}
           onClick={() => onSelect(index)} aria-pressed={selected === index} tabIndex={interactive ? 0 : -1}>
-          <span>{flight.minutes} min</span><strong>€{flight.price}</strong><small>{flight.route}</small>
+          <span>{flight.minutes} min</span><strong><Price amount={flight.price} /></strong><small>{flight.route}</small>
         </button>)}</div>
     </div>}
   </div>;

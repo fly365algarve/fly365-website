@@ -108,7 +108,7 @@ export function TrainingPage() {
     <TrainingPrices />
 
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[900px] space-y-10 text-sm leading-7 text-[var(--ink)]">
-      <article className="border-b border-[rgba(11,42,60,.2)] pb-9"><p className="r5-measure mb-4">Fly365 operate in Lagos Portugal from October through to end April (during the British Winter). The aircraft permanently based in the Algarve are the Flexwing Quantum 912, Deltajet500, Quik R and the Ikarus C42 side by side 3 Axis aircraft.</p>
+      <article className="border-b border-[rgba(11,42,60,.2)] pb-9"><p className="r5-measure mb-4">We fly in the Algarve all year round. The aircraft permanently based in the Algarve are the flexwing P&amp;M Quantum 912, P&amp;M Quik R and the Ikarus C42 side by side 3 Axis aircraft.</p>
         <h2 className="mb-6 text-3xl text-[var(--navy)]">Flight Training including Exams on Fixed or Flexwing Microlight</h2>
         <div className="grid gap-px border border-[rgba(11,42,60,.2)] bg-[rgba(11,42,60,.2)] md:grid-cols-2">
           {site.courses.slice(0, 2).map((course, i) => <div key={course.title} className="bg-[#eee4d4] p-6"><h3 className="text-2xl text-[var(--navy)]">{course.title} — {course.hours} Hours</h3><p className="mb-3 mt-2 text-xs font-semibold uppercase tracking-wider text-[var(--ocean)]">Practical Flight Training</p><p>{i === 0 ? 'Designed for the student who wants a "Kick Start" or Hour Build.' : 'Designed for the student who wants to "Really Crack On" or "Complete their Licence".'}</p></div>)}

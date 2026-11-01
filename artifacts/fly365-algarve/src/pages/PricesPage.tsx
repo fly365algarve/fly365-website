@@ -3,8 +3,9 @@ import { ArrowRight } from "lucide-react";
 import { site } from "../config/site";
 import { Seo } from "../components/Seo";
 import { PageHero } from "../components/round5/PageHero";
+import { Price, PriceNote } from "../components/Price";
 
-const euro = (amount: number) => `€${amount.toLocaleString("en-IE")}`;
+const euro = (amount: number) => <Price amount={amount} />;
 
 export function PricesPage() {
   const trialFrom = Math.min(...site.trialFlights.map((f) => f.price));
@@ -24,6 +25,7 @@ export function PricesPage() {
         <p className="display-heading text-5xl text-[var(--navy)]" data-testid={`text-from-${item.key}`}>{euro(item.price)}<span className="text-xl">{item.unit}</span></p>
         <Link href={item.href} className="motion-link mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]" data-testid={`link-summary-${item.key}`}>{item.cta} <ArrowRight size={14} /></Link>
       </article>)}
+      <div className="md:col-span-2"><PriceNote /></div>
     </div></section>
     <section className="surface-sand px-5 py-12"><div className="mx-auto flex max-w-[1160px] flex-col gap-5 md:flex-row md:items-center md:justify-between"><div><h2 className="text-4xl text-[var(--navy)]">Let’s find your flight.</h2><p className="mt-2 text-sm text-[var(--muted-foreground)]">Tell us what you’re hoping to do and when.</p></div><Link href="/contact" className="button-ochre inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold uppercase tracking-wider">Enquire now <ArrowRight size={16} /></Link></div></section>
   </div>;
