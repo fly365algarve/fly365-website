@@ -20,3 +20,9 @@ Only source new content photography from Wikimedia Commons under CC0, CC BY or C
 **Why:** The user explicitly imposed this source restriction and requested aviation-relevant photographs instead of generic stock scenery.
 
 **How to apply:** Check the individual file's license and attribution requirements, including any author website credit. Distinguish illustrative aircraft photographs from Fly365's own fleet, team or historical archive. Keep shared branding logos and existing functional route/location maps separate from the content-photography audit.
+
+Keep the original Fly365 flexwing-over-the-coast photograph as the homepage hero, without an additional logo inside the hero. It is an explicitly approved exception to the external-photo source restriction; do not replace it merely to satisfy that restriction.
+
+**Why:** The user explicitly requested restoring the original Fly365 hero after the licensed-photo replacements.
+
+**How to apply:** Keep its visible use unique. Credit it as the original Fly365 site photograph without inventing an external stock licence. The header logo stays.

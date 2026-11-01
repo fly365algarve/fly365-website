@@ -33,7 +33,7 @@ export function Footer() {
         <div className="flex gap-5"><Link href="/privacy">Privacy notice</Link><Link href="/terms">T&amp;Cs</Link></div>
       </div>
       <div className="mx-auto mt-4 max-w-[1160px] text-[10px] leading-5 text-[rgba(247,243,236,.55)]">
-        <p>Photo credits · All content photos are licensed for commercial use. Aircraft photographs marked illustrative are not photographs of Fly365&apos;s own aircraft or team.</p>
+        <p>Photo credits · Original Fly365 imagery and commercially licensed stock photography. Aircraft photographs marked illustrative are not photographs of Fly365&apos;s own aircraft or team.</p>
         <ul className="mt-1 flex flex-wrap gap-x-5 gap-y-1">{photoCredits.map(credit => <li key={credit.url}>
           {credit.subject}: <a href={credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{credit.photographer} / {credit.source}</a>
           {"authorUrl" in credit && <> / <a href={credit.authorUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{credit.authorLabel}</a></>}

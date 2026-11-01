@@ -28,9 +28,9 @@ export function HomePage() {
   return <div className="page-enter">
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." faq={faqs} />
     <section className={`fx-hero ${heroReady ? "fx-hero--go" : "fx-hero--hold"} relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20`}>
-      <ResponsiveImage src="/images/ponta-da-piedade-algarve-aerial.webp" alt="" aria-hidden="true" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
+      <ResponsiveImage src="/images/fly365-algarve-lagos-operation.png" alt="" aria-hidden="true" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1160px]">
-        <div className="mb-7 flex items-center gap-4"><ResponsiveImage src="/images/logo.png" alt="Fly365 Algarve" className="hero-logo circular-logo" priority sizes="96px" /><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
+        <div className="mb-7 flex items-center gap-4"><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
         <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]"><span className="fx-hero__line" style={{ ["--i" as string]: 0 }}>Learn to fly</span><span className="fx-hero__line text-[var(--sandstone)]" style={{ ["--i" as string]: 1 }}>over the Algarve</span></h1>
         <p className="mt-7 max-w-[580px] text-base leading-7 text-[rgba(247,243,236,.9)] md:text-lg">Microlight trial flights and intensive training from Lagos Aerodrome, with UK CAA-approved instructors.</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -124,7 +124,9 @@ export function HomePage() {
         </div>
       </div>
     </section>
-    <div className="aircraft-band" role="img" aria-label="View from a Fly365 microlight above the Algarve coast" />
+    <div className="aircraft-band">
+      <ResponsiveImage src="/images/ponta-da-piedade-algarve-aerial.webp" alt="Aerial view of the cliffs and grottos at Ponta da Piedade, Lagos" sizes="100vw" className="h-full w-full object-cover" />
+    </div>
 
     <Reviews />
     <PressStrip />

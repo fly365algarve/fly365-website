@@ -155,7 +155,6 @@
 .whatsapp-control:hover { transform: translateY(-3px); background: #20bd5b; }
 .whatsapp-label { font-size: .86rem; font-weight: 700; }
 .circular-logo { border-radius: 50%; clip-path: circle(50% at 50% 50%); }
-.hero-logo { width: 68px; height: 68px; object-fit: cover; }
 .aircraft-band { height: clamp(190px, 32vw, 390px); background: var(--navy); }
 .price-card { position: relative; display: block; min-height: 180px; padding: 1.5rem; background: #eee4d4; border: 1px solid rgba(11,42,60,.15); color: var(--navy); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .price-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(11,42,60,.12); border-color: var(--ochre); }
