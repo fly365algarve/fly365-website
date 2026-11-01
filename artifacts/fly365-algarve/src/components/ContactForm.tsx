@@ -45,8 +45,9 @@ export function ContactForm() {
     <button type="button" onClick={() => setSent(false)} className="mt-5 text-sm font-semibold underline underline-offset-4">Send another message</button>
   </div>;
 
-  return <form method="POST" data-netlify="true" name="contact" onSubmit={handleSubmit} className="space-y-5">
+  return <form method="POST" data-netlify="true" netlify-honeypot="bot-field" name="contact" onSubmit={handleSubmit} className="space-y-5">
     <input type="hidden" name="form-name" value="contact" />
+    <input type="hidden" name="bot-field" />
     {error && <p role="alert" className="border-l-2 border-[var(--ochre)] bg-[#eee4d4] px-4 py-3 text-sm leading-6 text-[var(--navy)]">{error}</p>}
     <div className="grid gap-5 sm:grid-cols-2">
       <label className="block text-sm font-semibold" htmlFor="contact-name">Name <span aria-hidden="true">*</span><input className="form-field mt-2 font-normal" id="contact-name" name="name" autoComplete="name" required /></label>

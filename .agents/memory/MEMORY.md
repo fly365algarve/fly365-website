@@ -3,3 +3,5 @@
 - [Route geography](route-geography.md) — shore landmark pins and offshore flight turns are different; inspect headlands at full image resolution.
 - [Photography policy](photography-policy.md) — content photos are single-use site-wide; shared logos are exempt, and scenery locations/licenses must be verified.
 - [Navigation ownership](navigation-ownership.md) — distinct trial-flight and course pages; Prices is a footer-only summary, and bookings carry their context to Contact.
+- [Decorative lines](decorative-lines.md) — dashed and dotted lines are allowed only for actual routes on the trial-flight map.
+- [Managed service cleanup](managed-service-cleanup.md) — protected artifact registrations can remain inert after validated removal of all services.

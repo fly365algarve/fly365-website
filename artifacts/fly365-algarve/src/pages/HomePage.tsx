@@ -68,7 +68,6 @@ export function HomePage() {
         <WeatherWidget />
       </div>
     </section>
-    <svg className="flight-divider" viewBox="0 0 420 34" aria-hidden="true"><path d="M3 25 C68 3 120 8 173 22 S274 32 321 13 S375 7 417 18" /></svg>
 
     <section className="section-pad surface-sand">
       <div className="mx-auto max-w-[1160px]">
@@ -90,7 +89,6 @@ export function HomePage() {
       </div>
     </section>
 
-    <svg className="flight-divider" viewBox="0 0 420 34" aria-hidden="true"><path d="M3 25 C68 3 120 8 173 22 S274 32 321 13 S375 7 417 18" /></svg>
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[1160px]">
         <div className="mb-8">
@@ -118,7 +116,6 @@ export function HomePage() {
       </div>
     </section>
 
-    <svg className="flight-divider" viewBox="0 0 420 34" aria-hidden="true"><path d="M3 25 C68 3 120 8 173 22 S274 32 321 13 S375 7 417 18" /></svg>
     <section className="section-pad surface-sand">
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-12 md:grid-cols-[.75fr_1.25fr]">

@@ -20,14 +20,11 @@
 .r5-steps { display: grid; gap: 0; list-style: none; padding: 0; position: relative; }
 .r5-step { position: relative; padding: 0 0 1.75rem 2.6rem; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; transition-delay: calc(var(--i, 0) * 90ms); }
 .is-visible .r5-step { opacity: 1; transform: none; }
-.r5-step::before { content: ""; position: absolute; left: 11px; top: 26px; bottom: 0; border-left: 1.5px dashed rgba(11,42,60,.35); }
-.r5-step:last-child::before { display: none; }
 .r5-step__dot { position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 999px; border: 2px solid var(--ocean); background: var(--chalk); display: grid; place-items: center; font-size: .62rem; font-weight: 800; color: var(--ocean); }
 .r5-step--final .r5-step__dot { background: var(--ochre); border-color: var(--ochre); color: var(--chalk); }
 @media (min-width: 1024px) {
   .r5-steps--h { grid-template-columns: repeat(7, 1fr); gap: 1rem; }
   .r5-steps--h .r5-step { padding: 2.6rem 0 0 0; }
-  .r5-steps--h .r5-step::before { left: 26px; right: -1rem; top: 11px; bottom: auto; border-left: 0; border-top: 1.5px dashed rgba(11,42,60,.35); }
 }
 @media (prefers-reduced-motion: reduce) { .r5-step, .r5-hero__img, .r5-hero__line, .r5-hero__sub, .r5-split__media img { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; } }
 

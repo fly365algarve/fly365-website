@@ -54,6 +54,7 @@ export function Navbar() {
       {isOpen && <div id="mobile-navigation" onClick={event => { if (event.target instanceof Element && event.target.closest("a")) setIsOpen(false); }} className="fixed inset-0 top-[76px] z-50 flex min-h-[calc(100dvh-76px)] flex-col overflow-y-auto bg-[var(--navy)] px-7 py-8 text-[var(--chalk)] lg:hidden">
         <p className="section-kicker !text-[var(--sandstone)]">Fly365 Algarve</p>
         <div className="mt-6 flex flex-col">
+          <Link href="/" className="mobile-nav-link">Home</Link>
           <Link href="/trial-flights" className="mobile-nav-link">Trial flights</Link>
           <Link href="/training" className="mobile-nav-link">Learn to fly</Link>
           <details className="group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between">Aircraft <ChevronDown size={20} className="transition-transform group-open:rotate-180" /></summary>
