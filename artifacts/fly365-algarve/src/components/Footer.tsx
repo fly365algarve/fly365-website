@@ -18,7 +18,7 @@ export function Footer() {
         <div>
           <h2 className="section-kicker !text-[var(--sandstone)]">Explore</h2>
           <div className="mt-4 grid gap-3 text-sm text-[rgba(247,243,236,.82)]">
-            <Link href="/fixed-wing">Fixed wing</Link><Link href="/flexwing">Flexwing</Link><Link href="/training">Learn to fly</Link><Link href="/prices">Prices</Link><Link href="/about">About &amp; team</Link><Link href="/history">Our history</Link><Link href="/contact">Contact</Link>
+            <Link href="/trial-flights">Trial flights</Link><Link href="/fixed-wing">Fixed wing</Link><Link href="/flexwing">Flexwing</Link><Link href="/training">Learn to fly</Link><Link href="/prices">Prices</Link><Link href="/about">About &amp; team</Link><Link href="/history">Our history</Link><Link href="/contact">Contact</Link>
           </div>
         </div>
         <div>

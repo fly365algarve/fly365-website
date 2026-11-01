@@ -4,6 +4,7 @@
 export const photoCredits = [
   { subject: "Lagos old town", photographer: "Bernd Dittrich", source: "Unsplash", url: "https://unsplash.com/photos/Is8KrOstrUk" },
   { subject: "Ponta da Piedade", photographer: "Sokmean Nou", source: "Unsplash", url: "https://unsplash.com/photos/WJQ39Q1rpgA" },
+  { subject: "Lagos coastline", photographer: "Cassia Tofano", source: "Unsplash", url: "https://unsplash.com/photos/jR5PpNOuitw" },
   { subject: "Praia da Balança aerial", photographer: "Claudio Schwarz", source: "Unsplash", url: "https://unsplash.com/photos/k89cvE4zY2A" },
   { subject: "Lagos marina", photographer: "Jacek Ulinski", source: "Unsplash", url: "https://unsplash.com/photos/rNb_i_YHnjY" },
   { subject: "Cabo de São Vicente", photographer: "Winged Jedi", source: "Unsplash", url: "https://unsplash.com/photos/Lk1KUAjiaMA" },

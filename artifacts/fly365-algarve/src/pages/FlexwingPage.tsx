@@ -39,7 +39,7 @@ export function FlexwingPage() {
             <p className="italic text-[var(--muted-foreground)]">Combining elegant engineering, high cruise speeds, and the unique sensation of open-cockpit flight, the P&amp;M Quik R stands as one of the most advanced and exciting flex-wing microlights ever built. It embodies the spirit of freedom and performance — a true pilot&apos;s aircraft designed to thrill, inspire, and endure.</p>
           </div>
         </article>
-        <div className="flex flex-wrap gap-4"><Link href="/training" className="button-ochre inline-flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wider">Explore training <ArrowRight size={15} /></Link><Link href="/prices" className="inline-flex items-center gap-2 border border-[var(--navy)] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[var(--navy)]">Training prices <ArrowRight size={15} /></Link></div>
+        <div className="flex flex-wrap gap-4"><Link href="/training" className="button-ochre inline-flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wider">Explore training <ArrowRight size={15} /></Link><Link href="/training#training-prices" className="inline-flex items-center gap-2 border border-[var(--navy)] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[var(--navy)]">Training prices <ArrowRight size={15} /></Link></div>
       </div>
     </section>
     <Comparison />

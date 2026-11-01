@@ -1,10 +1,20 @@
-import { useState, type FormEvent } from "react";
-import { Link } from "wouter";
+import { useEffect, useState, type FormEvent } from "react";
+import { Link, useSearch } from "wouter";
 import { Check, Send } from "lucide-react";
 import { site } from "../config/site";
 import "./round5/round5.css";
 
 export function ContactForm() {
+  const search = useSearch();
+  const [interest, setInterest] = useState("");
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const selectedInterest = params.get("interest");
+    setInterest(selectedInterest === "trial" ? "Trial flight" : selectedInterest === "course" ? "Training course" : "");
+    const flight = site.trialFlights.find(item => String(item.minutes) === params.get("flight"));
+    setMessage(selectedInterest === "trial" && flight ? `I'm interested in the ${flight.minutes}-minute trial flight.` : "");
+  }, [search]);
   const [sent, setSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -45,9 +55,9 @@ export function ContactForm() {
     <div className="grid gap-5 sm:grid-cols-2">
       <label className="block text-sm font-semibold" htmlFor="contact-phone">Phone <span className="font-normal text-[var(--muted-foreground)]">(optional)</span><input className="form-field mt-2 font-normal" id="contact-phone" name="phone" type="tel" autoComplete="tel" /></label>
       </div>
-    <fieldset><legend className="text-sm font-semibold">Interested in <span aria-hidden="true">*</span></legend><div className="mt-2 flex flex-wrap gap-2">{["Trial flight", "Training course", "Conversion", "Other"].map((v, i) => <label key={v} className="r5-chip"><input type="radio" name="interested-in" value={v} required={i === 0} /><span>{v}</span></label>)}</div></fieldset>
+    <fieldset><legend className="text-sm font-semibold">Interested in <span aria-hidden="true">*</span></legend><div className="mt-2 flex flex-wrap gap-2">{["Trial flight", "Training course", "Conversion", "Other"].map((v, i) => <label key={v} className="r5-chip"><input type="radio" name="interested-in" value={v} required={i === 0} checked={interest === v} onChange={() => setInterest(v)} /><span>{v}</span></label>)}</div></fieldset>
     <label className="block text-sm font-semibold" htmlFor="contact-dates">Preferred dates <input className="form-field mt-2 font-normal" id="contact-dates" name="preferred-dates" placeholder="For example, early October" required /></label>
-    <label className="block text-sm font-semibold" htmlFor="contact-message">Message <span aria-hidden="true">*</span><textarea className="form-field mt-2 min-h-32 resize-y font-normal" id="contact-message" name="message" required /></label>
+    <label className="block text-sm font-semibold" htmlFor="contact-message">Message <span aria-hidden="true">*</span><textarea className="form-field mt-2 min-h-32 resize-y font-normal" id="contact-message" name="message" value={message} onChange={event => setMessage(event.target.value)} required /></label>
     <button className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest disabled:cursor-wait disabled:opacity-70" type="submit" disabled={isSubmitting}><Send size={16} />{isSubmitting ? "Sending enquiry…" : "Send enquiry"}</button>
     <p className="text-xs text-[var(--muted-foreground)]">We use your details to respond to enquiries and arrange bookings. <Link href="/privacy" className="underline underline-offset-4">Privacy notice</Link></p>
   </form>;

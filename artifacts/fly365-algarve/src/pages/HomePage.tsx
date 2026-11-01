@@ -34,7 +34,7 @@ export function HomePage() {
         <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]"><span className="fx-hero__line" style={{ ["--i" as string]: 0 }}>Learn to fly</span><span className="fx-hero__line text-[var(--sandstone)]" style={{ ["--i" as string]: 1 }}>over the Algarve</span></h1>
         <p className="mt-7 max-w-[580px] text-base leading-7 text-[rgba(247,243,236,.9)] md:text-lg">Microlight trial flights and intensive training from Lagos Aerodrome, with UK CAA-approved instructors.</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Link href="/contact" className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Book a trial flight <ArrowRight size={16} /></Link>
+          <Link href="/trial-flights" className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Book a trial flight <ArrowRight size={16} /></Link>
           <Link href="/training" className="button-outline-light inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Learn to fly <ArrowDownRight size={16} /></Link>
         </div>
         <div className="mt-16 flex items-center gap-4 text-[10px] uppercase tracking-[.2em] text-[rgba(247,243,236,.65)]"><span className="h-px w-12 bg-[var(--sandstone)]" />A different view of the coast</div>

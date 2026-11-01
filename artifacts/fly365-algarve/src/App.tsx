@@ -10,6 +10,7 @@ import { FixedWingPage } from "./pages/FixedWingPage";
 import { FlexwingPage } from "./pages/FlexwingPage";
 import { TrainingPage } from "./pages/TrainingPage";
 import { PricesPage } from "./pages/PricesPage";
+import { TrialFlightsPage } from "./pages/TrialFlightsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { TermsPage } from "./pages/TermsPage";
@@ -36,6 +37,19 @@ function MotionObserver() {
   return null;
 }
 
+function RouteScroll() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const target = window.location.hash && document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView({ block: "start" });
+      else window.scrollTo(0, 0);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [location]);
+  return null;
+}
+
 const queryClient = new QueryClient();
 
 function NotFound() {
@@ -56,6 +70,7 @@ function Router() {
       <Navbar />
       <IntroOverlay />
       <MotionObserver />
+      <RouteScroll />
       <main>
         <Switch>
           <Route path="/" component={HomePage} />
@@ -64,6 +79,7 @@ function Router() {
           <Route path="/flexwing" component={FlexwingPage} />
           <Route path="/training" component={TrainingPage} />
           <Route path="/prices" component={PricesPage} />
+          <Route path="/trial-flights" component={TrialFlightsPage} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/history" component={HistoryPage} />
           <Route path="/terms" component={TermsPage} />

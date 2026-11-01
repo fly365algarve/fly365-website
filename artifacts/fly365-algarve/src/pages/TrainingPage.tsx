@@ -7,6 +7,7 @@ import { Reveal } from "../components/Reveal";
 import { PageHero } from "../components/round5/PageHero";
 import { WeatherWidget } from "../components/round5/WeatherWidget";
 import { Accordion } from "../components/round5/Extras";
+import { TrainingPrices } from "../components/TrainingPrices";
 
 const path = [
   ["Trial flight", "Your first taste, with an instructor beside you."],
@@ -104,6 +105,7 @@ export function TrainingPage() {
     <LicencePath />
     <SoloEstimator />
     <TypicalDay />
+    <TrainingPrices />
 
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[900px] space-y-10 text-sm leading-7 text-[var(--ink)]">
       <article className="border-b border-[rgba(11,42,60,.2)] pb-9"><p className="r5-measure mb-4">Fly365 operate in Lagos Portugal from October through to end April (during the British Winter). The aircraft permanently based in the Algarve are the Flexwing Quantum 912, Deltajet500, Quik R and the Ikarus C42 side by side 3 Axis aircraft.</p>

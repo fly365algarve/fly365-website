@@ -2,3 +2,4 @@
 - [Map preview timing](map-preview-timing.md) — use real elapsed time to verify network-loaded maps; virtual time can trigger fallbacks before imagery loads.
 - [Route geography](route-geography.md) — shore landmark pins and offshore flight turns are different; inspect headlands at full image resolution.
 - [Photography policy](photography-policy.md) — content photos are single-use site-wide; shared logos are exempt, and scenery locations/licenses must be verified.
+- [Navigation ownership](navigation-ownership.md) — distinct trial-flight and course pages; Prices is a footer-only summary, and bookings carry their context to Contact.

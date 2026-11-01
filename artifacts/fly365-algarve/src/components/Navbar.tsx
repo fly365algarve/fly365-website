@@ -35,13 +35,12 @@ export function Navbar() {
           <span className="display-heading text-[1.45rem] leading-none text-[var(--navy)]">Fly365 <span className="text-[var(--ocean)]">Algarve</span></span>
         </Link>
         <div className="hidden items-center gap-1 lg:flex">
-          <Link href="/prices#trial" className="nav-link">Trial flights</Link>
+          <Link href="/trial-flights" className="nav-link">Trial flights</Link>
           <Link href="/training" className="nav-link">Learn to fly</Link>
           <div className="nav-group">
             <button type="button" className="nav-link inline-flex items-center gap-1" aria-haspopup="true">Aircraft <ChevronDown size={14} /></button>
             <div className="nav-dropdown">{aircraftLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
           </div>
-          <Link href="/prices" className="nav-link">Prices</Link>
           <div className="nav-group">
             <button type="button" className="nav-link inline-flex items-center gap-1" aria-haspopup="true">About <ChevronDown size={14} /></button>
             <div className="nav-dropdown">{aboutLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
@@ -52,18 +51,19 @@ export function Navbar() {
           {isOpen ? <X size={25} /> : <Menu size={25} />}
         </button>
       </nav>
-      {isOpen && <div id="mobile-navigation" className="fixed inset-0 top-[76px] z-50 flex min-h-[calc(100dvh-76px)] flex-col bg-[var(--navy)] px-7 py-8 text-[var(--chalk)] lg:hidden">
+      {isOpen && <div id="mobile-navigation" onClick={event => { if (event.target instanceof Element && event.target.closest("a")) setIsOpen(false); }} className="fixed inset-0 top-[76px] z-50 flex min-h-[calc(100dvh-76px)] flex-col overflow-y-auto bg-[var(--navy)] px-7 py-8 text-[var(--chalk)] lg:hidden">
         <p className="section-kicker !text-[var(--sandstone)]">Fly365 Algarve</p>
         <div className="mt-6 flex flex-col">
-          <Link href="/prices#trial" className="mobile-nav-link">Trial flights</Link>
+          <Link href="/trial-flights" className="mobile-nav-link">Trial flights</Link>
           <Link href="/training" className="mobile-nav-link">Learn to fly</Link>
-          <p className="mt-5 text-xs font-bold uppercase tracking-[.2em] text-[var(--sandstone)]">Aircraft</p>
-          {aircraftLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}
-          <Link href="/prices" className="mobile-nav-link">Prices</Link>
-          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[var(--sandstone)]">About</p>
-          {aboutLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}
+          <details className="group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between">Aircraft <ChevronDown size={20} className="transition-transform group-open:rotate-180" /></summary>
+            <div className="flex flex-col pl-4">{aircraftLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}</div>
+          </details>
+          <details className="group"><summary className="mobile-nav-link flex cursor-pointer list-none items-center justify-between">About <ChevronDown size={20} className="transition-transform group-open:rotate-180" /></summary>
+            <div className="flex flex-col pl-4">{aboutLinks.map((item) => <Link key={item.href} href={item.href} className="mobile-nav-link !py-3 !text-xl">{item.label}</Link>)}</div>
+          </details>
         </div>
-        <Link href="/contact" className="button-ochre mt-auto px-6 py-4 text-center font-bold uppercase tracking-widest">Book a flight</Link>
+        <Link href="/contact" className="button-ochre mt-auto px-6 py-4 text-center font-bold uppercase tracking-widest">Book</Link>
       </div>}
       <style>{`.nav-link{display:inline-flex;align-items:center;padding:.7rem .72rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);transition:color .2s}.nav-link:hover{color:var(--ochre)}.nav-group{position:relative}.nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:180px;background:var(--chalk);border:1px solid rgba(11,42,60,.18);padding:.35rem;box-shadow:0 8px 18px rgba(11,42,60,.1)}.nav-group:focus-within .nav-dropdown,.nav-group:hover .nav-dropdown{display:grid}.nav-dropdown a{padding:.7rem;color:var(--navy);font-size:.78rem}.nav-dropdown a:hover{background:#eee4d4}.mobile-nav-link{border-bottom:1px solid rgba(247,243,236,.18);padding:1rem 0;font-family:var(--app-font-display);font-size:1.7rem;font-weight:700;letter-spacing:.025em;text-transform:uppercase}`}</style>
     </header>

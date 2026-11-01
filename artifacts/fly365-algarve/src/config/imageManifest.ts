@@ -10,6 +10,7 @@ const originals = [
   { name: "lagos-marina-boats.webp", width: 1600, height: 1068, sizes: [640, 1024, 1600] },
   { name: "cabo-sao-vicente-cliffs.webp", width: 1600, height: 2841, sizes: [640, 1024, 1600] },
   { name: "meia-praia-lagos-beach.webp", width: 1600, height: 1067, sizes: [640, 1024, 1600] },
+  { name: "lagos-coastal-trial-flight.webp", width: 1600, height: 900, sizes: [640, 1024, 1600] },
 ];
 
 export const imageManifest: Record<string, ImageAsset> = Object.fromEntries(
