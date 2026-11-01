@@ -9,7 +9,7 @@ export function FixedWingPage() {
   const fixedWing = site.fixedWing;
   return <div className="page-shell page-enter">
     <Seo title="Fixed-wing microlight training" description="Fly365 Algarve’s Ikarus C42: a high-wing, side-by-side, two-seat, 3-axis microlight with a single centre stick." />
-    <PageHero variant="split" kicker="Fixed wing · three axis" title={[fixedWing.name]} sub={<p className="text-sm">{fixedWing.description}</p>} image="/images/ikarus-c42-fly365.jpg" alt="Ikarus C42 fixed-wing microlight operated by Fly365 Algarve" />
+    <PageHero variant="split" kicker="Fixed wing · three axis" title={[fixedWing.name]} sub={<p className="text-sm">{fixedWing.description}</p>} image="/images/ikarus-c42c-fixed-wing-microlight.webp" alt="Ikarus C42C fixed-wing microlight — illustrative aircraft photograph" />
     <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">At a glance</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">Specifications</h2><SpecCards names={["Ikarus C42"]} /></div></section>
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto grid max-w-[1160px] gap-12 md:grid-cols-[.65fr_1.35fr]">
       <div><span className="section-kicker">The aircraft</span><h2 className="mt-3 text-5xl leading-[.92] text-[var(--navy)]">A clear place<br />to begin</h2><Link href="/contact?interest=course" className="button-ochre mt-7 inline-flex items-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-wider">Ask about training <ArrowRight size={15} /></Link></div>

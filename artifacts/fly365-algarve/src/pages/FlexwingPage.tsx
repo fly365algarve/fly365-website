@@ -8,7 +8,7 @@ import { SpecCards, Comparison } from "../components/round5/Aircraft";
 export function FlexwingPage() {
   return <div className="page-shell page-enter">
     <Seo title="Flexwing microlight aircraft" description="Explore Fly365 Algarve’s flexwing training aircraft: the Quantum 912, Deltajet 500 and Quik R." />
-    <PageHero variant="split" fit="contain" kicker="Weight-shift flying" title={["Flexwing"]} sub={<p>Weight-shift controlled microlights — the three-dimensional motorcycles of the sky</p>} image="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing weight-shift microlight aircraft" />
+    <PageHero variant="split" fit="contain" kicker="Weight-shift flying" title={["Flexwing"]} sub={<p>Weight-shift controlled microlights — the three-dimensional motorcycles of the sky</p>} image="/images/flexwing-weight-shift-microlight-in-flight.webp" alt="Weight-shift flexwing microlight airborne above a runway — illustrative aircraft photograph" />
     <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">At a glance</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">The flexwing fleet</h2><SpecCards names={["P&M Quantum 912", "Exodus Deltajet 500", "P&M Quik R"]} /></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">

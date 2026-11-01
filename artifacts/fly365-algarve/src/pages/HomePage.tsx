@@ -28,7 +28,7 @@ export function HomePage() {
   return <div className="page-enter">
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." faq={faqs} />
     <section className={`fx-hero ${heroReady ? "fx-hero--go" : "fx-hero--hold"} relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20`}>
-      <ResponsiveImage src="/images/fly365-algarve-lagos-operation.png" alt="" aria-hidden="true" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
+      <ResponsiveImage src="/images/ponta-da-piedade-algarve-aerial.webp" alt="" aria-hidden="true" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1160px]">
         <div className="mb-7 flex items-center gap-4"><ResponsiveImage src="/images/logo.png" alt="Fly365 Algarve" className="hero-logo circular-logo" priority sizes="96px" /><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
         <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]"><span className="fx-hero__line" style={{ ["--i" as string]: 0 }}>Learn to fly</span><span className="fx-hero__line text-[var(--sandstone)]" style={{ ["--i" as string]: 1 }}>over the Algarve</span></h1>

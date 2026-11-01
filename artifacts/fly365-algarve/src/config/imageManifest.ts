@@ -11,6 +11,14 @@ const originals = [
   { name: "cabo-sao-vicente-cliffs.webp", width: 1600, height: 2841, sizes: [640, 1024, 1600] },
   { name: "meia-praia-lagos-beach.webp", width: 1600, height: 1067, sizes: [640, 1024, 1600] },
   { name: "lagos-coastal-trial-flight.webp", width: 1600, height: 900, sizes: [640, 1024, 1600] },
+  { name: "ponta-da-piedade-algarve-aerial.webp", width: 1600, height: 899, sizes: [640, 1024, 1600] },
+  { name: "ponta-da-piedade-coast-flight-aerial.webp", width: 1600, height: 1066, sizes: [640, 1024, 1600] },
+  { name: "ikarus-c42-microlight-in-flight.webp", width: 1600, height: 1067, sizes: [640, 1024, 1600] },
+  { name: "ikarus-c42c-fixed-wing-microlight.webp", width: 1232, height: 816, sizes: [640, 1024, 1232] },
+  { name: "flexwing-weight-shift-microlight-in-flight.webp", width: 1600, height: 1200, sizes: [640, 1024, 1600] },
+  { name: "lagos-aerodrome-runway-aerial.webp", width: 1600, height: 900, sizes: [640, 1024, 1600] },
+  { name: "lagos-municipal-aerodrome-airfield.webp", width: 1600, height: 1200, sizes: [640, 1024, 1600] },
+  { name: "weight-shift-microlight-aviation-history.webp", width: 1600, height: 1200, sizes: [640, 1024, 1600] },
 ];
 
 export const imageManifest: Record<string, ImageAsset> = Object.fromEntries(

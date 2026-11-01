@@ -1,12 +1,15 @@
-// Source pages were checked for the named location and commercial-use license.
-// Each photograph is reserved for one visible placement; responsive sizes are
-// versions of that same placement, not different photos.
+// Each content photograph has one visible placement. Responsive sizes belong
+// to that placement. Source pages and their individual licenses were checked.
+// These credits also license the resized WebP versions under the stated terms.
 export const photoCredits = [
-  { subject: "Lagos old town", photographer: "Bernd Dittrich", source: "Unsplash", url: "https://unsplash.com/photos/Is8KrOstrUk" },
-  { subject: "Ponta da Piedade", photographer: "Sokmean Nou", source: "Unsplash", url: "https://unsplash.com/photos/WJQ39Q1rpgA" },
-  { subject: "Lagos coastline", photographer: "Cassia Tofano", source: "Unsplash", url: "https://unsplash.com/photos/jR5PpNOuitw" },
-  { subject: "Praia da Balança aerial", photographer: "Claudio Schwarz", source: "Unsplash", url: "https://unsplash.com/photos/k89cvE4zY2A" },
-  { subject: "Lagos marina", photographer: "Jacek Ulinski", source: "Unsplash", url: "https://unsplash.com/photos/rNb_i_YHnjY" },
-  { subject: "Cabo de São Vicente", photographer: "Winged Jedi", source: "Unsplash", url: "https://unsplash.com/photos/Lk1KUAjiaMA" },
-  { subject: "Meia Praia", photographer: "Joseolgon", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Meia_Praia_(1).jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", changes: "resized and converted to WebP" },
+  { subject: "Home · Ponta da Piedade aerial", photographer: "Arne Müseler", authorUrl: "https://www.arne-mueseler.com/", authorLabel: "arne-mueseler.com", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Ponta_da_Piedade_aerial_view.jpg", license: "CC BY-SA 3.0 DE", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/de/deed.de", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "Learn to Fly · illustrative Ikarus C42 in flight", photographer: "Alan Wilson", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Ikarus_C42_FB80_Bravo_G-HMCE_(9514175933).jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "Trial Flights · Ponta da Piedade aerial", photographer: "Vitor Oliveira", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Ponta_da_Piedade_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(53777269849).jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "About · Lagos Aerodrome aerial", photographer: "Bextrel", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Vista_aerea_do_Aerodromo_de_Lagos_-_04.02.2023.jpg", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "Contact · Lagos municipal airfield", photographer: "António Valente", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Aerodromo_Municipal_Brigadeiro_Costa_Franco.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", changes: "brightness adjusted, resized, converted to WebP; cropped for layout" },
+  { subject: "Fixed Wing · illustrative Ikarus C42C", photographer: "Lightflight", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:IKARUS_C42C_Design_Flying_vision.jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "Flexwing · illustrative weight-shift microlight in flight", photographer: "Biso", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Motodeltaplaner_slivnitsa.JPG", license: "CC BY 3.0", licenseUrl: "https://creativecommons.org/licenses/by/3.0/", changes: "resized and converted to WebP" },
+  { subject: "History · illustrative microlight at Southport, 2009", photographer: "Rept0n1x", source: "Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Microlight,_Southport_5.JPG", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", changes: "resized, converted to WebP; cropped for layout" },
+  { subject: "Prices · Praia da Balança aerial", photographer: "Claudio Schwarz", source: "Unsplash", url: "https://unsplash.com/photos/k89cvE4zY2A", license: "Unsplash License", licenseUrl: "https://unsplash.com/license", changes: "resized and converted to WebP" },
+  { subject: "Home trip section · Lagos old town", photographer: "Bernd Dittrich", source: "Unsplash", url: "https://unsplash.com/photos/Is8KrOstrUk", license: "Unsplash License", licenseUrl: "https://unsplash.com/license", changes: "resized, converted to WebP; cropped for layout" },
 ] as const;

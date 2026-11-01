@@ -11,7 +11,7 @@ const card = "border-t border-[rgba(11,42,60,.2)] py-8";
 export function AboutPage() {
   return <div className="page-shell page-enter">
     <Seo title="About and team" description="Learn about the Fly365 Algarve operation, aircraft, instructors and training at Lagos Aerodrome." />
-    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/lagos-marina-boats.webp" alt="Sailboats moored at Marina de Lagos, Portugal" position="center 55%" />
+    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/lagos-aerodrome-runway-aerial.webp" alt="Aerial view of the runway and hangars at Aeródromo Municipal de Lagos, Algarve" position="center 55%" />
     <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">Meet the team</span><h2 className="mt-3 text-5xl text-[var(--navy)]">Your instructors</h2><div className="mt-8 grid gap-6 md:grid-cols-2">{site.team.map((member) => <TeamCard key={member.name} member={member} />)}</div></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">

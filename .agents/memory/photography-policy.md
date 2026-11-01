@@ -7,10 +7,16 @@ Use each content photograph in only one placement across the whole site, includi
 
 **Why:** The user explicitly requested single-use imagery and confirmed “Keep shared branding logos.”
 
-**How to apply:** Treat responsive sizes and crops as the same underlying photo. Reserve the original aerial photo for Home, the C42 photo for Fixed Wing, and the flexwing aircraft photo for Flexwing. Remove unnecessary repeats rather than merely renaming or recropping them.
+**How to apply:** Treat responsive sizes and crops as the same underlying photo. Remove unnecessary repeats rather than merely renaming or recropping them. Photo choices may change; the single-placement rule does not.
 
 Verify scenery locations and commercial-use licenses on the individual source page, not from search ranking or a search result's title.
 
 **Why:** Unsplash searches for Meia Praia returned unrelated beaches in Brazil, Florida and elsewhere in Portugal. The user approved another free photo source for Contact when no reliably identified Unsplash image was available.
 
-**How to apply:** Prefer free Unsplash scenery where the location is verified; use a properly attributed commercial-use alternative for Meia Praia. Exact-phrase searches and source metadata are more reliable than broad Unsplash queries. Preserve author, source, license and required modification notices in the footer.
+**How to apply:** Exact-phrase searches and source metadata are more reliable than broad Unsplash queries. Preserve author, source, license and required modification notices in the footer.
+
+Only source new content photography from Wikimedia Commons under CC0, CC BY or CC BY-SA, or from Unsplash or Pexels with commercial-use permission. Do not source images from Facebook, news sites, Google Images or other sites. Prefer actual Lagos airfield imagery, relevant microlights and genuine aerial Algarve views.
+
+**Why:** The user explicitly imposed this source restriction and requested aviation-relevant photographs instead of generic stock scenery.
+
+**How to apply:** Check the individual file's license and attribution requirements, including any author website credit. Distinguish illustrative aircraft photographs from Fly365's own fleet, team or historical archive. Keep shared branding logos and existing functional route/location maps separate from the content-photography audit.
