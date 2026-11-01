@@ -51,7 +51,7 @@ export function staticRouteMap(coordinates: MapCoordinate[], size: keyof typeof 
   const latitude = Math.atan(Math.sinh(Math.PI * (1 - 2 * centerY))) * 180 / Math.PI;
   const camera = `${longitude.toFixed(6)},${latitude.toFixed(6)},${zoom},0,0`;
   const pins = routePlaces.map((place, index) =>
-    `pin-s-${["a", "p", "l", "s", "c"][index]}+C8692F(${place.position.join(",")})`);
+    `pin-s-${["a", "p", "l", "s", "c", "b", "r"][index]}+C8692F(${place.position.join(",")})`);
   const path = `path-4+C8692F-1(${encodeURIComponent(encodeRoutePolyline(coordinates))})`;
   const airport = project(routePlaces[0].position);
   const worldSize = 512 * 2 ** zoom;

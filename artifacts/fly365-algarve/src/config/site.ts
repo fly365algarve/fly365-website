@@ -22,10 +22,10 @@ export const site = {
     address: "Aeródromo de Lagos, 8600 Lagos, Portugal",
   },
   trialFlights: [
-    { minutes: 20, price: 60, route: "Grottos and back" },
-    { minutes: 30, price: 85, route: "Grottos and coast to Salema" },
-    { minutes: 45, price: 140, route: "Grottos, west coast and Sagres area" },
-    { minutes: 60, price: 185, route: "Grottos, west coast and further around Sagres" },
+    { minutes: 20, price: 60, route: "Grottos & Lagos – Meia Praia, grottos, Lagos old town and marina" },
+    { minutes: 30, price: 85, route: "Coast & countryside – grottos, Salema and Bravura reservoir" },
+    { minutes: 45, price: 140, route: "Sagres loop – grottos, Salema, Sagres, Vila do Bispo and Bravura reservoir" },
+    { minutes: 60, price: 185, route: "The edge of Europe – grottos, Sagres, Cabo de São Vicente, Carrapateira and Bravura reservoir" },
   ],
   training: {
     prepaidHours: [
