@@ -24,6 +24,7 @@ export function HomePage() {
   const [selected, setSelected] = useState(0);
   const flight = site.trialFlights[selected];
   const heroReady = useHeroReady();
+  const courseHourlyRate = Math.min(...site.training.prepaidHours.map(pack => pack.rate));
   return <div className="page-enter">
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." faq={faqs} />
     <section className={`fx-hero ${heroReady ? "fx-hero--go" : "fx-hero--hold"} relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20`}>
@@ -73,9 +74,24 @@ export function HomePage() {
       <div className="mx-auto max-w-[1160px]">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><span className="section-kicker">Make a week of it</span><h2 className="mt-3 text-5xl text-[var(--navy)] md:text-6xl">Courses with focus</h2></div><p className="max-w-sm text-sm leading-6 text-[var(--muted-foreground)]">Small weekly groups, big blocks of time in the air. A maximum of {site.facts.maxStudentsPerWeek} students each week.</p></div>
         <div className="mt-9 grid gap-7 lg:grid-cols-[.82fr_1.18fr] lg:items-stretch">
-          <div className="aircraft-image-frame min-h-[300px]"><ResponsiveImage src="/images/fly365-flexwing-aircraft.png" alt="Fly365 flexwing microlight above the Algarve" className="h-full min-h-[300px] w-full object-cover" /></div>
+          <div className="flex flex-col">
+            <div className="aircraft-image-frame min-h-[300px] flex-1"><ResponsiveImage src="/images/ikarus-c42-fly365.jpg" alt="Fly365 Ikarus C42 fixed-wing microlight" className="h-full min-h-[300px] w-full object-cover" /></div>
+            <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]"><Link href="/fixed-wing" className="motion-link">Fixed wing · C42</Link><Link href="/flexwing" className="motion-link">Flexwing</Link></p>
+          </div>
           <div className="grid gap-3 sm:grid-cols-2">{site.courses.map((course, index) => <div key={course.title} className="price-card bg-[var(--chalk)] p-6 md:p-8"><span className="section-kicker">0{index + 1}</span><h3 className="mt-5 text-3xl text-[var(--navy)]">{course.title}</h3><p className="display-heading mt-1 text-2xl text-[var(--ocean)]">{course.hours === 20 ? <CountUp value={20} label="hours" /> : course.hours} hours</p><Link href="/training" className="motion-link mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Course details <ArrowRight size={15} /></Link></div>)}</div>
         </div>
+        <p className="mt-6 text-sm leading-6 text-[var(--muted-foreground)]">Courses from €{courseHourlyRate} an hour (around £135) – less than you&apos;d pay at UK flying schools.</p>
+      </div>
+    </section>
+
+    <section className="section-pad bg-[var(--chalk)]" aria-labelledby="more-than-a-course">
+      <div className="mx-auto grid max-w-[1160px] items-center gap-9 lg:grid-cols-2 lg:gap-14">
+        <div>
+          <h2 id="more-than-a-course" className="text-5xl leading-[.95] text-[var(--navy)] md:text-6xl">More than a flying course</h2>
+          <p className="mt-6 text-base leading-8 text-[var(--muted-foreground)]">Fly in the morning, then enjoy Lagos – surf, beaches, great food and a lively old town, or just slow down and relax. Come on your own and we&apos;ll make you feel welcome – we often head out for dinner together – or bring friends or family along. We&apos;ll help sort your accommodation at no extra charge.</p>
+          <Link href="/contact" className="button-ochre mt-7 inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest">Plan your trip <ArrowRight size={16} /></Link>
+        </div>
+        <ResponsiveImage src="/images/lagos-old-town-unsplash.webp" width={1200} height={1879} sizes="(max-width: 1023px) 100vw, 560px" alt="A flowering jacaranda above a street in Lagos old town, Portugal" className="aspect-[5/4] w-full object-cover object-[center_65%]" />
       </div>
     </section>
 

@@ -31,6 +31,7 @@ export function Footer() {
         <p>© 2026 Fly365 Algarve.</p>
         <div className="flex gap-5"><Link href="/privacy">Privacy notice</Link><Link href="/terms">T&amp;Cs</Link></div>
       </div>
+      <p className="mx-auto mt-4 max-w-[1160px] text-[10px] text-[rgba(247,243,236,.55)]">Lagos old town photo by <a href="https://unsplash.com/@hdbernd" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Bernd Dittrich</a> on <a href="https://unsplash.com/photos/Is8KrOstrUk" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Unsplash</a> · <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Unsplash License</a></p>
     </footer>
   );
 }
