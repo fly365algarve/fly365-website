@@ -13,7 +13,7 @@ Verify scenery locations and commercial-use licenses on the individual source pa
 
 **Why:** Unsplash searches for Meia Praia returned unrelated beaches in Brazil, Florida and elsewhere in Portugal. The user approved another free photo source for Contact when no reliably identified Unsplash image was available.
 
-**How to apply:** Exact-phrase searches and source metadata are more reliable than broad Unsplash queries. Preserve author, source, license and required modification notices in the footer.
+**How to apply:** Exact-phrase searches and source metadata are more reliable than broad Unsplash queries. Preserve required author, source, license and modification notices on the photo credits page, linked from the footer.
 
 Only source new content photography from Wikimedia Commons under CC0, CC BY or CC BY-SA, or from Unsplash or Pexels with commercial-use permission. Do not source images from Facebook, news sites, Google Images or other sites. Prefer actual Lagos airfield imagery, relevant microlights and genuine aerial Algarve views.
 
@@ -26,3 +26,9 @@ Keep the original Fly365 flexwing-over-the-coast photograph as the homepage hero
 **Why:** The user explicitly requested restoring the original Fly365 hero after the licensed-photo replacements.
 
 **How to apply:** Keep its visible use unique. Credit it as the original Fly365 site photograph without inventing an external stock licence. The header logo stays.
+
+Keep required photo attribution on a separate `/credits` page with a plain navy hero and a small footer link beside Terms and Privacy. Do not list Unsplash photos, whose licence does not require attribution, or add `/credits` to the sitemap.
+
+**Why:** The user explicitly requested a shorter footer and a separate credits page.
+
+**How to apply:** Preserve required Creative Commons credits, licence links, modification notices and any additional author-site attribution when updating the credits data.
