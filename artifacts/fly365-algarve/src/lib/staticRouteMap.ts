@@ -1,6 +1,7 @@
 import { routePlaces, type MapCoordinate } from "../config/routes";
+import { site } from "../config/site";
 
-export const aerodromeMapsUrl = "https://www.google.com/maps/search/?api=1&query=Aer%C3%B3dromo%20de%20Lagos%2C%20Portugal";
+export const aerodromeMapsUrl = `https://www.google.com/maps/search/?api=1&query=${site.aerodrome.lat.toFixed(6)},${site.aerodrome.lng.toFixed(6)}`;
 export const staticMapSizes = {
   desktop: { width: 1000, height: 600 },
   mobile: { width: 480, height: 420 },

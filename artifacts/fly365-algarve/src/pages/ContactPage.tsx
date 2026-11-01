@@ -5,15 +5,17 @@ import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { PageHero } from "../components/round5/PageHero";
+import { aerodromeMapsUrl } from "../lib/staticRouteMap";
 
 const token = import.meta.env.VITE_MAPBOX_TOKEN as string | undefined;
-const mapSrc = token ? `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(-8.6447,37.1206)/-8.6447,37.1206,13.5,0/720x420@2x?access_token=${token}` : null;
+const location = `${site.aerodrome.lng},${site.aerodrome.lat}`;
+const mapSrc = token ? `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(${location})/${location},13.5,0/720x420@2x?access_token=${token}` : null;
 const mapSrcSet = token ? [
-  `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(-8.6447,37.1206)/-8.6447,37.1206,13.5,0/360x210?access_token=${token} 360w`,
-  `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(-8.6447,37.1206)/-8.6447,37.1206,13.5,0/720x420?access_token=${token} 720w`,
+  `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(${location})/${location},13.5,0/360x210?access_token=${token} 360w`,
+  `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/pin-l+c8692f(${location})/${location},13.5,0/720x420?access_token=${token} 720w`,
   `${mapSrc} 1440w`,
 ].join(", ") : undefined;
-const directions = "https://www.google.com/maps/search/?api=1&query=Aer%C3%B3dromo%20de%20Lagos%2C%20Portugal";
+const directions = aerodromeMapsUrl;
 
 export function ContactPage() {
   const [mapFailed, setMapFailed] = useState(false);

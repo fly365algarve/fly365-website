@@ -1,2 +1,3 @@
 - [Content accuracy](content-accuracy.md) — Fly365 factual copy must come from existing site content or user-supplied facts, not invented claims.
 - [Map preview timing](map-preview-timing.md) — use real elapsed time to verify network-loaded maps; virtual time can trigger fallbacks before imagery loads.
+- [Route geography](route-geography.md) — shore landmark pins and offshore flight turns are different; inspect headlands at full image resolution.

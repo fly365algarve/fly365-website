@@ -14,7 +14,7 @@ export function Seo({ title, description, faq }: SeoProps) {
     name: site.name, url: site.domain, email: site.contact.email,
     telephone: [...site.contact.portugalPhones.map((phone) => phone.tel), site.contact.ukPhone.tel],
     address: { "@type": "PostalAddress", streetAddress: "Aeródromo de Lagos", postalCode: "8600", addressLocality: "Lagos", addressCountry: "PT" },
-    geo: { "@type": "GeoCoordinates", latitude: 37.1206, longitude: -8.6447 },
+    geo: { "@type": "GeoCoordinates", latitude: site.aerodrome.lat, longitude: site.aerodrome.lng },
     image: new URL("/images/fly365-algarve-lagos-operation-837.webp", site.domain).toString(),
   };
   return (
