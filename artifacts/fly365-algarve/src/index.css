@@ -174,8 +174,6 @@
 .price-tab.active { background: var(--navy); color: var(--chalk); }
 .trial-map-shell { color: var(--ink); }
 .trial-map { position: relative; aspect-ratio: 5 / 3; overflow: hidden; border: 1px solid rgba(11,42,60,.18); background: var(--navy); }
-.trial-map .mapbox-canvas-host { position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none; }
-.trial-map .mapbox-canvas-host.mapbox-visible { opacity: 1; pointer-events: auto; }
 .static-route-image, .static-route-image picture, .static-route-image picture img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .static-route-image picture { transition: opacity 200ms ease; pointer-events: none; }
 .static-route-image picture img { object-fit: fill; }
@@ -183,15 +181,11 @@
 .static-airport-hotspot:focus-visible { outline: 3px solid var(--chalk); background: rgba(200,105,47,.2); }
 .static-airport-mobile { display: none; }
 .static-map-key { position: absolute; left: 8px; right: 8px; top: 8px; width: fit-content; max-width: calc(100% - 16px); padding: 5px 7px; background: var(--navy); color: var(--chalk); font-size: 10px; line-height: 1.6; }
-.map-button-progress { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: map-button-spin .7s linear infinite; }
-@keyframes map-button-spin { to { transform: rotate(360deg); } }
 @media (max-width: 639px) {
   .trial-map { aspect-ratio: 8 / 7; }
   .static-airport-desktop { display: none; }
   .static-airport-mobile { display: block; }
 }
-@media (prefers-reduced-motion: reduce) { .map-button-progress { animation: none; } }
-.trial-map .mapboxgl-map { width: 100%; height: 100%; font-family: var(--app-font-sans); }
 .map-fallback { position: absolute; z-index: 4; inset: 0; display: grid; grid-template-rows: minmax(160px, 1fr) auto; background: var(--chalk); }
 .map-fallback-photo { position: relative; min-height: 155px; background-image: linear-gradient(rgba(11,42,60,.24),rgba(11,42,60,.24)), url("/images/fly365-algarve-lagos-operation.png"); background-size: cover; background-position: center; }
 .map-fallback-caption { position: absolute; bottom: 14px; left: 16px; color: white; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-shadow: 0 1px 5px rgba(0,0,0,.5); text-transform: uppercase; }
@@ -201,27 +195,10 @@
 .map-fallback-route span { font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .map-fallback-route strong { font: 800 1.25rem var(--app-font-display); }
 .map-fallback-route small { font-size: .62rem; line-height: 1.25; }
-.mapbox-place-pin { position: relative; display: grid; place-items: center; pointer-events: none; }
-.mapbox-place-dot { width: 13px; height: 13px; border: 3px solid var(--chalk); border-radius: 50%; background: var(--ochre); box-shadow: 0 1px 7px rgba(11,42,60,.55); }
-.mapbox-place-label { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 112px; padding: 3px 5px; border: 1px solid rgba(247,243,236,.4); background: var(--navy); color: var(--chalk); font-size: 9px; font-weight: 600; line-height: 1.2; text-align: center; white-space: normal; }
-.mapbox-pin-sagres .mapbox-place-label { left: 18px; top: 9px; transform: none; }
-.mapbox-pin-cabo .mapbox-place-label { left: 18px; top: auto; bottom: 18px; transform: none; }
-.mapbox-place-pin-airport { gap: 3px; pointer-events: auto; cursor: pointer; }
-.mapbox-airport-logo { width: 28px; height: 28px; border: 2px solid var(--chalk); object-fit: cover; }
-.mapbox-place-pin-airport .mapbox-place-label { left: auto; right: 18px; top: -18px; transform: none; }
-.cockpit-hud { position: absolute; z-index: 3; left: 12px; top: 12px; width: min(250px, calc(100% - 65px)); padding: 11px 13px; background: rgba(11,42,60,.84); color: var(--chalk); pointer-events: none; font-size: 11px; line-height: 1.4; }
-.cockpit-progress { height: 2px; margin-top: 9px; overflow: hidden; background: rgba(247,243,236,.3); }
-.cockpit-progress span { display: block; width: 100%; height: 100%; background: var(--ochre); transform-origin: left; transition: transform .12s linear; }
-.cockpit-place { margin-top: 7px; opacity: 0; transition: opacity .4s ease; }
-.cockpit-place-visible { opacity: 1; }
-.trial-map .mapboxgl-ctrl-attrib { font-size: 10px; }
-.trial-map .mapboxgl-ctrl-logo { margin: 0 0 4px 4px; }
 .route-select { border: 1px solid rgba(11,42,60,.25); padding: .55rem .8rem; color: var(--navy); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: transform .2s, background .2s, color .2s; }
 .route-select:hover { transform: translateY(-2px); border-color: var(--ochre); background: rgba(200,105,47,.08); }
 .route-select.selected { border-color: var(--navy); background: var(--navy); color: var(--chalk); }
 .route-select.selected:hover, .price-tab.active:hover { background: var(--ocean); border-color: var(--ocean); }
-.route-play { display: inline-flex; align-items: center; gap: .45rem; background: var(--ochre); border-color: var(--ochre); color: white; }
-.route-play:hover { background: #a85127; color: white; }
 .motion-link { position: relative; transform-origin: left; transition: color .2s ease, transform .2s ease; }
 .motion-link::after { content: ""; position: absolute; left: 0; right: 20px; bottom: -5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
 .motion-link svg { transition: transform .2s ease; }
@@ -237,7 +214,7 @@
 .section-reveal.is-visible { opacity: 1; transform: translateY(0); }
 @keyframes whatsapp-pulse { 0% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 0 rgba(37,211,102,.42); } 75% { box-shadow: 0 5px 16px rgba(11,42,60,.2), 0 0 0 10px rgba(37,211,102,0); } 100% { box-shadow: 0 5px 16px rgba(11,42,60,.2); } }
 @media (max-width: 640px) { .whatsapp-control { width: 54px; height: 54px; padding: 0; } .whatsapp-label { display: none; } }
-@media (max-width: 640px) { .map-fallback-routes { grid-template-columns: repeat(2,minmax(0,1fr)); } .map-fallback-route { padding: .55rem; } .mapbox-place-label { max-width: 96px; } }
+@media (max-width: 640px) { .map-fallback-routes { grid-template-columns: repeat(2,minmax(0,1fr)); } .map-fallback-route { padding: .55rem; } }
 .coast-svg { width: 100%; height: auto; display: block; }
 .coast-route { fill: none; stroke: var(--ocean); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 9 8; opacity: .45; transition: opacity .2s, stroke-width .2s; }
 .coast-route.active { opacity: 1; stroke: var(--ochre); stroke-width: 4; }
