@@ -54,9 +54,6 @@ export function IntroOverlay() {
 
   return (
     <div className={`fx-intro${wiping ? " fx-intro--wipe" : ""}`} onPointerDown={skipNow} onAnimationEnd={(e) => { if (e.target === e.currentTarget) setGone(true); }} role="presentation" aria-hidden="true" data-testid="intro-overlay">
-      <svg className="fx-intro__sky" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path className="fx-intro__trail" d="M-12 64 L108 40" />
-      </svg>
       <svg className="fx-intro__plane" viewBox="0 0 48 48" fill="currentColor">
         <g transform="rotate(90 24 24)">
           <rect x="21.5" y="4" width="5" height="38" rx="2.5" />
