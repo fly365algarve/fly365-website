@@ -27,7 +27,7 @@ export function StaticRouteImage({ selected, onSelect, interactive }: {
       style={{ opacity: visible === index ? 1 : 0 }} aria-hidden={visible !== index}>
       <source media="(max-width: 639px)" srcSet={images.mobile.url} width={480} height={420} />
       <img src={images.desktop.url} width={1000} height={600} loading="eager" decoding="async"
-        alt={`Satellite view of the approximate ${trialRoutes[index].minutes}-minute trial flight route: ${trialRoutes[index].route}, with pins for Lagos Aerodrome, Ponta da Piedade, Salema, Sagres, Cabo de São Vicente, Barragem da Bravura and Carrapateira`}
+        alt={`Satellite view of the approximate ${trialRoutes[index].minutes}-minute trial flight route: ${trialRoutes[index].route}, with pins for Lagos Aerodrome, Ponta da Piedade, Salema, Sagres, Cabo de São Vicente and Barragem da Bravura`}
         onLoad={() => setLoaded(previous => previous.map((value, i) => i === index || value))}
         onError={() => setFailed(previous => previous.map((value, i) => i === index || value))} />
     </picture>)}
@@ -38,7 +38,7 @@ export function StaticRouteImage({ selected, onSelect, interactive }: {
       <a href={aerodromeMapsUrl} target="_blank" rel="noopener noreferrer"
         className="static-airport-hotspot static-airport-mobile" style={mobile.airport}
         aria-label="Open Lagos Aerodrome in Google Maps" title="Lagos Aerodrome · Open Google Maps" tabIndex={interactive ? 0 : -1} />
-      <span className="static-map-key">A Lagos Aerodrome · P Ponta da Piedade · L Salema · S Sagres · C Cabo de São Vicente · B Barragem da Bravura · R Carrapateira</span>
+      <span className="static-map-key">A Lagos Aerodrome · P Ponta da Piedade · L Salema · S Sagres · C Cabo de São Vicente · B Barragem da Bravura</span>
     </> : null}
     {showFallback && <div className="map-fallback">
       <div className="map-fallback-photo"><span className="map-fallback-caption">Explore the flight options below</span></div>

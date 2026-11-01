@@ -10,7 +10,6 @@ export const routePlaces = [
   { name: "Sagres", position: [-8.9403, 37.0086] as MapCoordinate },
   { name: "Cabo de São Vicente", position: [-8.9965, 37.0230] as MapCoordinate },
   { name: "Barragem da Bravura", position: [-8.707, 37.205] as MapCoordinate },
-  { name: "Carrapateira / Bordeira", position: [-8.905, 37.195] as MapCoordinate },
 ] as const;
 
 const airport = routePlaces[0].position;
@@ -50,10 +49,20 @@ const lagosReturn: MapCoordinate[] = [
   [-8.673, 37.110], [-8.675, 37.115], [-8.678, 37.119], airport,
 ];
 
-// Longer loops return through the hills and reservoir instead of retracing
-// the coastal leg. Every inbound corridor closes at the same aerodrome point.
+// Inland returns keep the loops compact instead of retracing the coastal leg.
+// Only the 45-minute route visits Bravura; the Cape loop returns via Vila do Bispo.
 const bravura = routePlaces[5].position;
-const carrapateira = routePlaces[6].position;
+const luzLoop: MapCoordinate[] = [
+  ...coastToGrottos,
+  [-8.682, 37.075], [-8.696, 37.075], [-8.710, 37.076],
+  [-8.719, 37.079], [-8.725, 37.083], [-8.727, 37.087],
+  [-8.730, 37.096], [-8.733, 37.106], [-8.735, 37.116],
+  [-8.736, 37.126], [-8.736, 37.136], [-8.735, 37.146],
+  [-8.735, 37.155], // Bensafrim
+  [-8.727, 37.155], [-8.719, 37.152], [-8.711, 37.148],
+  [-8.703, 37.143], [-8.696, 37.138], [-8.689, 37.132],
+  [-8.683, 37.126], airport,
+];
 const reservoirReturn: MapCoordinate[] = [
   bravura, [-8.700, 37.204], [-8.695, 37.200], [-8.690, 37.194],
   [-8.687, 37.187], [-8.684, 37.179], [-8.682, 37.170],
@@ -68,37 +77,21 @@ const salemaReturn: MapCoordinate[] = [
   [-8.747, 37.174], [-8.735, 37.185], [-8.725, 37.194],
   [-8.717, 37.200], ...reservoirReturn,
 ];
-const sagresReturn: MapCoordinate[] = [
-  routePlaces[3].position, [-8.941, 37.020], [-8.940, 37.029],
-  [-8.938, 37.037], [-8.934, 37.046], [-8.929, 37.055],
-  [-8.924, 37.064], [-8.919, 37.072], [-8.912, 37.083],
-  [-8.904, 37.091], [-8.895, 37.098], [-8.885, 37.105],
-  [-8.874, 37.113], [-8.861, 37.121], [-8.848, 37.130],
-  [-8.836, 37.138], [-8.824, 37.145], [-8.811, 37.154],
-  [-8.799, 37.162], [-8.787, 37.171], [-8.775, 37.180],
-  [-8.762, 37.188], [-8.749, 37.194], [-8.737, 37.199],
-  [-8.726, 37.202], [-8.716, 37.204], ...reservoirReturn,
-];
 const caboReturn: MapCoordinate[] = [
-  [-9.004, 37.030], [-9.005, 37.037], [-9.003, 37.046],
-  [-9.000, 37.055], [-8.997, 37.064], [-8.993, 37.073],
-  [-8.987, 37.084], [-8.981, 37.094], [-8.974, 37.104],
-  [-8.967, 37.115], [-8.960, 37.126], [-8.952, 37.137],
-  [-8.947, 37.148], [-8.943, 37.160], [-8.938, 37.170],
-  [-8.932, 37.180], [-8.926, 37.189], [-8.920, 37.195],
-  [-8.913, 37.197], carrapateira,
-  [-8.896, 37.197], [-8.886, 37.201], [-8.874, 37.204],
-  [-8.862, 37.206], [-8.850, 37.209], [-8.837, 37.212],
-  [-8.823, 37.215], [-8.809, 37.218], [-8.795, 37.220],
-  [-8.780, 37.220], [-8.766, 37.219], [-8.752, 37.218],
-  [-8.739, 37.215], [-8.727, 37.211], [-8.716, 37.207],
-  ...reservoirReturn,
+  routePlaces[4].position, [-8.990, 37.030], [-8.981, 37.037],
+  [-8.971, 37.045], [-8.961, 37.053], [-8.949, 37.061],
+  [-8.937, 37.069], [-8.925, 37.077], [-8.912, 37.083],
+  [-8.900, 37.087], [-8.886, 37.091], [-8.871, 37.095],
+  [-8.855, 37.099], [-8.839, 37.103], [-8.823, 37.107],
+  [-8.807, 37.111], [-8.791, 37.115], [-8.775, 37.118],
+  [-8.759, 37.121], [-8.743, 37.123], [-8.727, 37.125],
+  [-8.712, 37.126], [-8.698, 37.126], [-8.687, 37.125], airport,
 ];
 
 const loops: MapCoordinate[][] = [
   [...coastToGrottos, ...lagosReturn],
+  luzLoop,
   [...coastToSalema, ...salemaReturn],
-  [...coastToSagres, ...sagresReturn],
   [...coastToCabo, ...caboReturn],
 ];
 

@@ -23,9 +23,9 @@ export const site = {
   },
   trialFlights: [
     { minutes: 20, price: 60, route: "Grottos & Lagos – Meia Praia, grottos, Lagos old town and marina" },
-    { minutes: 30, price: 85, route: "Coast & countryside – grottos, Salema and Bravura reservoir" },
-    { minutes: 45, price: 140, route: "Sagres loop – grottos, Salema, Sagres, Vila do Bispo and Bravura reservoir" },
-    { minutes: 60, price: 185, route: "The edge of Europe – grottos, Sagres, Cabo de São Vicente, Carrapateira and Bravura reservoir" },
+    { minutes: 30, price: 85, route: "Grottos & Luz – grottos, Praia da Luz and inland over Bensafrim" },
+    { minutes: 45, price: 140, route: "Coast & Bravura – grottos, the coast to Salema and inland over Bravura reservoir" },
+    { minutes: 60, price: 185, route: "Sagres & Cape St Vincent – grottos, Salema, Sagres and Cabo de São Vicente, returning inland via Vila do Bispo" },
   ],
   training: {
     prepaidHours: [
