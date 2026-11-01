@@ -18,7 +18,7 @@ export function HistoryPage() {
   const showMalcolm = publicImageExists("/images/malcolm.jpg");
   return <div className="page-shell page-enter">
     <Seo title="Our history" description="The history of Fly365 Algarve and its founder Malcolm Howland." />
-    <PageHero variant="split" fit="contain" kicker="Fly365 Algarve" title={["Our history"]} sub={<p>Malcolm Howland, founder of Fly365.</p>} image="/images/logo.png" alt="Fly365 Algarve logo" />
+    <PageHero variant="split" kicker="Fly365 Algarve" title={["Our history"]} sub={<p>Malcolm Howland, founder of Fly365.</p>} image="/images/cabo-sao-vicente-cliffs.webp" alt="Atlantic cliffs at Cabo de São Vicente near Sagres" />
     <section className="section-pad bg-[var(--chalk)]"><div className={`mx-auto grid gap-12 ${showMalcolm ? "max-w-[1000px] md:grid-cols-[1fr_260px]" : "max-w-[820px]"}`}>
       <Reveal className="r5-history"><ol className="r5-steps">{steps.map((text, i) => <li key={text} className={`r5-step ${i === 4 ? "r5-step--quiet" : ""}`} style={{ ["--i" as string]: i }}><span className="r5-step__dot" aria-hidden="true">{i + 1}</span><h2 className="text-xs font-bold uppercase tracking-[.18em] text-[var(--ocean)]">{labels[i]}</h2><p className="r5-measure mt-2 text-base leading-8 text-[var(--ink)]">{text}</p></li>)}</ol></Reveal>
       {showMalcolm && <figure className="md:sticky md:top-28 md:self-start"><ResponsiveImage src="/images/malcolm.jpg" alt="Malcolm Howland, founder of Fly365" sizes="260px" className="aspect-[4/5] w-full object-cover grayscale-[20%]" /><figcaption className="mt-3 text-xs text-[var(--muted-foreground)]">Malcolm Howland, founder of Fly365</figcaption></figure>}

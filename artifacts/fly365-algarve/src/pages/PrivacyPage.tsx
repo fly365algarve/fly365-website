@@ -16,7 +16,7 @@ export function PrivacyPage() {
   ];
   return <div className="page-shell page-enter">
     <Seo title="Privacy notice (draft)" description="Draft privacy notice for Fly365 Algarve, to be reviewed." />
-    <PageHero variant="split" fit="contain" kicker="Draft – to be reviewed" title={["Privacy", "notice"]} sub={<p>Plain English. Items marked [CONFIRM] are awaiting confirmation.</p>} image="/images/logo.png" alt="Fly365 Algarve logo" />
+    <PageHero variant="plain" kicker="Draft – to be reviewed" title={["Privacy", "notice"]} sub={<p>Plain English. Items marked [CONFIRM] are awaiting confirmation.</p>} />
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[760px]">
       <p className="border-l-2 border-[var(--ochre)] bg-[#eee4d4] px-5 py-4 text-sm font-semibold text-[var(--navy)]">Draft – to be reviewed. This notice has not yet been finalised or legally reviewed.</p>
       <div className="mt-10 space-y-10">{sections.map(([title, body], i) => <section key={title} className="grid gap-3 border-t border-[rgba(11,42,60,.2)] pt-6 sm:grid-cols-[48px_1fr]"><span className="display-heading text-2xl text-[var(--ochre)]">{String(i + 1).padStart(2, "0")}</span><div><h2 className="text-3xl text-[var(--navy)]">{title}</h2><p className="r5-measure mt-3 text-sm leading-7 text-[var(--ink)]">{body}</p></div></section>)}</div>

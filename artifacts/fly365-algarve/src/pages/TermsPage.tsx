@@ -25,7 +25,7 @@ const terms = [
 export function TermsPage() {
   return <div className="page-shell page-enter">
     <Seo title="Terms and conditions" description="Read Fly365 Algarve’s terms and conditions for microlight trial flights and training bookings." />
-    <PageHero variant="split" kicker="Before you book" title={["Terms &", "Conditions"]} sub={<p>Please read these carefully before booking</p>} image="/images/ikarus-c42-fly365.jpg" alt="Fly365 Algarve Ikarus C42 at Lagos Aerodrome" />
+    <PageHero variant="plain" kicker="Before you book" title={["Terms &", "Conditions"]} sub={<p>Please read these carefully before booking</p>} />
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto max-w-[900px]"><div className="mb-8"><h2 className="text-3xl text-[var(--navy)]">Fly365 Algarve — Terms &amp; Conditions</h2></div><ol className="border-t border-[rgba(11,42,60,.2)]">{terms.map((term, i) => <li key={term} className="grid gap-4 border-b border-[rgba(11,42,60,.2)] py-5 sm:grid-cols-[50px_1fr]"><span className="display-heading text-2xl text-[var(--ochre)]">{String(i + 1).padStart(2, "0")}</span><p className="r5-measure text-sm leading-6 text-[var(--ink)]">{term}</p></li>)}</ol></div></section>
     <section className="surface-sand section-pad"><div className="mx-auto max-w-2xl"><div className="mb-8"><h2 className="text-4xl text-[var(--navy)]">Questions?</h2><p className="mt-2 text-sm text-[var(--muted-foreground)]">Contact us at any time</p><Link href="/contact" className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Contact Fly365 <ArrowRight size={15} /></Link></div><ContactForm /></div></section>
   </div>;

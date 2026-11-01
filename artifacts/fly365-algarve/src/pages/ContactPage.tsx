@@ -21,7 +21,7 @@ export function ContactPage() {
   const [mapFailed, setMapFailed] = useState(false);
   return <div className="page-shell page-enter">
     <Seo title="Contact Fly365 Algarve" description="Contact Fly365 Algarve to plan a trial flight, intensive microlight training course or conversion at Lagos Aerodrome." />
-    <PageHero kicker="Talk flying" title={["Contact Us"]} sub={<p>Get in touch — we&apos;d love to hear from you</p>} image="/images/fly365-algarve-lagos-operation.png" alt="Fly365 Algarve at Lagos Aerodrome" position="center 70%" />
+    <PageHero kicker="Talk flying" title={["Contact Us"]} sub={<p>Get in touch — we&apos;d love to hear from you</p>} image="/images/meia-praia-lagos-beach.webp" alt="The wide sandy beach and Atlantic shoreline at Meia Praia, Lagos" position="center 65%" />
     <section className="section-pad bg-[var(--chalk)]"><div className="mx-auto grid max-w-[1160px] gap-12 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="bg-[var(--navy)] p-6 text-[var(--chalk)] md:p-8">

@@ -3,7 +3,6 @@ import { ArrowRight, Check } from "lucide-react";
 import { site } from "../config/site";
 import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
-import { ResponsiveImage } from "../components/ResponsiveImage";
 import { PageHero } from "../components/round5/PageHero";
 import { TeamCard } from "../components/round5/Extras";
 
@@ -12,13 +11,12 @@ const card = "border-t border-[rgba(11,42,60,.2)] py-8";
 export function AboutPage() {
   return <div className="page-shell page-enter">
     <Seo title="About and team" description="Learn about the Fly365 Algarve operation, aircraft, instructors and training at Lagos Aerodrome." />
-    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/fly365-algarve-lagos-operation.png" alt="Fly365 Algarve operation at Lagos Aerodrome" position="center 35%" />
+    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/lagos-marina-boats.webp" alt="Sailboats moored at Marina de Lagos, Portugal" position="center 55%" />
     <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">Meet the team</span><h2 className="mt-3 text-5xl text-[var(--navy)]">Your instructors</h2><div className="mt-8 grid gap-6 md:grid-cols-2">{site.team.map((member) => <TeamCard key={member.name} member={member} />)}</div></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[1160px] space-y-14 text-sm leading-7 text-[var(--ink)] md:space-y-20">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <ResponsiveImage src="/images/ikarus-c42-fly365.jpg" alt="Fly365 Algarve Ikarus C42 at Lagos Aerodrome" sizes="(max-width: 768px) 100vw, 50vw" className="aspect-[4/3] w-full object-cover" />
+        <div>
           <div className="max-w-[68ch]">
             <h2 className="mb-4 text-3xl text-[var(--navy)]">The Operation</h2>
             <p className="mb-4">Lagos Aerodrome is {site.facts.townDistanceKm}km from the centre of Lagos in Portugal, has a {site.facts.runway.toLowerCase()} and {site.facts.flyingDays} flying days per year. We offer intensive training packages of up to {site.courses[1].hours} hours in {site.courses[1].title.toLowerCase()} blocks throughout the year.</p>
@@ -26,8 +24,7 @@ export function AboutPage() {
             <p>The C42 is a high wing side-by-side seat, Single Side Stick controlled monoplane. This popular aircraft has been designed with the beginner in mind, being very forgiving yet giving lively performance especially when it comes to operating from short unprepared fields. Experience has shown that students who learn on this aircraft find conversion to other more sophisticated aircraft much easier. This is due firstly to the requirement to use the rudder pedals in order to fly the aircraft more precisely, and secondly, the extremely light control forces normally only found in very advanced more aerobatic type of aircraft. This makes for a more relaxed and less strenuous flight even in very turbulent conditions. Whilst some schools use faster and more sophisticated aircraft in the training role, experience has shown that this generally slows down a student&apos;s progress and increases the training time required to reach that seemingly elusive goal of first solo or the licence!</p>
           </div>
         </div>
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          <ResponsiveImage src="/images/fly365-flexwing-aircraft.png" alt="Fly365 Algarve flexwing aircraft at the airfield" sizes="(max-width: 768px) 100vw, 50vw" className="aspect-[4/3] w-full bg-[#eee4d4] object-contain p-3 md:order-2" />
+        <div>
           <div className="md:order-1">          <div className="max-w-[68ch]">
             <h2 className="mb-4 text-3xl text-[var(--navy)]">Our Fleet</h2>
             <p className="mb-4">For our flexwing training, we have a choice of P&amp;M Quantum 912, P&amp;M Quik R 912S and an Exodus Deltajet 500 BMW. For the 3 axis microlight training we have {site.fixedWing.aircraftCount} {site.fixedWing.name} aircraft and offer intensive training packages of up to {site.courses[1].hours} hours in {site.courses[1].title.toLowerCase()} blocks throughout the year, in both control types.</p>
