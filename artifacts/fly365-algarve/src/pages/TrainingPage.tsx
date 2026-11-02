@@ -5,6 +5,7 @@ import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
 import { Reveal } from "../components/Reveal";
 import { PageHero } from "../components/round5/PageHero";
+import { publicImageExists } from "../components/ResponsiveImage";
 import { WeatherWidget } from "../components/round5/WeatherWidget";
 import { Accordion } from "../components/round5/Extras";
 import { TrainingPrices } from "../components/TrainingPrices";
@@ -101,7 +102,7 @@ const howToBook = [
 export function TrainingPage() {
   return <div className="page-shell page-enter">
     <Seo title="Microlight training courses" description="Plan an intensive fixed-wing or flexwing training course, conversion or hour-building visit with Fly365 Algarve in Lagos." />
-    <PageHero kicker="Learn in Lagos" title={["Training", "Packages"]} sub={<p>Courses and Flight Training available</p>} image="/images/ikarus-c42-microlight-in-flight.webp" alt="Ikarus C42 microlight in flight — illustrative aircraft photograph" position="center 48%" />
+    <PageHero variant="split" kicker="Learn in Lagos" title={["Training", "Packages"]} sub={<p>Courses and Flight Training available</p>} image={publicImageExists("/images/fly365-learn-to-fly.webp") ? "/images/fly365-learn-to-fly.webp" : undefined} alt="Fly365 instructor and student in or beside an aircraft" position="center 48%" />
     <LicencePath />
     <SoloEstimator />
     <TypicalDay />
