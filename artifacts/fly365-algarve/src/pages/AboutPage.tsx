@@ -5,7 +5,6 @@ import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
 import { PageHero } from "../components/round5/PageHero";
 import { TeamCard } from "../components/round5/Extras";
-import { ResponsiveImage } from "../components/ResponsiveImage";
 
 const card = "border-t border-[rgba(11,42,60,.2)] py-8";
 
@@ -74,7 +73,6 @@ export function AboutPage() {
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <ResponsiveImage src="/images/fly365-c42-fleet-red-striped-noses.webp" alt="Close-up row of white C42 aircraft noses with red stripes and propellers at the airfield" sizes="(max-width: 1023px) 100vw, 460px" className="h-auto w-full" />
           <div>
             <Link href="/history" className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Our history <ArrowRight size={15} /></Link>
           </div>

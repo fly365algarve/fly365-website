@@ -101,7 +101,7 @@ const howToBook = [
 export function TrainingPage() {
   return <div className="page-shell page-enter">
     <Seo title="Microlight training courses" description="Plan an intensive fixed-wing or flexwing training course, conversion or hour-building visit with Fly365 Algarve in Lagos." />
-    <PageHero variant="split" fit="contain" kicker="Learn in Lagos" title={["Training", "Packages"]} sub={<p>Courses and Flight Training available</p>} image="/images/fly365-flexwing-aircraft.png" alt="Two people flying in a red and orange flexwing above the countryside" position="center" />
+    <PageHero variant="split" fit="contain" kicker="Learn in Lagos" title={["Training", "Packages"]} sub={<p>Courses and Flight Training available</p>} image="/images/fly365-c42-fleet-red-striped-noses.webp" alt="Close-up row of white C42 aircraft noses with red stripes and propellers at the airfield" position="center" />
     <LicencePath />
     <SoloEstimator />
     <TypicalDay />
