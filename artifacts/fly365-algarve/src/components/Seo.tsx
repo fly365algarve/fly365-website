@@ -8,7 +8,7 @@ export function Seo({ title, description, faq }: SeoProps) {
   const [location] = useLocation();
   const fullTitle = `${title} | ${site.name}`;
   const canonicalUrl = new URL(location, site.domain).toString();
-  const imageUrl = new URL("/images/fly365-quik-r-two-people-over-sea-1600.webp", site.domain).toString();
+  const imageUrl = new URL("/images/fly365-flexwing-cockpit-orange-cliffs-795.webp", site.domain).toString();
   const business = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
     name: site.name, url: site.domain, email: site.contact.email,
