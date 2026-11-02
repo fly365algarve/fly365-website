@@ -5,13 +5,14 @@ import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
 import { PageHero } from "../components/round5/PageHero";
 import { TeamCard } from "../components/round5/Extras";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 
 const card = "border-t border-[rgba(11,42,60,.2)] py-8";
 
 export function AboutPage() {
   return <div className="page-shell page-enter">
     <Seo title="About and team" description="Learn about the Fly365 Algarve operation, aircraft, instructors and training at Lagos Aerodrome." />
-    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/lagos-aerodrome-runway-aerial.webp" alt="Aerial view of the runway and hangars at Aeródromo Municipal de Lagos, Algarve" position="center 55%" />
+    <PageHero kicker="Fly365 Algarve" title={["About", "& Team"]} sub={<p>FLY365 Full Time Operation on Portugal&apos;s Algarve</p>} image="/images/fly365-c42-fleet-airfield-lineup.webp" alt="Elevated view of several white Ikarus C42 aircraft lined up at the airfield" position="center 55%" />
     <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">Meet the team</span><h2 className="mt-3 text-5xl text-[var(--navy)]">Your instructors</h2><div className="mt-8 grid gap-6 md:grid-cols-2">{site.team.map((member) => <TeamCard key={member.name} member={member} />)}</div></div></section>
 
     <section className="section-pad bg-[var(--chalk)]">
@@ -73,6 +74,7 @@ export function AboutPage() {
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
+          <ResponsiveImage src="/images/fly365-c42-fleet-red-striped-noses.webp" alt="Close-up row of white C42 aircraft noses with red stripes and propellers at the airfield" sizes="(max-width: 1023px) 100vw, 460px" className="h-auto w-full" />
           <div>
             <Link href="/history" className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Our history <ArrowRight size={15} /></Link>
           </div>

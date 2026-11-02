@@ -29,7 +29,7 @@ export function HomePage() {
   return <div className="page-enter">
     <Seo title="Microlight flights and training in Lagos" description="Book a microlight trial flight or learn to fly with intensive training from Lagos Aerodrome on Portugal’s Algarve coast." faq={faqs} />
     <section className={`fx-hero ${heroReady ? "fx-hero--go" : "fx-hero--hold"} relative flex min-h-[min(790px,100svh)] items-end overflow-hidden px-5 pb-16 pt-32 text-[var(--chalk)] md:items-center md:pb-20`}>
-      <ResponsiveImage src="/images/fly365-algarve-lagos-operation-cropped.png" alt="" aria-hidden="true" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
+      <ResponsiveImage src="/images/fly365-c42-sunset-over-lagos.webp" alt="Sunset over Lagos town beneath a white C42 wing, with the sun between the wing struts" className="fx-hero__photo" priority sizes="100vw" /><div className="fx-hero__shade" aria-hidden="true" />
       <div className="relative mx-auto w-full max-w-[1160px]">
         <div className="mb-7 flex items-center gap-4"><p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[var(--sandstone)]"><MapPin size={15} />Lagos · Algarve · Portugal</p></div>
         <h1 className="display-heading max-w-[800px] text-[clamp(3.7rem,10vw,8.2rem)] leading-[.83]"><span className="fx-hero__line" style={{ ["--i" as string]: 0 }}>Learn to fly</span><span className="fx-hero__line text-[var(--sandstone)]" style={{ ["--i" as string]: 1 }}>over the Algarve</span></h1>
@@ -45,7 +45,7 @@ export function HomePage() {
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[1160px]">
         <div className="grid gap-9 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
-          <div><span className="section-kicker">Choose your coast</span><h2 className="mt-3 text-5xl leading-[.95] text-[var(--navy)] md:text-6xl">From grottos<br />to the west</h2><p className="mt-5 max-w-md text-sm leading-6 text-[var(--muted-foreground)]">Experience the thrill of microlight flying with a one-off trial lesson over the stunning Algarve coastline. Trace the route from Lagos Aerodrome past Ponta da Piedade, onward to Salema and Sagres.</p></div>
+          <div><span className="section-kicker">Choose your coast</span><h2 className="mt-3 text-5xl leading-[.95] text-[var(--navy)] md:text-6xl">From grottos<br />to the west</h2><p className="mt-5 max-w-md text-sm leading-6 text-[var(--muted-foreground)]">Experience the thrill of microlight flying with a one-off trial lesson over the stunning Algarve coastline. Trace the route from Lagos Aerodrome past Ponta da Piedade, onward to Salema and Sagres.</p><ResponsiveImage src="/images/fly365-c42-ponta-da-piedade-sunset.webp" alt="Sunset over Ponta da Piedade cliffs seen through the C42 wing struts" sizes="280px" className="mt-6 h-auto w-full max-w-[280px]" /></div>
           <div className="thin-border bg-[#f1e8db] p-4 md:p-7"><TrialFlightMap selected={selected} onSelect={setSelected} /></div>
         </div>
       </div>
@@ -128,9 +128,6 @@ export function HomePage() {
         </div>
       </div>
     </section>
-    <div className="aircraft-band">
-      <ResponsiveImage src="/images/ponta-da-piedade-algarve-aerial.webp" alt="Aerial view of the cliffs and grottos at Ponta da Piedade, Lagos" sizes="100vw" className="h-full w-full object-cover" />
-    </div>
 
     <Reviews />
     <PressStrip />

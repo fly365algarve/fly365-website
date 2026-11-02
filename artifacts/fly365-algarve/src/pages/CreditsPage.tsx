@@ -14,7 +14,6 @@ export function CreditsPage() {
             <h2 className="text-2xl text-[var(--navy)]">{credit.subject}</h2>
             <p className="mt-3 text-sm leading-7 text-[var(--ink)]">
               <a href={credit.url.startsWith("/") ? `${import.meta.env.BASE_URL}${credit.url.slice(1)}` : credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{credit.photographer} / {credit.source}</a>
-              {"authorUrl" in credit && <> / <a href={credit.authorUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{credit.authorLabel}</a></>}
             </p>
             {"license" in credit && <p className="mt-1 text-sm leading-7 text-[var(--ink)]">
               <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{credit.license}</a> · {credit.changes}.
