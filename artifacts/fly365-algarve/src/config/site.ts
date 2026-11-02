@@ -52,7 +52,6 @@ export const site = {
     runway: "Tarmac runway",
     townDistanceKm: 2,
     winterWeather: "Mild winters",
-    maxStudentsPerWeek: 2,
   },
   team: [
     { name: "Zeth Devenish", role: "Fixed-wing instructor", experience: "More than 2,000 hours", initials: "ZD", photo: "/images/zeth.jpg" },

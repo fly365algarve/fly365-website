@@ -39,7 +39,7 @@ export function AboutPage() {
 
           <article className={card}>
             <h2 className="mb-4 text-3xl text-[var(--navy)]">Personal Service</h2>
-            <p className="mb-4">In order to offer a personal service courses are strictly limited in numbers to {site.facts.maxStudentsPerWeek} students per week and, therefore, it is important to book early to avoid disappointment. Courses normally run from Monday to Friday, with beginner training taking place mainly in the mornings and the late afternoons. Lessons last approximately 1½ - 2 hours including a minimum of 1 hour&apos;s flying training (taken from engine start to engine stop). Courses can be completed in several stages but remember, if you come back, a certain amount of revision will be required before you can pick up where you left off. The longer you leave it between courses, the more revision will be required.</p>
+            <p className="mb-4">Courses normally run from Monday to Friday, with beginner training taking place mainly in the mornings and the late afternoons. Lessons last approximately 1½ - 2 hours including a minimum of 1 hour&apos;s flying training (taken from engine start to engine stop). Courses can be completed in several stages but remember, if you come back, a certain amount of revision will be required before you can pick up where you left off. The longer you leave it between courses, the more revision will be required.</p>
             <p>You can complete your training from start to finish with us – we can even arrange tests or examinations by CAA Examiner. You can also start your training here, which will be &apos;signed off&apos; in your logbook by our UK, CAA Approved Flying Instructors when you leave. You can then complete your training when you go home to your local school. Alternatively, courses can be structured to take into account any previous training that you have completed.</p>
           </article>
 
@@ -74,7 +74,6 @@ export function AboutPage() {
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
           <div>
-            <p className="r5-pull">Strictly limited to {site.facts.maxStudentsPerWeek} students per week.</p>
             <Link href="/history" className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--ocean)]">Our history <ArrowRight size={15} /></Link>
           </div>
         </aside>

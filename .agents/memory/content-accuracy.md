@@ -20,3 +20,9 @@ Fly365 operates in the Algarve all year round, not only October–April. Its fle
 **Why:** Fly365 feedback supplied by the user supersedes older site copy.
 
 **How to apply:** Keep these corrections when reusing older material. User-approved trip copy includes Meia Praia next to the airfield, sociable evenings, and good-value winter accommodation and car hire; do not expand these into unsupported claims.
+
+Do not state a weekly student limit or use one-to-one training claims tied to that limit.
+
+**Why:** The user explicitly removed all student-per-week limits from website copy.
+
+**How to apply:** Do not reintroduce the old two-students-per-week or small-weekly-groups wording when reusing historical content.
