@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/fly365-print-posters/"
+title = "Fly365 A5 print posters"
+description = "Standalone A5 fixed-wing and flexwing front-and-back print artwork. Separate from the Fly365 website."
+version = "1.0.0"
+id = "artifacts/fly365-print-posters"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/fly365-print-posters/" ]
+localPort = 19460
+
+[services.development]
+run = "pnpm --filter @workspace/fly365-print-posters run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fly365-print-posters", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fly365-print-posters/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19460"
+BASE_PATH = "/fly365-print-posters/"

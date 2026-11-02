@@ -1,0 +1,58 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "B4OqQl_3O3fzanIvk3sZA"
+uri = "file://artifacts/fly365-print-posters/public/posters/png/Fly365_FixedWing_Front.png"
+type = "image"
+title = "Fixed wing — front"
+description = "A5 portrait PNG · 1748 × 2480 pixels · 300 dpi"
+logical_id = "a815f4d5-abbc-4f2e-a4f9-58d9c5470b42"
+content_hash = "sha256:60b4024d275ff0ac538eb14306420747378ee18dfe0b2c995a1f1ac7834add91"
+size = 1242155
+mtime_ms = 1793631338177
+storage_uri = "gcs://replit-rams-assets-worf/rams/assets/repl:0fd2cdf0-429d-4453-a84c-cc5b54d7c7eb/a815f4d5-abbc-4f2e-a4f9-58d9c5470b42/35609345-7e2e-4da5-82d8-4c435476859a"
+storage_version_token = "1793631413357855"
+content_type = "image/png"
+
+[[outputs]]
+id = "ZiWxq2csateM8he-5xkFz"
+uri = "file://artifacts/fly365-print-posters/public/posters/png/Fly365_FixedWing_Back.png"
+type = "image"
+title = "Fixed wing — back"
+description = "A5 portrait PNG · 1748 × 2480 pixels · 300 dpi"
+logical_id = "2856fe12-24d0-42a7-be5b-5dcaeff29d0a"
+content_hash = "sha256:78a41d3295c3868767544ea16c9a1731e8438cd9eb485b79ca63593110f90865"
+size = 2195117
+mtime_ms = 1793631341177
+storage_uri = "gcs://replit-rams-assets-worf/rams/assets/repl:0fd2cdf0-429d-4453-a84c-cc5b54d7c7eb/2856fe12-24d0-42a7-be5b-5dcaeff29d0a/d09481c8-1d75-44fa-a14d-d2095a021795"
+storage_version_token = "1793631414451097"
+content_type = "image/png"
+
+[[outputs]]
+id = "XjlVMt6YtZy4ckIpc34aQ"
+uri = "file://artifacts/fly365-print-posters/public/posters/png/Fly365_Flexwing_Front.png"
+type = "image"
+title = "Flexwing — front"
+description = "A5 portrait PNG · 1748 × 2480 pixels · 300 dpi"
+logical_id = "78a157c6-b3dc-48e9-a953-ca269f4044b4"
+content_hash = "sha256:f45f87c86b08b129418391f455a81bf2300447c3ccdb5387c0ec2418316dd00b"
+size = 1864964
+mtime_ms = 1793631343409
+storage_uri = "gcs://replit-rams-assets-worf/rams/assets/repl:0fd2cdf0-429d-4453-a84c-cc5b54d7c7eb/78a157c6-b3dc-48e9-a953-ca269f4044b4/06f848ca-2904-4221-a5a6-476a3c343d84"
+storage_version_token = "1793631415550128"
+content_type = "image/png"
+
+[[outputs]]
+id = "wC1st8W2QdRdP51AvRZno"
+uri = "file://artifacts/fly365-print-posters/public/posters/png/Fly365_Flexwing_Back.png"
+type = "image"
+title = "Flexwing — back"
+description = "A5 portrait PNG · 1748 × 2480 pixels · 300 dpi"
+logical_id = "99944232-56b1-48a2-92d8-f144c484d6ff"
+content_hash = "sha256:df387fc13bc1f140a865f09725a1871c178a86845df56988afa13d84a1a52c0e"
+size = 2288638
+mtime_ms = 1793631346025
+storage_uri = "gcs://replit-rams-assets-worf/rams/assets/repl:0fd2cdf0-429d-4453-a84c-cc5b54d7c7eb/99944232-56b1-48a2-92d8-f144c484d6ff/89d8970e-b933-4ffd-a832-af6995f9f2da"
+storage_version_token = "1793631416631966"
+content_type = "image/png"

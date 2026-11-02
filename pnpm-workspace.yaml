@@ -36,6 +36,7 @@ minimumReleaseAgeExclude:
 
 packages:
   - artifacts/fly365-algarve
+  - artifacts/fly365-print-posters
 
 catalog:
   '@replit/vite-plugin-cartographer': ^0.5.1

@@ -5,3 +5,4 @@
 - [Navigation ownership](navigation-ownership.md) — distinct trial-flight and course pages; Prices is a footer-only summary, and bookings carry their context to Contact.
 - [Decorative lines](decorative-lines.md) — dashed and dotted lines are allowed only for actual routes on the trial-flight map.
 - [Managed service cleanup](managed-service-cleanup.md) — protected artifact registrations can remain inert after validated removal of all services.
+- [Print poster scope](print-posters.md) — posters stay separate from the website; use real photos and travel-print design, not website templates.
