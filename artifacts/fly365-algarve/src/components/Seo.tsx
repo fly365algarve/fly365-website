@@ -8,14 +8,14 @@ export function Seo({ title, description, faq }: SeoProps) {
   const [location] = useLocation();
   const fullTitle = `${title} | ${site.name}`;
   const canonicalUrl = new URL(location, site.domain).toString();
-  const imageUrl = new URL("/opengraph.jpg", site.domain).toString();
+  const imageUrl = new URL("/images/fly365-quik-r-two-people-over-sea-1600.webp", site.domain).toString();
   const business = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
     name: site.name, url: site.domain, email: site.contact.email,
     telephone: site.contact.portugalPhones.map((phone) => phone.tel),
     address: { "@type": "PostalAddress", streetAddress: "Aeródromo Municipal de Lagos", postalCode: "8600-327", addressLocality: "Lagos", addressCountry: "PT" },
     geo: { "@type": "GeoCoordinates", latitude: site.aerodrome.lat, longitude: site.aerodrome.lng },
-    image: new URL("/images/fly365-c42-sunset-over-lagos-1600.webp", site.domain).toString(),
+    image: imageUrl,
   };
   return (
     <Helmet>

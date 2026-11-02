@@ -21,9 +21,9 @@ Only source new content photography from Wikimedia Commons under CC0, CC BY or C
 
 **How to apply:** Check the individual file's license and attribution requirements, including any author website credit. Distinguish illustrative aircraft photographs from Fly365's own fleet, team or historical archive. Keep shared branding logos and existing functional route/location maps separate from the content-photography audit.
 
-Prefer the user's supplied Fly365 photographs for the requested placements. The homepage hero is now the C42-wing sunset over Lagos; the flexwing cockpit-over-orange-cliffs photograph belongs on the Flexwing page, not the homepage.
+Prefer the user's supplied Fly365 photographs for the requested placements. The homepage hero is the Quik R with two people over the sea; the C42-wing sunset over Lagos belongs on Trial Flights. The cockpit-over-orange-cliffs photograph belongs on Flexwing.
 
-**Why:** The user supplied Fly365's own photos and explicitly superseded the earlier request to keep the flexwing homepage hero.
+**Why:** The user supplied Fly365's own photos, then explicitly swapped the Quik R and sunset heroes. This supersedes earlier homepage-photo choices.
 
 **How to apply:** Keep each visible use unique. User-supplied Fly365 photos are approved sources regardless of attachment filename; do not infer an external licence from a filename. Strip EXIF/GPS metadata, correct orientation, crop unwanted bars/watermarks/player icons, and never upscale generated files beyond the source size. The header logo stays.
 
