@@ -15,7 +15,7 @@ export function Seo({ title, description, faq }: SeoProps) {
     telephone: site.contact.portugalPhones.map((phone) => phone.tel),
     address: { "@type": "PostalAddress", streetAddress: "Aeródromo Municipal de Lagos", postalCode: "8600-327", addressLocality: "Lagos", addressCountry: "PT" },
     geo: { "@type": "GeoCoordinates", latitude: site.aerodrome.lat, longitude: site.aerodrome.lng },
-    image: new URL("/images/fly365-algarve-lagos-operation-837.webp", site.domain).toString(),
+    image: new URL("/images/fly365-algarve-lagos-operation-cropped-837.webp", site.domain).toString(),
   };
   return (
     <Helmet>

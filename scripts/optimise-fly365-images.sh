@@ -5,7 +5,7 @@ image_tool=convert
 if command -v magick >/dev/null 2>&1; then image_tool=magick; fi
 # Keep originals as source files. Never upscale the small original photographs.
 for spec in \
-  "fly365-algarve-lagos-operation.png:320,640,837" \
+  "fly365-algarve-lagos-operation-cropped.png:320,640,837" \
   "fly365-flexwing-aircraft.png:160,320,388" \
   "ikarus-c42-fly365.jpg:320,640,702" \
   "logo.png:96,192"; do
