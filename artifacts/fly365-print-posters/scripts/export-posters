@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const source = path.join(root, "public/posters");
+const source = path.resolve(root, "../../design/posters");
 const output = path.join(source, "png");
 const width = 1748;
 const height = 2480;
@@ -61,7 +61,7 @@ try {
     if (actualWidth !== width || actualHeight !== height) {
       throw new Error(`Unexpected export size: ${name} ${actualWidth} × ${actualHeight}`);
     }
-    console.log(`public/posters/png/${name} — ${actualWidth} × ${actualHeight} px, 300 dpi`);
+    console.log(`design/posters/png/${name} — ${actualWidth} × ${actualHeight} px, 300 dpi`);
   }
 } finally {
   await browser.close();

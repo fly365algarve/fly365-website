@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const out = path.join(root, "public", "posters");
+const out = path.resolve(root, "../../design/posters");
 
 const WA = "https://wa.me/351936445501?text=Hi%20Fly365!%20I%27d%20like%20to%20book%20a%20flight";
 const SITE = "https://fly365algarve.co.uk";

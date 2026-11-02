@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const source = path.resolve(root, "../../design/posters");
 const out = path.resolve(root, "../../generated-artifacts/fly365-posters");
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ executablePath: "/repl/tools/bin/chromium", headless: true, args: ["--no-sandbox"] });
@@ -21,7 +22,7 @@ const checks = [];
 for (const variant of ["fixed", "flex"]) {
   for (const side of ["front", "back"]) {
     const name = `${variant}-${side}`;
-    await page.goto(pathToFileURL(path.join(root, `public/posters/${name}.html`)).href);
+    await page.goto(pathToFileURL(path.join(source, `${name}.html`)).href);
     await page.emulateMedia({ media: "print" });
     await waitForAssets();
     const result = await page.evaluate(() => {
@@ -40,8 +41,8 @@ for (const variant of ["fixed", "flex"]) {
     await page.pdf({ path: path.join(out, `${name}.pdf`), preferCSSPageSize: true, printBackground: true, displayHeaderFooter: false });
   }
   // A two-page PDF: front followed by back, for double-sided printing.
-  await page.goto(pathToFileURL(path.join(root, `public/posters/${variant}-front.html`)).href);
-  const back = await readFile(path.join(root, `public/posters/${variant}-back.html`), "utf8");
+  await page.goto(pathToFileURL(path.join(source, `${variant}-front.html`)).href);
+  const back = await readFile(path.join(source, `${variant}-back.html`), "utf8");
   await page.evaluate(html => {
     const parsed = new DOMParser().parseFromString(html, "text/html");
     document.body.append(parsed.querySelector("main"));
