@@ -23,6 +23,7 @@ export function Footer() {
         <div>
           <h2 className="section-kicker !text-[var(--sandstone)]">Find us</h2>
           <p className="mt-4 flex gap-3 text-sm leading-6 text-[rgba(247,243,236,.82)]"><MapPin size={17} className="mt-1 shrink-0" />{site.contact.address}</p>
+          <a href="https://aeroclubedelagos.com" target="_blank" rel="noopener noreferrer" className="ml-[29px] mt-1 inline-block text-xs text-[rgba(247,243,236,.82)] underline underline-offset-4 hover:text-[var(--sandstone)]">Aerodrome website</a>
           <a href={`mailto:${site.contact.email}`} className="mt-3 flex items-center gap-3 text-sm text-[rgba(247,243,236,.82)]"><Mail size={17} />{site.contact.email}</a>
           <div className="mt-3 grid gap-2">{site.contact.portugalPhones.map((phone) => <div key={phone.tel} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[rgba(247,243,236,.82)]"><a href={`tel:${phone.tel}`} className="flex items-center gap-3 hover:text-[var(--sandstone)]"><Phone size={16} />{phone.label}</a><a href={phone.whatsappUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[var(--sandstone)]">WhatsApp</a></div>)}</div>
         </div>
