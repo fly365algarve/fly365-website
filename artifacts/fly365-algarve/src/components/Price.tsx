@@ -6,5 +6,5 @@ export function Price({ amount }: { amount: number }) {
 }
 
 export function PriceNote() {
-  return <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">*Pound prices are approximate, based on an exchange rate of €{site.exchangeRate.toFixed(2)} = £1 (updated {site.exchangeRateUpdated}). Rates change, and we update this regularly. All payments are taken in euros.</p>;
+  return <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">*Pound prices are a rough guide, based on an approximate average exchange rate of €{site.exchangeRate.toFixed(2)} = £1. We update this if the rate changes significantly. All payments are taken in euros.</p>;
 }
