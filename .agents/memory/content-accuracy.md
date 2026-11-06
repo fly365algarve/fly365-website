@@ -26,3 +26,9 @@ Do not state a weekly student limit or use one-to-one training claims tied to th
 **Why:** The user explicitly removed all student-per-week limits from website copy.
 
 **How to apply:** Do not reintroduce the old two-students-per-week or small-weekly-groups wording when reusing historical content.
+
+Route all website WhatsApp buttons to the main contact, while the separate flexwing enquiry contact remains available by phone.
+
+**Why:** The user designated one main calls-and-WhatsApp contact and a separate contact specifically for flexwing enquiries.
+
+**How to apply:** Keep WhatsApp links centralized when editing contact details; do not direct them to the flexwing phone number.

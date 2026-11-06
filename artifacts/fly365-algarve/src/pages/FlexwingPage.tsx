@@ -4,12 +4,13 @@ import { ContactForm } from "../components/ContactForm";
 import { Seo } from "../components/Seo";
 import { PageHero } from "../components/round5/PageHero";
 import { SpecCards, Comparison } from "../components/round5/Aircraft";
+import { site } from "../config/site";
 
 export function FlexwingPage() {
   return <div className="page-shell page-enter">
     <Seo title="Flexwing microlight aircraft" description="Explore Fly365 Algarve’s flexwing training aircraft: the P&M Quantum 912 and P&M Quik R." />
     <PageHero variant="split" fit="contain" kicker="Weight-shift flying" title={["Flexwing"]} sub={<p>Weight-shift controlled microlights — the three-dimensional motorcycles of the sky</p>} image="/images/fly365-quik-r-two-people-over-sea.webp" alt="Two people flying over the sea in a red Quik R flexwing, photographed from the wingtip" />
-    <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">At a glance</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">The flexwing fleet</h2><SpecCards names={["P&M Quantum 912", "P&M Quik R"]} /></div></section>
+    <section className="section-pad surface-sand"><div className="mx-auto max-w-[1160px]"><span className="section-kicker">At a glance</span><h2 className="mb-8 mt-3 text-5xl text-[var(--navy)]">The flexwing fleet</h2><SpecCards names={["P&M Quantum 912", "P&M Quik R"]} />{site.contact.portugalPhones.filter((phone) => phone.enquiry === "flexwing").map((phone) => <p key={phone.tel} className="mt-6 text-sm text-[var(--ink)]"><a href={`tel:${phone.tel}`} className="underline underline-offset-4">{phone.label}</a></p>)}</div></section>
 
     <section className="section-pad bg-[var(--chalk)]">
       <div className="mx-auto max-w-[1160px] space-y-14 text-sm leading-7 text-[var(--ink)] [&_article>div:last-child]:max-w-[68ch]">

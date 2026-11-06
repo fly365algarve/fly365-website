@@ -28,7 +28,7 @@ export function ContactPage() {
           <span className="section-kicker !text-[var(--sandstone)]">Start with WhatsApp</span>
           <h2 className="mt-2 text-4xl">Message us on WhatsApp</h2>
           <p className="r5-measure mt-3 text-sm leading-6 text-[rgba(247,243,236,.75)]">Please note we operate primarily through email and WhatsApp. We aim to respond within 24 hours.</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">{site.contact.portugalPhones.map((phone) => <a key={phone.tel} href={phone.whatsappUrl} target="_blank" rel="noopener noreferrer" className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-bold uppercase tracking-wider"><MessageCircle size={17} />{phone.label}</a>)}</div>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">{site.contact.portugalPhones.filter((phone) => phone.enquiry === "main").map((phone) => <a key={phone.tel} href={site.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="button-ochre inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-bold uppercase tracking-wider"><MessageCircle size={17} />{phone.label}</a>)}</div>
         </div>
         <div>
           <div className="flex items-start gap-4 border-t border-[rgba(11,42,60,.2)] py-5"><Phone className="mt-1 shrink-0 text-[var(--ocean)]" size={20} /><div><div className="section-kicker mb-1">Portugal Mobile · Calls and WhatsApp</div><div className="grid gap-2">{site.contact.portugalPhones.map((phone) => <a key={phone.tel} href={`tel:${phone.tel}`} className="text-sm text-[var(--ink)] hover:text-[var(--ocean)]">{phone.label}</a>)}</div></div></div>

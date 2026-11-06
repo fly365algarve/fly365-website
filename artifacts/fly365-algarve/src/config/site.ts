@@ -8,17 +8,17 @@ export const site = {
   contact: {
     portugalPhones: [
       {
-        label: "Colin – +351 967 456 156",
-        tel: "+351967456156",
-        whatsappUrl: "https://wa.me/351967456156",
+        enquiry: "main",
+        label: "Fern – +351 938 766 356",
+        tel: "+351938766356",
       },
       {
-        label: "Zeth – +351 936 445 501",
-        tel: "+351936445501",
-        whatsappUrl: "https://wa.me/351936445501",
+        enquiry: "flexwing",
+        label: "Flexwing enquiries – Colin – +351 967 456 156",
+        tel: "+351967456156",
       },
     ],
-    whatsappUrl: "https://wa.me/351967456156",
+    whatsappUrl: "https://wa.me/351938766356",
     email: "fly365algarve@gmail.com",
     address: "Aeródromo Municipal de Lagos, 8600-327 Lagos, Portugal",
   },
